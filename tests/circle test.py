@@ -36,7 +36,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            sys.exit()
+            sys.exit() 
     screen.fill(white)
 
     #pygame.draw.line(screen, black, (width // 2, 0), (width // 2, height), 2)  # Вертикальная ось
