@@ -1,0 +1,9 @@
+# lang [ru|en]
+
+ru
+
+# theme of game [basedark|baselight]
+
+basedark
+
+#end
