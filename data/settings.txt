@@ -4,6 +4,6 @@ ru
 
 # theme of game [basedark|baselight]
 
-basedark
+fiol
 
 #end
