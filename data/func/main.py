@@ -4,9 +4,9 @@ pygame.init()
 
 width, height = 1000, 800
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.2")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.3")
 
-class StartScreen:
+class Game:
 
     def main():
 
@@ -14,7 +14,6 @@ class StartScreen:
 
         while True:
 
-            screen.fill(getcolor(0))
             width, height = screen.get_size()
 
             for event in pygame.event.get():
@@ -23,8 +22,13 @@ class StartScreen:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
+                    Game.click(x,y)
             
-            Draw.StartScreen([screen,width,height]).main()
+            Draw([screen,width,height]).main()
 
             pygame.display.flip()
             pygame.time.Clock().tick(300)
+    
+    def click(x,y):
+
+        print(x,y)
