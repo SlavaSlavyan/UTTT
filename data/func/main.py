@@ -6,6 +6,8 @@ width, height = 1000, 800
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
 pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.3")
 
+status = 0
+
 class Game:
 
     def main():
@@ -31,4 +33,6 @@ class Game:
     
     def click(x,y):
 
-        print(x,y)
+        from data.func.draw import anim
+
+        print(anim)
