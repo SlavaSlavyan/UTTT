@@ -1,8 +1,8 @@
 # lang [ru|en]
 
-ru
+en
 
-# theme of game [basedark|baselight]
+# theme of game [basedark|baselight|fiol]
 
 fiol
 

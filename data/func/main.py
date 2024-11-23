@@ -4,7 +4,7 @@ pygame.init()
 
 width, height = 1000, 800
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.3")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.5")
 
 status = 0
 
@@ -29,7 +29,7 @@ class Game:
             Draw([screen,width,height]).main()
 
             pygame.display.flip()
-            pygame.time.Clock().tick(300)
+            pygame.time.Clock().tick(120)
     
     def click(x,y):
 

@@ -15,7 +15,7 @@ class Draw:
         global anim
 
         if anim >= 0 and anim < 1:
-            anim = Logo(self.swh,anim).main()
+            anim = Logo(self.swh,anim).main()  
         
         elif anim >= 1 and anim < 2:
             anim = StartScreen(self.swh,anim).main()

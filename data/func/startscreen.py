@@ -16,10 +16,11 @@ class StartScreen:
         global startscreen
 
         if self.anim == 1:
-            startscreen = [[0,gradient(getcolor(0),getcolor(2),600),gradient(getcolor(0),getcolor(3),601)],[self.width,self.width*2,self.width*4,self.width*8]]
+            startscreen = [[0,gradient(getcolor(0),getcolor(2),300),gradient(getcolor(0),getcolor(3),301),gradient(getcolor(0),getcolor(3),301)],
+                           [self.width,self.width*2,self.width*4,self.width*8]]
             self.anim = 1.1
 
-        if startscreen[0][0] != 600:
+        if startscreen[0][0] != 300:
             self.screen.fill(startscreen[0][1][startscreen[0][0]])
             startscreen[0][0] += 1
         
@@ -29,7 +30,7 @@ class StartScreen:
         for i in range(3):
             StartScreen.button(self,25+55*i,startscreen[1][i],0)
 
-        startscreen[1] = [i / 1.02 for i in startscreen[1]]
+        startscreen[1] = [i / 1.05 for i in startscreen[1]]
 
         return self.anim
 
