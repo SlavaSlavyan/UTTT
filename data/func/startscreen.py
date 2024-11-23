@@ -71,9 +71,13 @@ class StartScreen:
             startscreen[1] = [i * 1.11 for i in startscreen[1]]
 
             if startscreen[1][0] >= self.height:
-                self.anim = 1.5
-        
-        elif self.anim == 1.5:
+
+                from data.func.main import status
+                self.anim = status+1
+
+                if status == 3:
+                    pygame.quit()
+                    sys.exit()            
 
         return self.anim
 

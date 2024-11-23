@@ -4,7 +4,7 @@ pygame.init()
 
 width, height = 1000, 800
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.6")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.7")
 
 status = 0
 anim = 0
@@ -49,24 +49,24 @@ class Main:
             
             elif anim == 1.2:
                 status = Main.startscreen(x,y)
+                if status != 0:
+                    anim = 1.3
         
-        elif status == 1:
-            print('gameshit')
-        
-        elif status == 2:
-            print('яицо')
-        
-        if status == 3:
-            pygame.quit()
-            sys.exit()
+        if anim != 1.4:
+
+            if status == 1:
+                anim = 0
+                status = 0
+            
+            elif status == 2:
+                anim = 0
+                status = 0
     
     def startscreen(x,y):
 
         for i in range(3):
 
             if x > -200 and x < 200 and y > -50-55*i and y < -55*i:
-                print(f'yea >_> {i+1}')
                 return i+1
-        
-        print('nah >:(')
+
         return 0

@@ -1,6 +1,7 @@
 from data.func.read import *
 from data.func.logo import *
 from data.func.startscreen import *
+from data.func.gamescreen import *
 
 class Draw:
 
@@ -18,5 +19,8 @@ class Draw:
         
         elif self.anim >= 1 and self.anim < 2:
             self.anim = StartScreen(self.swh,self.anim).main()
+        
+        elif self.anim >= 2 and self.anim < 3:
+            self.anim = GameScreen(self.swh,self.anim).main()
         
         return self.anim
