@@ -1,3 +1,7 @@
-Ultimate\n Tic Tac Toe
+Ultimate
+Tic Tac Toe
+Play
+Config
+Exit
 
 #end

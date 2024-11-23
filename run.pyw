@@ -1,3 +1,3 @@
 from data.func.main import *
 
-Game.main()
+Main.main()

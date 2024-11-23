@@ -4,15 +4,16 @@ pygame.init()
 
 width, height = 1000, 800
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.5")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.6")
 
 status = 0
+anim = 0
 
-class Game:
+class Main:
 
     def main():
 
-        global width, height
+        global width, height, anim
 
         while True:
 
@@ -24,15 +25,48 @@ class Game:
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
-                    Game.click(x,y)
+                    Main.click(x,y)
             
-            Draw([screen,width,height]).main()
+            anim = Draw([screen,width,height],anim).main()
 
             pygame.display.flip()
-            pygame.time.Clock().tick(120)
+            pygame.time.Clock().tick(300)
     
     def click(x,y):
 
-        from data.func.draw import anim
+        global anim, width, height,status
 
-        print(anim)
+        x = width//2 - x
+        y = height//2 - y
+
+        if status == 0:
+
+            if anim >= 0 and anim < 1:
+                anim = 1
+        
+            elif anim == 1.1:
+                anim = 1.2
+            
+            elif anim == 1.2:
+                status = Main.startscreen(x,y)
+        
+        elif status == 1:
+            print('gameshit')
+        
+        elif status == 2:
+            print('яицо')
+        
+        if status == 3:
+            pygame.quit()
+            sys.exit()
+    
+    def startscreen(x,y):
+
+        for i in range(3):
+
+            if x > -200 and x < 200 and y > -50-55*i and y < -55*i:
+                print(f'yea >_> {i+1}')
+                return i+1
+        
+        print('nah >:(')
+        return 0

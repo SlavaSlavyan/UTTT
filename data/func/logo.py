@@ -26,7 +26,7 @@ class Logo:
         Logo.L(self,200*((logo[1]/self.width)+1),logo[1],math.cos(logo[0])*50,math.sin(logo[0])*50,logo[1]/(self.width/4))
         
         if self.anim == 0.1:
-            logo[1] /= 1.1
+            logo[1] /= 1.12
             if round(logo[1]) == 0:
                 self.anim = 0.2
 
@@ -35,10 +35,10 @@ class Logo:
             logo[2] -= 0.015
             if logo[2] <= 0:
                 self.anim = 0.3
-                logo[1] = -0.1
+                logo[1] = -0.2
 
         elif self.anim == 0.3:
-            logo[1] *= 1.1
+            logo[1] *= 1.12
             if logo[1] < -self.width:
                 self.anim = 1
 
