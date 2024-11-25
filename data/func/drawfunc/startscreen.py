@@ -30,7 +30,7 @@ class StartScreen:
         if self.anim == 1.1:
 
             for i in range(3):
-                StartScreen.button(self,25+55*i,startscreen[1][i],i+2)
+                StartScreen.button(self,25+55*i,startscreen[1][i],i+2,-400,-400,i+1)
             
             StartScreen.title(self,130,startscreen[1][3])
 
@@ -44,8 +44,9 @@ class StartScreen:
             self.screen.fill(getcolor(2))
             startscreen[0] = [0,gradient(getcolor(2),getcolor(2),120),gradient(getcolor(3),getcolor(3),121),gradient(getcolor(3),getcolor(3),121)]
             
+            mouse_x, mouse_y = pygame.mouse.get_pos()
             for i in range(3):
-                StartScreen.button(self,25+55*i,0,i+2)
+                StartScreen.button(self,25+55*i,0,i+2,mouse_x,mouse_y,i+1)
             
             StartScreen.title(self,130,0)
         
@@ -54,7 +55,7 @@ class StartScreen:
             self.screen.fill(getcolor(2))
             
             for i in range(3):
-                StartScreen.button(self,25+55*i,0,i+2)
+                StartScreen.button(self,25+55*i,0,i+2,-400,-400,i+1)
             
             StartScreen.title(self,130,0)
 
@@ -64,7 +65,7 @@ class StartScreen:
         elif self.anim == 1.4:
 
             for i in range(3):
-                StartScreen.button(self,25+55*i,startscreen[1][i],i+2)
+                StartScreen.button(self,25+55*i,startscreen[1][i],i+2,-400,-400,i+1)
             
             StartScreen.title(self,130,startscreen[1][3])
 
@@ -81,15 +82,40 @@ class StartScreen:
 
         return self.anim
 
-    def button(self,endpos,offset,textnum):
+    def button(self,endpos,offset,textnum,mouseX,mouseY,buttonNum):
 
         x = self.width//2
         y = self.height//2+offset+endpos
+        mouseX = self.width//2 - mouseX
+        mouseY = self.height//2 - mouseY
 
         pos = [(x-200,y+25),(x+200,y+25),(x+200,y-25),(x-200,y-25)]
         pygame.draw.polygon(self.screen, startscreen[0][2][startscreen[0][0]], pos)
 
-        text = pygame.font.Font('data\\font\\TeletactileRus.ttf', 40).render(getstr(textnum), True, getcolor(4))
+
+        if self.anim != 1.4 and self.anim != 1.3:
+
+            from data.func.main import Main
+
+            arg = Main.startscreen(mouseX,mouseY)
+
+            if arg == buttonNum:
+                color = getcolor(6)
+
+            else:
+                color = getcolor(4)
+
+        else:
+            
+            from data.func.main import status
+
+            if status == buttonNum:
+                color = getcolor(6)
+
+            else:
+                color = getcolor(4)
+
+        text = pygame.font.Font('data\\font\\TeletactileRus.ttf', 40).render(getstr(textnum), True, color)
 
         self.screen.blit(text, text.get_rect(center=(self.width // 2, self.height // 2+offset+endpos)))
     
