@@ -1,7 +1,7 @@
 from data.func.read import *
-from data.func.logo import *
-from data.func.startscreen import *
-from data.func.gamescreen import *
+from data.func.drawfunc.logo import *
+from data.func.drawfunc.startscreen import *
+from data.func.drawfunc.gamescreen import *
 
 class Draw:
 

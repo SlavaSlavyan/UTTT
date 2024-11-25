@@ -1,6 +1,6 @@
 # lang [ru|en]
 
-en
+ru
 
 # theme of game [basedark|baselight|fiol]
 

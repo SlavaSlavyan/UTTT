@@ -1,4 +1,4 @@
-from data.func.logo import *
+from data.func.drawfunc.logo import *
 
 startscreen = []
 
