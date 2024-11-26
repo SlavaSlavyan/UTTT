@@ -4,10 +4,12 @@ pygame.init()
 
 width, height = 1000, 800
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.7")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.0.10")
 
 status = 0
 anim = 0
+game = [None]
+# cells
 
 class Main:
 
@@ -27,7 +29,7 @@ class Main:
                     x, y = event.pos
                     Main.click(x,y)
             
-            anim = Draw([screen,width,height],anim).main()
+            anim = Draw([screen,width,height],anim,game).main()
 
             pygame.display.flip()
             pygame.time.Clock().tick(300)
@@ -55,8 +57,7 @@ class Main:
         if anim != 1.4:
 
             if status == 1:
-                anim = 0
-                status = 0
+                pass
             
             elif status == 2:
                 anim = 0

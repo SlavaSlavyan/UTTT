@@ -126,5 +126,5 @@ class StartScreen:
 
         for i in range(2):
 
-            text = pygame.font.Font('data\\font\\TeletactileRus.ttf', 100-50*i).render(getstr(i), True, getcolor(4))
+            text = pygame.font.Font('data\\font\\TeletactileRus.ttf', 100-50*i).render(getstr(i), True, getcolor(7-2*i))
             self.screen.blit(text, text.get_rect(center=(self.width // 2, self.height // 2-offset-endpos+70*i)))

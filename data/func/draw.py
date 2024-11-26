@@ -5,10 +5,11 @@ from data.func.drawfunc.gamescreen import *
 
 class Draw:
 
-    def __init__(self,swh,anim):
+    def __init__(self,swh,anim,game):
             
         self.swh = swh
         self.anim = anim
+        self.game = game
     
     def main(self):
 
@@ -21,6 +22,6 @@ class Draw:
             self.anim = StartScreen(self.swh,self.anim).main()
         
         elif self.anim >= 2 and self.anim < 3:
-            self.anim = GameScreen(self.swh,self.anim).main()
+            self.anim = GameScreen(self.swh,self.anim,self.game).main()
         
         return self.anim
