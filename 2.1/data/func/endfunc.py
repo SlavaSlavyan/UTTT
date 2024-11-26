@@ -5,12 +5,18 @@ import math
 
 def getThem():
     
-    pass
+    with open(f'data\\them\\{config("them")}.json', 'r') as file:
+        them = json.load(file)
+
+    return them
 
 def getLang():
 
     pass
 
-def settings():
+def config(arg):
 
-    pass
+    with open('data\\settings.json', 'r') as file:
+        parameters = json.load(file)
+    
+    return parameters[arg]

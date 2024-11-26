@@ -29,9 +29,10 @@ class Main:
                     x, y = event.pos
                     Main.click(x,y)
 
+            anim = Draw([screen,width,height,anim]).main()
 
             pygame.display.flip()
-            pygame.time.Clock().tick(300)
+            pygame.time.Clock().tick(120)
     
     def click(x,y):
 
