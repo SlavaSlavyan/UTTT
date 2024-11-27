@@ -23,7 +23,7 @@ class Logo:
 
         if self.anim == 0:
             
-            colors = getThem(1)
+            colors = getThem(0)
             logo = [self.width//100,[100,250,500],0,240]
             self.anim = 0.1
         

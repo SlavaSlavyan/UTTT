@@ -4,7 +4,7 @@ pygame.init()
 
 width, height = 1000, 800
 screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.1.3 DEV")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.1.4 DEV")
 
 status = 0
 anim = 0

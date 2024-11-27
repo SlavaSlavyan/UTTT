@@ -1,6 +1,9 @@
 [
     [
         "Ultimate",
-        "Tic Tac Toe"
+        "Tic Tac Toe",
+        "Play",
+        "Info",
+        "Exit"
     ]
 ]

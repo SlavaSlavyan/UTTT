@@ -7,7 +7,6 @@ def getThem(numscreen):
     
     with open(f'data\\them\\{config('them')}.json', 'r', encoding='utf-8') as file:
         them = json.load(file)
-        print(them[numscreen])
         result = []
         for item in them[numscreen]:
             result.append(tuple(map(int, item.split(','))))

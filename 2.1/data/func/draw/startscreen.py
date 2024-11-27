@@ -25,16 +25,21 @@ class StartScreen:
         if self.anim == 1:
             colors = getThem(1)
             lang = getLang()
-            startscreen = [self.height//100,gradient(colors[0],colors[1],240),0,[125,250,500]]
+            startscreen = [self.height//100,gradient(colors[0],colors[1],120),0,[125,250,500]]
+            self.anim = 1.1
         
         if startscreen[2] != len(startscreen[1]):
             self.screen.fill(startscreen[1][startscreen[2]])
+            startscreen[2] += 1
         
         else:
             self.screen.fill(colors[1])
         
-        for i in range(3):
-            StartScreen.button(self,-25-55*i,startscreen[3][i]*startscreen[0],i)
+            for i in range(3):
+                StartScreen.button(self,-25-55*i,startscreen[3][i]*startscreen[0],i)
+            
+            if self.anim == 1.1:
+                startscreen[3] = [i / 1.05 for i in startscreen[3]]
 
         return self.anim
     
