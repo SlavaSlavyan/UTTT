@@ -46,10 +46,9 @@ class StartScreen:
                 startscreen[3] = [i / 1.05 for i in startscreen[3]]
                 if startscreen[3][3] < 0.2:
                     self.anim = 1.2
-                    startscreen[3] = [i*0 for i in startscreen[3]]
 
             elif self.anim == 1.2:
-                pass
+                startscreen[3] = [i*0 for i in startscreen[3]]
 
         return self.anim
     

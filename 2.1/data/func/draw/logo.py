@@ -2,6 +2,7 @@ from data.func.endfunc import *
 
 colors = []
 logo = []
+size = config("scale")
 
 #0 - соотношение ширины и множителю
 #1 - смещение букв

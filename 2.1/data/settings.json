@@ -1,6 +1,10 @@
 [
     {
         "them":"basedark",
-        "lang":"en"
+        "lang":"en",
+        "fullscreen":"False",
+        "scale":"1",
+        "music":"100",
+        "sound":"100"
     }
 ]
