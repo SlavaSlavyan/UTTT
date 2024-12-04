@@ -2,9 +2,19 @@ from data.func.drawfunc import *
 
 pygame.init()
 
-width, height = 1000, 800
-screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.2.0 DEV")
+fullscreen = config('fullscreen')
+size = float(config('scale'))
+
+if fullscreen == "False":
+    width, height = 1000*size, 800*size
+    screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
+
+else:
+    infoObject = pygame.display.Info()
+    width, height = infoObject.current_w, infoObject.current_h
+    screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN)
+
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.2.1 DEV")
 
 status = 0
 anim = 0

@@ -1,8 +1,8 @@
 {
     "them":"basedark",
     "lang":"en",
-    "fullscreen":"False",
-    "scale":"1.5",
+    "fullscreen":"True",
+    "scale":"1",
     "music":"100",
     "sound":"100"
 }

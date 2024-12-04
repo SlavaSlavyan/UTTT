@@ -3,6 +3,7 @@ from data.func.endfunc import *
 colors = []
 lang = []
 startscreen = []
+size = float(config("scale"))
 
 #0 - соотношение высоты и множителя
 #1 - градиент фона
@@ -23,9 +24,9 @@ class StartScreen:
         global startscreen,colors,lang
 
         if self.anim == 1:
-            colors = getThem(1)
-            lang = getLang()
-            startscreen = [self.height//100,gradient(colors[0],colors[1],120),0,[125,250,500,1000]]
+            colors = getThem()
+            lang = getLang(0)
+            startscreen = [self.height//100,gradient(colors['black'],colors['gray'],120),0,[125,250,500,1000]]
             self.anim = 1.1
         
         if startscreen[2] != len(startscreen[1]) and self.anim == 1.1:
@@ -34,7 +35,7 @@ class StartScreen:
         
         else:
 
-            self.screen.fill(colors[1])
+            self.screen.fill(colors['gray'])
 
             mouse_x, mouse_y = pygame.mouse.get_pos()
 
@@ -54,22 +55,26 @@ class StartScreen:
     
     def button(self,endpos,offset,text):
 
+        endpos*=size
+        offset*=size
         x = self.width//2
         y = self.height//2-endpos+offset
 
-        pos = [(x-200,y+25),(x+200,y+25),(x+200,y-25),(x-200,y-25)]
+        pos = [(x-200*size,y+25*size),(x+200*size,y+25*size),(x+200*size,y-25*size),(x-200*size,y-25*size)]
 
-        pygame.draw.polygon(self.screen, colors[2], pos)
+        pygame.draw.polygon(self.screen, colors['darkgray'], pos)
 
-        text = pygame.font.Font('data\\font\\text.ttf', 40).render(lang[0][text+2], True, colors[3])
-        self.screen.blit(text, text.get_rect(center=(self.width // 2, self.height//2-endpos+offset-3)))
+        text = pygame.font.Font('data\\font\\text.ttf', int(40*size)).render(lang[text+2], True, colors['lightgray'])
+        self.screen.blit(text, text.get_rect(center=(self.width // 2, self.height//2-endpos+offset-3*size)))
     
     def title(self,endpos,offset):
 
+        endpos*=size
+        offset*=size
         x = self.width//2
         y = self.height//2+offset+endpos
 
         for i in range(2):
 
-            text = pygame.font.Font('data\\font\\Title.ttf', 100-50*i).render(lang[0][i], True, colors[4-1*i])
-            self.screen.blit(text, text.get_rect(center=(self.width // 2, self.height // 2-offset-endpos+70*i)))
+            text = pygame.font.Font('data\\font\\Title.ttf', int((100-50*i)*size)).render(lang[i], True, colors['green'])
+            self.screen.blit(text, text.get_rect(center=(self.width // 2, self.height // 2-offset-endpos+70*size*i)))

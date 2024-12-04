@@ -2,7 +2,7 @@ from data.func.endfunc import *
 
 colors = []
 logo = []
-size = config("scale")
+size = float(config("scale"))
 
 #0 - соотношение ширины и множителю
 #1 - смещение букв
@@ -30,7 +30,7 @@ class Logo:
         
         self.screen.fill(colors['black'])
 
-        Logo.S(self,-200*size,logo[1][0e]*logo[0]*size,logo[2])
+        Logo.S(self,-200*size,logo[1][0]*logo[0]*size,logo[2])
         Logo.L(self,0,logo[1][1]*logo[0]*size,logo[2])
         Logo.L(self,200*size,logo[1][2]*logo[0]*size,logo[2])
 
