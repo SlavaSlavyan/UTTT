@@ -39,3 +39,9 @@ def gradient(color, color2, steps):
         gradient.append((r, g, b))
     
     return gradient
+
+def output(outputText,screen):
+    font = pygame.font.Font('data\\font\\text.ttf', 10)
+    for i in range(len(outputText)):
+        text_surface = font.render(str(outputText[i]), True, (255,255,255))
+        screen.blit(text_surface, (10, 10+10*i))

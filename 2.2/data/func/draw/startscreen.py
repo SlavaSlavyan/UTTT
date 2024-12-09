@@ -18,6 +18,23 @@ class StartScreen:
         self.width = args[1]
         self.height = args[2]
         self.anim = args[3]
+        self.status = args[4]
+    
+    def startscreenclick(self,x,y):
+
+        x = self.width//2-x
+        y = self.height//2-y
+
+        selected_button = 0
+
+        for i in range(3):
+            if x < 200 and x > -200 and y < 0-55*i and y > -50-55*i:
+                return selected_button
+            
+            else:
+                selected_button += 1
+        
+        return None
     
     def main(self):
 
@@ -38,9 +55,10 @@ class StartScreen:
             self.screen.fill(colors['gray'])
 
             mouse_x, mouse_y = pygame.mouse.get_pos()
+            arg = StartScreen.startscreenclick(self,mouse_x,mouse_y)
 
             for i in range(3):
-                StartScreen.button(self,-25-55*i,startscreen[3][i]*startscreen[0],i)
+                StartScreen.button(self,-25-55*i,startscreen[3][i]*startscreen[0],i,arg)
             StartScreen.title(self,130,startscreen[3][3]*startscreen[0])
             
             if self.anim == 1.1:
@@ -50,10 +68,23 @@ class StartScreen:
 
             elif self.anim == 1.2:
                 startscreen[3] = [i*0 for i in startscreen[3]]
+                self.status = 1
+            
+            elif self.anim == 1.3 or self.anim == 1.4:
+                if self.anim == 1.3:
+                    startscreen[3] = [0.0625,0.125,0.25,0.5]
+                    self.anim = 1.4
+                startscreen[3] = [i * 1.1 for i in startscreen[3]]
 
-        return self.anim
+                if startscreen[3][0]*startscreen[0] >= self.height:
+                    from data.func.main import status
+                    if status == 4:
+                        pygame.quit()
+                        sys.exit()
+
+        return self.anim,self.status
     
-    def button(self,endpos,offset,text):
+    def button(self,endpos,offset,text,arg):
 
         endpos*=size
         offset*=size
@@ -63,8 +94,14 @@ class StartScreen:
         pos = [(x-200*size,y+25*size),(x+200*size,y+25*size),(x+200*size,y-25*size),(x-200*size,y-25*size)]
 
         pygame.draw.polygon(self.screen, colors['darkgray'], pos)
+        
+        if text != arg:
+            textcolor = colors['lightgray']
 
-        text = pygame.font.Font('data\\font\\text.ttf', int(40*size)).render(lang[text+2], True, colors['lightgray'])
+        else:
+            textcolor = colors['yellow']
+    
+        text = pygame.font.Font('data\\font\\text.ttf', int(40*size)).render(lang[text+2], True, textcolor)
         self.screen.blit(text, text.get_rect(center=(self.width // 2, self.height//2-endpos+offset-3*size)))
     
     def title(self,endpos,offset):

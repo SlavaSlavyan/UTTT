@@ -8,6 +8,7 @@ class Draw:
         
         self.args = args
         self.anim = args[3]
+        self.status = args[4]
     
     def main(self):
 
@@ -15,6 +16,6 @@ class Draw:
             self.anim = Logo(self.args).main()
 
         elif self.anim >= 1 and self.anim < 2:
-            self.anim = StartScreen(self.args).main()
+            self.anim,self.status = StartScreen(self.args).main()
 
-        return self.anim
+        return self.anim, self.status

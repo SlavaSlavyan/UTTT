@@ -6,7 +6,7 @@ fullscreen = config('fullscreen')
 size = float(config('scale'))
 
 if fullscreen == "False":
-    width, height = 1000*size, 800*size
+    width, height = 1000*size, 700*size
     screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
 
 else:
@@ -14,7 +14,7 @@ else:
     width, height = infoObject.current_w, infoObject.current_h
     screen = pygame.display.set_mode((width, height),pygame.FULLSCREEN)
 
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.2.1 DEV")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.2.2 DEV")
 
 status = 0
 anim = 0
@@ -23,7 +23,7 @@ class Main:
 
     def start():
 
-        global width, height, anim
+        global width, height, anim,status
 
         while True:
 
@@ -39,7 +39,8 @@ class Main:
                     x, y = event.pos
                     Main.click(x,y)
 
-            anim = Draw([screen,width,height,anim]).main()
+            anim,status = Draw([screen,width,height,anim,status]).main()
+            output([status,anim],screen)
 
             pygame.display.flip()
             pygame.time.Clock().tick(120)
@@ -57,6 +58,7 @@ class Main:
         elif status == 1:
             if anim == 1.2:
                 arg = Main.startscreenclick(x,y)
+
                 if arg != None:
                     status = 2+arg
                     anim = 1.3
@@ -69,7 +71,7 @@ class Main:
         selected_button = 0
 
         for i in range(3):
-            if x < 200 and x > -200 and y < 0+50*i and y > -50+50*i:
+            if x < 200 and x > -200 and y < 0-55*i and y > -50-55*i:
                 return selected_button
             
             else:
