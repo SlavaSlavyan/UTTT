@@ -31,11 +31,11 @@ class Logo:
         Logo.letter(self,"l",0,logo['offset'][1],logo['rotation'])
         Logo.letter(self,"l",200,logo['offset'][2],logo['rotation'])
 
-        logo['rotation'] += 0.03
+        logo['rotation'] += 0.02
 
         if self.args['anim'] == 0.1:
 
-            logo['offset'] = [i / 1.05 for i in logo['offset']]
+            logo['offset'] = [i / 1.03 for i in logo['offset']]
 
             if logo['offset'][-1] <= 0.1:
 
@@ -52,7 +52,7 @@ class Logo:
         
         elif self.args['anim'] == 0.3:
 
-            logo['offset'] = [i * 1.05 for i in logo['offset']]
+            logo['offset'] = [i * 1.03 for i in logo['offset']]
 
             if logo['offset'][-1] <= -self.args['width']//2:
 

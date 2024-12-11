@@ -1,9 +1,9 @@
-[
-    [
+{
+    "startscreen":[
         "Ultimate",
         "Tic Tac Toe",
         "Play",
         "Info",
         "Exit"
     ]
-]
+}
