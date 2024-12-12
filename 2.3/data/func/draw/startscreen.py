@@ -47,9 +47,26 @@ class StartScreen:
 
                 if startscreen['offset'][3] >= -0.1:
                     self.args['anim'] = 1.2
+                    self.args['status'] = 1
             
             if self.args['anim'] == 1.2:
                 startscreen['offset'] = [i * 0 for i in startscreen['offset']]
+            
+            if self.args['anim'] == 1.3 or self.args['anim'] == 1.4:
+
+                if self.args['anim'] == 1.3:
+
+                    startscreen['offset'] = [0.01,0.02,0.04,-0.16,-0.08]
+                    self.args['anim'] = 1.4
+                
+                startscreen['offset'] = [i * 1.05 for i in startscreen['offset']]
+
+                if startscreen['offset'][0] >= self.args['height']*1.5:
+                    self.args['anim'] = self.args['status']
+                    if self.args['status'] == 4:
+                        pygame.quit()
+                        sys.exit()
+
 
         return self.args['anim'], self.args['status']
     

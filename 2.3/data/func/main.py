@@ -7,7 +7,7 @@ pygame.init()
 
 main = {"screen":pygame.display.set_mode((1000, 750),pygame.RESIZABLE),"width":1000,"height":750,"status":0,"anim":0}
 
-pygame.display.set_caption("Ultimate Tic Tac Toe 2.3.1 DEV")
+pygame.display.set_caption("Ultimate Tic Tac Toe 2.3.2 DEV")
 
 clock = pygame.time.Clock()
 fps = 0
