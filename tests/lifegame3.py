@@ -1,5 +1,6 @@
 import pygame
 import sys
+import random
 
 pygame.init()
 
@@ -17,11 +18,17 @@ for s in range(30):
 
 size = (len(cells)*20, len(cells[0])*20)
 
-cells[15][15] = 1
-cells[15][16] = 1
-cells[15][14] = 1
+a = 1
 
-pygame.display.set_caption("Life game")
+if a == 1:
+    for y in range(len(cells)):
+        for x in range(len(cells[0])):
+            if x == 0 or x == len(cells[0])-1 or y == 0 or y == len(cells)-1:
+                pass
+            else:
+                cells[y][x] = random.randint(0,1)
+
+pygame.display.set_caption("Life game 3")
 
 clock = pygame.time.Clock()
 
@@ -45,83 +52,82 @@ class Draw:
 
                 if cells[s][i] == 0:
                     color = (10,10,10)
+                elif cells[s][i] == 2:
+                    color = (119,221,119)
+                elif cells[s][i] == 3:
+                    color = (196,30,58)
                 else:
                     color = (255,255,255)
 
                 pygame.draw.polygon(screen, color, pos)
 
+def check():
+
+    for y in range(len(cells)):
+        for x in range(len(cells[0])):
+            if cells[y][x] == 2 or cells[y][x] == 3:
+                return True
+    return False
+            
+
 class Game:
 
     def main():
 
-        Game.newlife()
-        Game.kill()
-        Game.clear()
-        #Game.test()
+        arg = check()
+        if arg == False:
+            Game.newlife()
+            Game.kill()
+        else:
+            Game.clear()
+        
     
     def newlife():
 
         global cells
 
-        for x in range(len(cells[0])):
-            for y in range(len(cells)):
-                
+        for y in range(len(cells)):
+            for x in range(len(cells[0])):
                 if x == 0 or x == len(cells[0])-1 or y == 0 or y == len(cells)-1:
-
                     pass
-
                 else:
-
-                    if cells[x][y] == 0:
-
+                    if cells[y][x] == 0:
                         alive = 0
-
-                        for xx in range(3):
-                            for yy in range(3):
-                                
-                                if cells[x+yy-1][y+xx-1] == 1:
-                                    alive += 1
-
-                        if alive == 3:
+                        for yy in range(3):
+                            for xx in range(3):
+                                if cells[y+yy-1][x+xx-1] == 1:
+                                    alive+=1
+                        if alive == 4:
                             cells[y][x] = 2
-
 
     def kill():
 
         global cells
 
-        for x in range(len(cells[0])):
-            for y in range(len(cells)):
-                
-                if x == 0 or x == len(cells[0]) or y == 0 or y == len(cells):
-
+        for y in range(len(cells)):
+            for x in range(len(cells[0])):
+                if x == 0 or x == len(cells[0])-1 or y == 0 or y == len(cells)-1:
                     pass
-
                 else:
-                    
                     if cells[y][x] == 1:
-                        
                         alive = -1
-
-                        for xx in range(3):
-                            for yy in range(3):
-                                
-                                if cells[x+yy-1][y+xx-1] == 1:
-                                    alive += 1
-
-                        if alive == 3 or alive == 2:
-                            cells[y][x] = 1
-                        else:
-                            cells[y][x] = 0
+                        for yy in range(3):
+                            for xx in range(3):
+                                if cells[y+yy-1][x+xx-1] == 1 or cells[y+yy-1][x+xx-1] == 3:
+                                    alive+=1
+                        if alive != 4 and alive != 3:
+                            cells[y][x] = 3
     
     def clear():
 
-        for x in range(len(cells[0])):
-            for y in range(len(cells)):
+        global cells
+
+        for y in range(len(cells)):
+            for x in range(len(cells[0])):
                 if cells[y][x] == 2:
                     cells[y][x] = 1
-                        
-
+                elif cells[y][x] == 3:
+                    cells[y][x] = 0
 
 def main():
 
