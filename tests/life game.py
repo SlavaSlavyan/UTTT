@@ -60,20 +60,6 @@ class Game:
         Game.clear()
         #Game.test()
     
-    def test():
-
-        global cells
-
-        alive = -1
-
-        for xx in range(3):
-            for yy in range(3):
-                
-                if cells[15+yy-1][15+xx-1] == 1:
-                    alive += 1
-        
-        print(alive)
-    
     def newlife():
 
         global cells
@@ -86,18 +72,19 @@ class Game:
                     pass
 
                 else:
-                        
-                    alive = 0
 
-                    for xx in range(3):
-                        for yy in range(3):
-                            
-                            if cells[x+yy-1][y+xx-1] == 1:
-                                alive += 1
+                    if cells[x][y] == 0:
 
-                    if alive == 3:
-                        cells[y][x] = 2
+                        alive = 0
 
+                        for xx in range(3):
+                            for yy in range(3):
+                                
+                                if cells[x+yy-1][y+xx-1] == 1:
+                                    alive += 1
+
+                        if alive == 3:
+                            cells[y][x] = 2
 
 
     def kill():
