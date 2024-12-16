@@ -15,11 +15,12 @@ for s in range(30):
     for i in range(30):
         cells[s].append(0)
 
+size = (len(cells)*20, len(cells[0])*20)
+
 cells[15][15] = 1
 cells[15][16] = 1
 cells[15][14] = 1
 
-size = (len(cells)*20, len(cells[0])*20)
 
 pygame.display.set_caption("Life game")
 
@@ -57,61 +58,82 @@ class Game:
         Game.newlife()
         Game.kill()
         Game.clear()
+        #Game.test()
+    
+    def test():
 
+        global cells
+
+        alive = -1
+
+        for xx in range(3):
+            for yy in range(3):
+                
+                if cells[15+yy-1][15+xx-1] == 1:
+                    alive += 1
+        
+        print(alive)
+    
     def newlife():
 
         global cells
 
-        for s in range(len(cells)):
-
-            for i in range(len(cells[0])):
+        for x in range(len(cells[0])):
+            for y in range(len(cells)):
                 
-                cell = 0
+                if x == 0 or x == len(cells[0])-1 or y == 0 or y == len(cells)-1:
 
-                for ss in range(3):
-                    for ii in range(3):
-                        try:
-                            if cells[s-1+ss][i-1+ii] == 1:
-                                cell+=1
-                        except:
-                            pass
-                
-                if cell == 3:
-                    cells[s][i] = 2
+                    pass
+
+                else:
+                        
+                    alive = 0
+
+                    for xx in range(3):
+                        for yy in range(3):
+                            
+                            if cells[x+yy-1][y+xx-1] == 1:
+                                alive += 1
+
+                    if alive == 3:
+                        cells[y][x] = 2
+
+
 
     def kill():
 
         global cells
 
-        for s in range(len(cells)):
-
-            for i in range(len(cells[0])):
+        for x in range(len(cells[0])):
+            for y in range(len(cells)):
                 
-                cell = 0
+                if x == 0 or x == len(cells[0]) or y == 0 or y == len(cells):
 
-                for ss in range(3):
-                    for ii in range(3):
-                        try:
-                            if cells[s-1+ss][i-1+ii] == 1:
-                                cell+=1
-                        except:
-                            pass
-                
-                if cells[s][i] == 1:
+                    pass
 
-                    if cell < 2 and cell > 3:
-                        cells[s][i] = 0
+                else:
+                    
+                    if cells[y][x] == 1:
+                        
+                        alive = -1
+
+                        for xx in range(3):
+                            for yy in range(3):
+                                
+                                if cells[x+yy-1][y+xx-1] == 1:
+                                    alive += 1
+
+                        if alive == 3 or alive == 2:
+                            cells[y][x] = 1
+                        else:
+                            cells[y][x] = 0
     
     def clear():
 
-        global cells
-
-        for s in range(len(cells)):
-
-            for i in range(len(cells[0])):
-
-                if cells[s][i] == 2:
-                    cells[s][i] = 1
+        for x in range(len(cells[0])):
+            for y in range(len(cells)):
+                if cells[y][x] == 2:
+                    cells[y][x] = 1
                         
 
 
@@ -132,6 +154,6 @@ def main():
         Game.main()
                 
         pygame.display.flip()
-        clock.tick(100)
+        clock.tick(1)
 
 main()
