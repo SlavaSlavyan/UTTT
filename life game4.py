@@ -2,7 +2,7 @@ import pygame
 import sys
 import random
 
-count_of_cells = [120,120]
+count_of_cells = [100,100]
 zoom = 1
 start_delay = 0
 
@@ -15,7 +15,7 @@ clock = pygame.time.Clock()
 pygame.mouse.set_visible(True)
 
 shift = False
-showInProcessCells = True
+showInProcessCells = False
 colors = [(10,10,10),(255,255,255),(119,221,119),(196,30,58)]
 life = False
 fullscreen = False
