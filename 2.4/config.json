@@ -1,3 +1,4 @@
 {
-    "fullscreen":"True"
+    "fullscreen": false,
+    "theme": "dark"
 }

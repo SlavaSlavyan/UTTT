@@ -1,4 +1,5 @@
 from function.endfunc import *
+from display.main import Display
 
 class Main:
 
@@ -6,6 +7,8 @@ class Main:
 
         pygame.init()
         
+        self.status = 'loading'
+        self.anim = 'game_start'
         self.clock = pygame.time.Clock()
 
         Main.setscreen(self)
@@ -32,7 +35,7 @@ class Main:
                         Main.f11(self)
 
             pygame.display.flip()
-            self.clock.tick(120)
+            self.clock.tick(60)
 
     def f11(self):
 
@@ -51,7 +54,7 @@ class Main:
 
         self.config = Config.read()
 
-        if self.config['fullscreen'] == "False":
+        if self.config['fullscreen'] == False:
 
             info = pygame.display.Info()
 
@@ -61,5 +64,5 @@ class Main:
         
         else:
 
-            self.screen = pygame.display.set_mode((0, 0),pygame.RESIZABLE)
+            self.screen = pygame.display.set_mode((0, 0),pygame.FULLSCREEN)
             self.width, self.height = self.screen.get_size()

@@ -1,3 +1,3 @@
 from function.endfunc import *
 
-Config.write({})
+print(Config.read())
