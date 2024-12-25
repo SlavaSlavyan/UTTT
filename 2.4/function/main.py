@@ -12,6 +12,8 @@ class Main:
         self.zoom = 1
         self.clock = pygame.time.Clock()
 
+        self.display = Display()
+
         Main.setscreen(self)
         
     
@@ -34,8 +36,8 @@ class Main:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_F11:
                         Main.f11(self)
-            
-            self = Display.main(self)
+
+            self = self.display.main(self)
 
             pygame.display.flip()
             self.clock.tick(60)

@@ -1,10 +1,15 @@
 from function.endfunc import *
+from display.game import DisplayGame
 
 class Display:
 
-    def main(self):
+    def __init__(self):
+        
+        self.display_game = DisplayGame()
+
+    def main(arg,self):
 
         if self.anim == 'game_start':
-            pass
+            self = self.display_game.main(self)
 
         return self
