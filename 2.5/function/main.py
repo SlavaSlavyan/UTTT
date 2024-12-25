@@ -1,5 +1,6 @@
 from function.endfunc import *
 from display.main import Display
+
 class Main:
 
     def __init__(self):
@@ -27,8 +28,8 @@ class Main:
 
         self.display = Display(self)
 
-        icon = pygame.image.load("3767084.png")
-        pygame.display.set_icon(icon)
+        #icon = pygame.image.load(".png")
+        #pygame.display.set_icon(icon)
         pygame.display.set_caption("Ultimate Tic Tac Toe 2.5.0 DEV")
 
     

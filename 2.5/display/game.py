@@ -43,27 +43,6 @@ class DisplayGame:
         pygame.draw.line(var.screen, var.colors['lightgray'], (x-100*z, y-300*z), (x-100*z, y+300*z), round(5*z))
         pygame.draw.line(var.screen, var.colors['lightgray'], (x+100*z, y-300*z), (x+100*z, y+300*z), round(5*z))
     
-    def small_cell(self,var,offset,endposX,endposY,i):
-
-        for Y in range(3):
-            for X in range(3):
-                F_offset = [offset*z*self.ratio[0]*x-1,]
-
-        z = var.zoom
-        x = var.width//2 + offset*z*self.ratio[0] + endposX*z
-        y = var.height//2 + offset*z*self.ratio[1] + endposY*z
-
-        pygame.draw.line(var.screen, var.colors['lightgray'], (x-75*z, y-25*z), (x+75*z, y-25*z), round(3*z))
-        pygame.draw.line(var.screen, var.colors['lightgray'], (x-75*z, y+25*z), (x+75*z, y+25*z), round(3*z))
-        pygame.draw.line(var.screen, var.colors['lightgray'], (x-25*z, y-75*z), (x-25*z, y+75*z), round(3*z))
-        pygame.draw.line(var.screen, var.colors['lightgray'], (x+25*z, y-75*z), (x+25*z, y+75*z), round(3*z))
-    
-    def small_cells(self,var):
-
-        for y in range(3):
-            for x in range(3):
-                DisplayGame.small_cell(self,var,self.offset[3*y+x+2],-200+200*x, -200+200*y,0)
-
     def small_cells(self,var):
 
         for y in range(3):
