@@ -12,6 +12,9 @@ class Main:
         self.zoom = 1
         self.keyF3 = False
         self.fps = int
+        self.mouseX = 0
+        self.mouseY = 0
+        self.mouseSize = 0
         self.clock = pygame.time.Clock()
         self.colors = {"bg_gray":(40, 44, 52),
                        "bg_darkgray":(33, 37, 43),
@@ -30,8 +33,8 @@ class Main:
 
         #icon = pygame.image.load(".png")
         #pygame.display.set_icon(icon)
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.5.0 DEV")
-
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.5.3 DEV")
+        pygame.mouse.set_visible(False)
     
     def main(self):
         
@@ -53,6 +56,7 @@ class Main:
                     elif event.button == 2:
                         self.zoom = 1
                     if event.button == 1:
+                        self.mouseSize = 5
                         x, y = event.pos
                         #Main.click(x,y)
                 
@@ -69,6 +73,7 @@ class Main:
 
             if self.keyF3 == True:
                 Main.f3(self)
+            Main.cursor(self)
             
             self.fps = int(self.clock.get_fps())
 
@@ -82,6 +87,15 @@ class Main:
             if self.anim == 'game_start':
                 pass
 
+    def cursor(self):
+
+        z = self.zoom
+        self.mouseX, self.mouseY = pygame.mouse.get_pos()
+        x = self.mouseX
+        y = self.mouseY
+        pos = [(x,y),(x+(10-self.mouseSize)*z,y),(x,y+(10-self.mouseSize)*z)]
+        pygame.draw.polygon(self.screen, self.colors['yellow'], pos)
+        self.mouseSize /= 1.2
         
 
     def f11(self):
@@ -105,7 +119,9 @@ class Main:
                       f'Anim: {self.anim}',
                       f'Zoom: {str(self.zoom)[:3]}',
                       f'FPS: {self.fps}',
-                      f'Fullscreen: {self.config['fullscreen']}',]
+                      f'Fullscreen: {self.config['fullscreen']}',
+                      f'Mouse pos: {self.mouseX-self.width//2,-(self.mouseY-self.height//2)}',
+                      ]
         
         for i in range(len(outputText)):
             text_surface = font.render(outputText[i], True, (255,255,255))
