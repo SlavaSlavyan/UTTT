@@ -52,8 +52,9 @@ class Main:
                         self.zoom -= 0.1
                     elif event.button == 2:
                         self.zoom = 1
-                    x, y = event.pos
-                    #Main.click(x,y)
+                    if event.button == 1:
+                        x, y = event.pos
+                        #Main.click(x,y)
                 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_F11:
@@ -73,6 +74,15 @@ class Main:
 
             pygame.display.flip()
             self.clock.tick(60)
+
+    def click(self):
+        
+        if self.status == 'loading':
+
+            if self.anim == 'game_start':
+                pass
+
+        
 
     def f11(self):
 

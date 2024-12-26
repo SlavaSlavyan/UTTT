@@ -11,5 +11,8 @@ class Display:
 
         if var.anim == 'game_start':
             var = self.display_game.start(var)
+        
+        elif var.anim == 'game':
+            var = self.display_game.main(var)
 
         return var

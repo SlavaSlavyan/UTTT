@@ -8,7 +8,16 @@ class DisplayGame:
         self.offset = []
         for i in range(11):
             self.offset.append(100*(i+1))
+    
+    def main(self,var):
 
+        var.screen.fill(var.colors['bg_gray'])
+
+        DisplayGame.bg_cells(self,var)
+        DisplayGame.big_cells(self,var)
+        DisplayGame.small_cells(self,var)
+
+        return var
 
     def start(self,var):
 
@@ -18,7 +27,12 @@ class DisplayGame:
         DisplayGame.big_cells(self,var)
         DisplayGame.small_cells(self,var)
 
-        self.offset = [i/1.1 for i in self.offset]
+        self.offset = [i/1.09 for i in self.offset]
+
+        if self.offset[-1] <= 0.1:
+            var.anim = 'game'
+            var.status = 'game'
+            self.offset = [i*0 for i in self.offset]
 
         return var
     
