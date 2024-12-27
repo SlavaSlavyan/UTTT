@@ -1,5 +1,6 @@
 from function.endfunc import *
 from display.main import Display
+from function.game import Game
 
 class Main:
 
@@ -10,11 +11,8 @@ class Main:
         self.status = 'loading'
         self.anim = 'game_start'
         self.zoom = 1
-        self.keyF3 = False
+        self.keyF3 = True
         self.fps = int
-        self.mouseX = 0
-        self.mouseY = 0
-        self.mouseSize = 0
         self.clock = pygame.time.Clock()
         self.colors = {"bg_gray":(40, 44, 52),
                        "bg_darkgray":(33, 37, 43),
@@ -30,6 +28,7 @@ class Main:
         Main.setscreen(self)
 
         self.display = Display(self)
+        self.game = Game(self)
 
         #icon = pygame.image.load(".png")
         #pygame.display.set_icon(icon)
@@ -56,9 +55,7 @@ class Main:
                     elif event.button == 2:
                         self.zoom = 1
                     if event.button == 1:
-                        self.mouseSize = 5
-                        x, y = event.pos
-                        #Main.click(x,y)
+                        Main.click(self)
                 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_F11:
@@ -73,7 +70,6 @@ class Main:
 
             if self.keyF3 == True:
                 Main.f3(self)
-            Main.cursor(self)
             
             self.fps = int(self.clock.get_fps())
 
@@ -81,21 +77,19 @@ class Main:
             self.clock.tick(60)
 
     def click(self):
+
+        self.display.mouseSize = 10
         
         if self.status == 'loading':
 
             if self.anim == 'game_start':
-                pass
+                self.anim = 'game'
+                self.status = 'game'
+                self.display.display_game.offset = [i*0 for i in self.display.display_game.offset]
+            
+        elif self.status == 'game' and self.anim == 'game':
 
-    def cursor(self):
-
-        z = self.zoom
-        self.mouseX, self.mouseY = pygame.mouse.get_pos()
-        x = self.mouseX
-        y = self.mouseY
-        pos = [(x,y),(x+(10-self.mouseSize)*z,y),(x,y+(10-self.mouseSize)*z)]
-        pygame.draw.polygon(self.screen, self.colors['yellow'], pos)
-        self.mouseSize /= 1.2
+            self = self.game.main(self)
         
 
     def f11(self):
@@ -114,13 +108,18 @@ class Main:
     def f3(self):
 
         font = pygame.font.Font('assets\\Title.ttf', 15)
-        outputText = [f'Screen: {self.width}x{self.height}',
+        outputText = ["[GLOBAL]",
+                      f'Screen: {self.width}x{self.height}',
                       f'Status: {self.status}',
                       f'Anim: {self.anim}',
                       f'Zoom: {str(self.zoom)[:3]}',
                       f'FPS: {self.fps}',
                       f'Fullscreen: {self.config['fullscreen']}',
-                      f'Mouse pos: {self.mouseX-self.width//2,-(self.mouseY-self.height//2)}',
+                      f'Mouse pos: {self.display.mouseX-self.width//2,-(self.display.mouseY-self.height//2)}',"",
+                      "[GAME]",
+                      f'Big selected cell: {self.game.big_celected_cell}',
+                      f'Player: {self.game.player}',
+                      "","MADE BY SLL :)"
                       ]
         
         for i in range(len(outputText)):
