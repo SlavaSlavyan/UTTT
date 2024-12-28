@@ -8,6 +8,10 @@ class DisplayGame:
         self.offset = []
         for i in range(11):
             self.offset.append(100*(i+1))
+        self.select_size = 10
+        self.last_selected_big_cell = var.game.big_celected_cell
+        self.select_pos = [0,0]
+        self.select_offset = [0,0]
     
     def main(self,var):
 
@@ -16,6 +20,8 @@ class DisplayGame:
         DisplayGame.bg_cells(self,var)
         DisplayGame.big_cells(self,var)
         DisplayGame.small_cells(self,var)
+
+        DisplayGame.select(self,var)
 
         return var
 
@@ -26,6 +32,7 @@ class DisplayGame:
         DisplayGame.bg_cells(self,var)
         DisplayGame.big_cells(self,var)
         DisplayGame.small_cells(self,var)
+        DisplayGame.select(self,var)
 
         self.offset = [i/1.09 for i in self.offset]
 
@@ -75,3 +82,56 @@ class DisplayGame:
         pygame.draw.line(var.screen, var.colors['lightgray'], (x-75*z, y+25*z), (x+75*z, y+25*z), round(3*z))
         pygame.draw.line(var.screen, var.colors['lightgray'], (x-25*z, y-75*z), (x-25*z, y+75*z), round(3*z))
         pygame.draw.line(var.screen, var.colors['lightgray'], (x+25*z, y-75*z), (x+25*z, y+75*z), round(3*z))
+    
+    def select(self,var):
+            
+        z = self.select_size*var.zoom
+
+        if var.anim == 'game':
+            if var.game.big_celected_cell == None:
+                self.select_size += 0.02
+                if self.select_size > 1:
+                    self.select_size = 1
+            else:
+                self.select_size -= 0.02
+                if self.select_size < 0.25:
+                    self.select_size = 0.25
+        else:
+            self.select_size = ((self.select_size-1)/1.1)+1
+
+        x = var.width//2 + self.select_pos[0]*var.zoom + self.select_offset[0]*var.zoom
+        y = var.height//2 - self.select_pos[1]*var.zoom - self.select_offset[1]*var.zoom
+
+        if var.game.big_celected_cell != self.last_selected_big_cell:
+            self.last_selected_big_cell = var.game.big_celected_cell
+            last_selected_pos = self.select_pos
+            if var.game.big_celected_cell != None:
+                for Y in range(3):
+                    for X in range(3):
+                        if var.game.big_celected_cell == 3*Y+X: 
+                            self.select_pos = [-200+200*X,200-200*Y]
+            else:
+                self.select_pos = [0,0]
+            self.select_offset = [self.select_offset[0]+last_selected_pos[0]-self.select_pos[0],self.select_offset[1]+last_selected_pos[1]-self.select_pos[1]]
+
+
+        if var.game.player == 0:
+            color = var.colors['blue']
+        elif var.game.player == 1:
+            color = var.colors['orange']
+        else:
+            color = var.colors['yellow']
+        
+        X = (-1,1)
+        Y = (-1,1)
+
+        pos = []
+
+        for Yy in range(2):
+            for Xx in range(2):
+                pos.append([(x-320*z*X[Xx],y-320*z*Y[Yy]),(x-170*z*X[Xx],y-320*z*Y[Yy]),(x-170*z*X[Xx],y-370*z*Y[Yy]),(x-370*z*X[Xx],y-370*z*Y[Yy]),(x-370*z*X[Xx],y-170*z*Y[Yy]),(x-320*z*X[Xx],y-170*z*Y[Yy])])
+
+        for i in range(4):
+            pygame.draw.polygon(var.screen, color, pos[i])
+        
+        self.select_offset = [i / 1.1 for i in self.select_offset]

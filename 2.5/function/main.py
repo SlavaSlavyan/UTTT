@@ -27,12 +27,12 @@ class Main:
 
         Main.setscreen(self)
 
-        self.display = Display(self)
         self.game = Game(self)
+        self.display = Display(self)
 
         #icon = pygame.image.load(".png")
         #pygame.display.set_icon(icon)
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.5.3 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.5.4 DEV")
         pygame.mouse.set_visible(False)
     
     def main(self):
