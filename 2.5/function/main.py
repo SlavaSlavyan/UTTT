@@ -107,7 +107,7 @@ class Main:
     
     def f3(self):
 
-        font = pygame.font.Font('assets\\Title.ttf', 15)
+        font = pygame.font.Font('assets\\text.ttf', 10)
         outputText = ["[GLOBAL]",
                       f'Screen: {self.width}x{self.height}',
                       f'Status: {self.status}',
@@ -124,7 +124,7 @@ class Main:
         
         for i in range(len(outputText)):
             text_surface = font.render(outputText[i], True, (255,255,255))
-            self.screen.blit(text_surface, (10, 10+15*i))
+            self.screen.blit(text_surface, (10, 10+10*i))
     
     def setscreen(self):
 

@@ -6,6 +6,13 @@ class Game:
         
         self.big_celected_cell = None
         self.player = 0
+        self.sells = []
+        for bs in range(9):
+            self.sells.append([])
+            for s in range(9):
+                self.sells[bs].append(None)
+                
+
 
     def main(self,var):
 
