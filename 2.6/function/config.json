@@ -1,4 +1,5 @@
 {
-    "fulscreen":false,
-    "zoom":1
+    "fullscreen": false,
+    "zoom": 1,
+    "theme": "baseDark"
 }
