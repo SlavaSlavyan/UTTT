@@ -12,12 +12,13 @@ class Main:
         Main.setscreen(self)
         self.clock = pygame.time.Clock()
         self.fps = int
+        self.maxfps = 60
         self.F3 = True
         self.status = 'loading'
 
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.7.0 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.7.1 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):
@@ -41,20 +42,32 @@ class Main:
                     
                     if event.key == pygame.K_F11:
                         Main.F11(self)
+                    
+                    if event.key == pygame.K_F2:
+                        if self.maxfps == 60:
+                            self.maxfps = 13000
+
+                        else:
+                            self.maxfps = 60
 
             self = self.Disp.main(self)
                     
             self.fps = int(self.clock.get_fps())
 
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(self.maxfps)
     
     def zoom(self,btn):
 
-        if btn == 4:
-            self.config['zoom'] += 0.1
-        elif btn == 5:
-            self.config['zoom'] -= 0.1
+        if self.config['zoom'] < 3:
+            var = 0.1
+        else:
+            var = 0.5
+
+        if btn == 4 and self.config['zoom'] < 10:
+            self.config['zoom'] += var
+        elif btn == 5 and self.config['zoom'] > 0.2:
+            self.config['zoom'] -= var
         elif btn == 2:
             self.config['zoom'] = 1
     

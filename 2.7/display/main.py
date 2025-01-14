@@ -20,14 +20,14 @@ class Display:
         if m.F3 == True:
             text = [
                 'Made by SLL >:3',"",
-                f"[GLOBAL]",'',[
-                    f'Screen: {m.width}x{m.height}',
-                    f'FPS: {m.fps}',
-                    f'Status: {m.status}',
-                    f"Config:",list(m.config.items())
-                ]
+                f'Screen: {m.width}x{m.height}',
+                f'FPS: {m.fps}',
+                f'Status: {m.status}',
+                f'Anim: {self.anim}',
+                f'Zoom: {str(m.config['zoom'])[:4]}',
+                f"Theme: {m.config['theme']}"
             ]
-            Display.F3(m,text,0,0)
+            Display.F3(m,text)
 
         return m
     
@@ -36,16 +36,12 @@ class Display:
         m.screen.fill(self.colors['global']['background'])
         Display.title(m,(m.width//2,m.height//2),"Error of Anim!",150,self.colors['global']['title'])
     
-    def F3(m,inputText,indentNum,textNum):
+    def F3(m,inputText):
 
-        font = pygame.font.Font(f"assets\\fonts\\text.ttf", 9)
-
+        font = pygame.font.Font(f"assets\\fonts\\text.ttf", 8)
         for i in range(len(inputText)):
-            if isinstance(inputText[i],list):
-                Display.F3(m,inputText[i],indentNum+1,textNum+i)
-            else:
-                text = font.render(str(inputText[i]), False, (255,255,255))
-                m.screen.blit(text, (10+9*indentNum,10+9*(i+textNum)))
+            text = font.render(str(inputText[i]), False, m.Disp.colors['global']['text'])
+            m.screen.blit(text, (10,10+8*i))
     
     def text(m,pos,inputText,size,color):
         

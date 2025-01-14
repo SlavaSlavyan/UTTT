@@ -68,13 +68,15 @@ class Main:
 
             self = self.display.main(self)
 
+            print(self.fps)
+
             if self.keyF3 == True:
                 Main.f3(self)
             
             self.fps = int(self.clock.get_fps())
 
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(6000)
 
     def click(self):
 
