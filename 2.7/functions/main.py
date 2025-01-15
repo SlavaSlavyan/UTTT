@@ -19,7 +19,7 @@ class Main:
         self.Disp = Display(self)
 
         pygame.display.set_caption("Ultimate Tic Tac Toe 2.7.1 DEV")
-        pygame.mouse.set_visible(True)
+        pygame.mouse.set_visible(False)
 
     def main(self):
 
@@ -33,7 +33,13 @@ class Main:
                     Main.saveAndExit(self)
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    Main.zoom(self,event.button)
+                    keys = pygame.key.get_pressed()
+
+                    if keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]:
+                        Main.zoom(self,event.button)
+                    
+                    if event.button == 1:
+                        Main.LTclick(self)
 
                 if event.type == pygame.KEYDOWN:
 
@@ -70,6 +76,10 @@ class Main:
             self.config['zoom'] -= var
         elif btn == 2:
             self.config['zoom'] = 1
+    
+    def LTclick(self):
+
+        self.Disp.mouse_size = 10
     
     def F11(self):
 

@@ -7,6 +7,8 @@ class Display:
     def __init__(self,m):
         
         self.anim = 'None'
+        self.mouse_pos = [int,int]
+        self.mouse_size = 0.1
         self.colors = File.load(f'themes\\{m.config['theme']}')
 
     def main(self,m):
@@ -28,6 +30,8 @@ class Display:
                 f"Theme: {m.config['theme']}"
             ]
             Display.F3(m,text)
+        
+        Display.cursor(self,m)
 
         return m
     
@@ -35,6 +39,21 @@ class Display:
 
         m.screen.fill(self.colors['global']['background'])
         Display.title(m,(m.width//2,m.height//2),"Error of Anim!",150,self.colors['global']['title'])
+    
+    def cursor(self,m):
+
+        z = m.config['zoom']
+        self.mouse_pos = pygame.mouse.get_pos()
+        x = self.mouse_pos[0]
+        y = self.mouse_pos[1]
+
+        pos = [(x,y),(x+(10+self.mouse_size)*z,y),(x,y+(10+self.mouse_size)*z)]
+        pygame.draw.polygon(m.screen, self.colors['global']['cursor'], pos)
+        for i in range(len(pos)):
+            pygame.draw.circle(m.screen, self.colors['global']['background'], pos[i], round(0.3*int(z)))
+            pygame.draw.line(m.screen, self.colors['global']['background'], pos[i-1], pos[i], round(1*z))
+        self.mouse_size /= 1.2
+
     
     def F3(m,inputText):
 
@@ -57,7 +76,7 @@ class Display:
         size = round(size*m.config['zoom'])
 
         font = pygame.font.Font(f"assets\\fonts\\title.ttf", size)
-        text = font.render(str(inputText), True, color)
+        text = font.render(str(inputText), False, color)
         text_rect = text.get_rect()
         text_rect.center = pos
         m.screen.blit(text, text_rect)
