@@ -1,87 +1,73 @@
 import pygame
-import json
 import sys
+import json
 
-class Main:
+pygame.init()
+width, height = 1200, 800
+screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
+pygame.display.set_caption("DEV")
+zoom = 1
+offset = [0,0]
+selected_file = "test"
+autoload = True
 
-    def __init__(self):
-        
-        pygame.init()
-        
-        self.width = 1200
-        self.height = 800
-        self.screen = pygame.display.set_mode((self.width, self.height),pygame.RESIZABLE)
-
-        self.Disp = Display(self)
-
-        pygame.display.set_caption("SLL EDITOR SLL 0.2")
-
-    def main(self):
-
-        while True:
-
-            self.width, self.height = self.screen.get_size()
-
-            for event in pygame.event.get():
-
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-
-            self = self.Disp.main(self)
-
-            pygame.display.flip()
+def load(path):
+    with open(f'{path}.json', 'r', encoding='utf-8') as file:
+        try:
+            data = json.load(file)
+            return data
+        except:
+            pass
     
-    class Editor:
 
-        def __init__(self,m):
+def display(pos):
 
-            pass
+    if autoload:
+        global MainPOS
+        MainPOS = load(selected_file)
 
-        def main(m):
+    try:
+        for vizual_object in pos:
+            try:
+                if vizual_object['type'] == 'line':
+                    newpos = [[int,int],[int,int]]
+                    for i in range(2):
+                        newpos[i][0] = vizual_object['pos'][i][0]*zoom + offset[0]
+                        newpos[i][1] = -vizual_object['pos'][i][1]*zoom - offset[1]
+                        if vizual_object['cord_system'] == 'center':
+                            newpos[i][0] += width//2
+                            newpos[i][1] += height//2
+                    pygame.draw.line(screen, vizual_object['color'], newpos[0] , newpos[1], round(vizual_object['size']*zoom))
+            except:
+                pass
+    except:
+        pass
+MainPOS = load(selected_file)
 
-            return m
+while True:
 
-class Display:
+    screen.fill((40, 44, 52))
+    width, height = screen.get_size()
 
-    def __init__(self,m):
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
         
-        self.colors = {"gray":(40, 44, 52),
-                       "dark_gray":(33, 37, 43),
-                       "light_gray":(171,178,191),
-                       "second_light_gray":(92, 99, 112),
-                       "yellow":(229, 192, 123),
-                       "green":(152, 195, 121),
-                       "blue":(97, 175, 239),
-                       "orange":(198, 107, 60),
-                       "red":(194, 64, 52),
-                       "black":(0,0,0),
-                       "white":(255,255,255)}
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 4:
+                zoom += 0.1
+            elif event.button == 5:
+                zoom -= 0.1
+            elif event.button == 2:
+                zoom = 1
         
-        self.Edit = Display.Editor(m)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_F6:
+                MainPOS = load(selected_file)
 
-    def main(self,m):
 
-        m = m.Disp.Edit.main(m)
-
-        return m
-
-    class Editor:
-
-        def __init__(self,m):
-
-            pass
-
-        def main(self,m):
-
-            m.screen.fill(m.Disp.colors['gray'])
-
-            pos = (((0,0),(0,50),(50,50),(50,0)),((0,100),(50,100),(50,300),(0,300)),((m.width,0),(m.width,m.height),(m.width-300,m.height),(m.width-300,0)))
-
-            for i in range(len(pos)):
-                pygame.draw.polygon(m.screen, m.Disp.colors['dark_gray'], pos[i])
-            return m
-
-Start = Main()
-
-Start.main()
+    display(MainPOS)
+    
+    pygame.display.flip()

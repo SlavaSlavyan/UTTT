@@ -1,0 +1,30 @@
+[
+    {
+        "type":"line",
+        "cord_system":"center",
+        "color":[255,255,255],
+        "size":10,
+        "pos":[[100,100],[100,-100]]
+    },
+    {
+        "type":"line",
+        "cord_system":"center",
+        "color":[255,255,255],
+        "size":10,
+        "pos":[[100,-100],[-100,-100]]
+    },
+    {
+        "type":"line",
+        "cord_system":"center",
+        "color":[255,255,255],
+        "size":10,
+        "pos":[[-100,-100],[-100,100]]
+    },
+    {
+        "type":"line",
+        "cord_system":"center",
+        "color":[255,255,255],
+        "size":10,
+        "pos":[[-100,100],[100,100]]
+    }
+]
