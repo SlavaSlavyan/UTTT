@@ -8,8 +8,12 @@ screen = pygame.display.set_mode((width, height),pygame.RESIZABLE)
 pygame.display.set_caption("DEV")
 zoom = 1
 offset = [0,0]
+last_offset = offset
 selected_file = "test"
 autoload = True
+mouse_pos_last = [0,0]
+mouse_pos = mouse_pos_last
+mouse_pressed = False
 
 def load(path):
     with open(f'{path}.json', 'r', encoding='utf-8') as file:
@@ -34,14 +38,12 @@ def display(pos):
                     for i in range(2):
                         newpos[i][0] = vizual_object['pos'][i][0]*zoom + offset[0]
                         newpos[i][1] = -vizual_object['pos'][i][1]*zoom - offset[1]
-                        if vizual_object['cord_system'] == 'center':
-                            newpos[i][0] += width//2
-                            newpos[i][1] += height//2
                     pygame.draw.line(screen, vizual_object['color'], newpos[0] , newpos[1], round(vizual_object['size']*zoom))
             except:
                 pass
     except:
         pass
+
 MainPOS = load(selected_file)
 
 while True:
@@ -62,10 +64,28 @@ while True:
                 zoom -= 0.1
             elif event.button == 2:
                 zoom = 1
+                offset = [0,0]
+                last_offset = offset
+
+            if event.button == 3:
+                last_offset = offset
+                mouse_pos_last = event.pos
+                mouse_pressed = True
         
+        if event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 3:
+                mouse_pressed = False
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_F6:
                 MainPOS = load(selected_file)
+        
+        if mouse_pressed == True:
+            try:
+                mouse_pos = event.pos
+            except:
+                pass
+            offset = [last_offset[0]-(mouse_pos_last[0]-mouse_pos[0]),last_offset[1]+mouse_pos_last[1]-mouse_pos[1]]
 
 
     display(MainPOS)
