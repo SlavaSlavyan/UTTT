@@ -1,0 +1,8 @@
+[
+    {
+        "type":"line",
+        "config":{"align":"center"},
+        "size":1,
+        "pos":[[-10,0],[10,10]]
+    }
+]
