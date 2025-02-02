@@ -1,9 +1,0 @@
-[
-    {
-        "type":"line",
-        "settings":{"align":"center","zoomable":false},
-        "color":[255,255,255],
-        "size":1,
-        "pos":[[0,0],[0,100]]
-    }
-]
