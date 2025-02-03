@@ -1,3 +1,5 @@
 {
-    "fullscreen": false
+    "fullscreen": true,
+    "them": "dark",
+    "zoom": 1
 }

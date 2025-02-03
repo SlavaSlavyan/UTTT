@@ -16,11 +16,20 @@ class Main:
         self.maxfps = 60
         self.status = "game"
         self.F3 = True
+        self.keys = {
+            "ctrl":False
+        }
+        self.mouse = {
+            "lt":False,
+            "rt":False
+        }
+        self.lastmousepos = [int,int]
+        self.lastoffset = [int,int]
         self.clock = pygame.time.Clock()
 
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.0 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.1 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):
@@ -32,23 +41,63 @@ class Main:
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
+
+                    File.save('function\\config',self.config)
                     pygame.quit()
                     sys.exit()
                 
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    
+                    if self.keys['ctrl'] == True:
+                        if event.button == 4:
+                            self.config['zoom'] -= 0.1
+
+                        if event.button == 5:
+                            self.config['zoom'] += 0.1
+
+                        if event.button == 2: 
+                            self.config['zoom'] = 1
+                    
+                    if event.button == 3:
+                        
+                        self.lastmousepos = self.Disp.mouse_pos
+                        self.mouse['rt'] = True
+                
+                if event.type == pygame.MOUSEBUTTONUP:
+
+                    if event.button == 3:
+
+                        self.mouse['rt'] = False
+
                 if event.type == pygame.KEYDOWN:
+
+                    if event.key == pygame.K_LCTRL or event.key == pygame.K_RCTRL:
+                        self.keys['ctrl'] = True
 
                     if event.key == pygame.K_F3:
                         Main.F3(self)
                     
                     if event.key == pygame.K_F11:
                         Main.F11(self)
+                
+                if event.type == pygame.KEYUP:
+
+                    if event.key == pygame.K_LCTRL or event.key == pygame.K_RCTRL:
+                        self.keys['ctrl'] = False
             
             self.Disp.main(self)
+            self.offset()
                     
             self.fps = int(self.clock.get_fps())
 
             pygame.display.flip()
             self.clock.tick(self.maxfps)
+    
+    def offset(self):
+        
+        if self.mouse['rt'] == True:
+            pass
+            
     
     def F11(self):
 
