@@ -201,7 +201,12 @@ class Draw:
         else:
             color = colors[5]
 
-        pos = [(x-320*dx,y-320*dy),(x-170*dx,y-320*dy),(x-170*dx,y-370*dy),(x-370*dx,y-370*dy),(x-370*dx,y-170*dy),(x-320*dx,y-170*dy)]
+        pos = [(x-320*dx,y-320*dy),
+               (x-170*dx,y-320*dy),
+               (x-170*dx,y-370*dy),
+               (x-370*dx,y-370*dy),
+               (x-370*dx,y-170*dy),
+               (x-320*dx,y-170*dy)]
 
         pygame.draw.polygon(screen, color, pos)
 

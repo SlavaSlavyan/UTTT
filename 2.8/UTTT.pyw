@@ -3,6 +3,7 @@ import sys
 
 from function.Reader import File
 from display.main import Display
+from function.game import Game
 
 class Main:
     
@@ -27,9 +28,10 @@ class Main:
         self.lastoffset = [int,int]
         self.clock = pygame.time.Clock()
 
+        self.Game = Game(self)
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.1 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.2 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):
@@ -61,6 +63,7 @@ class Main:
                     if event.button == 3:
                         
                         self.lastmousepos = self.Disp.mouse_pos
+                        self.lastoffset = self.Disp.offset
                         self.mouse['rt'] = True
                 
                 if event.type == pygame.MOUSEBUTTONUP:
@@ -96,7 +99,7 @@ class Main:
     def offset(self):
         
         if self.mouse['rt'] == True:
-            pass
+            self.Disp.offset = [self.lastoffset[0]-self.lastmousepos[0]+self.Disp.mouse_pos[0],self.lastoffset[1]+self.lastmousepos[1]-self.Disp.mouse_pos[1]]
             
     
     def F11(self):
