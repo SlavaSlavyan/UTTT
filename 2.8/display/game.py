@@ -10,6 +10,8 @@ class Game:
             self.offset.append(200*(i+1))
         self.selectsize = 1
         self.selectpos = [0,0]
+        self.selectoffset = [0,0]
+        self.lastselectedcell = None
 
     def start(self,m):
 
@@ -74,20 +76,44 @@ class Game:
     def select(self,m):
 
         z = (self.offset[11]+self.selectsize)*m.config['zoom']
-        x = m.width//2+m.Disp.offset[0] + self.selectpos[0]*z
-        y = m.height//2-m.Disp.offset[1] + self.selectpos[0]*z
+        x = m.width//2+m.Disp.offset[0] + self.selectpos[0]*m.config['zoom'] + self.selectoffset[0]*m.config['zoom']
+        y = m.height//2-m.Disp.offset[1] - self.selectpos[1]*m.config['zoom'] - self.selectoffset[1]*m.config['zoom']
         
         for X in range(-1,2,2):
+
             for Y in range(-1,2,2):
 
                 pos = [[x-320*X*z,y+320*Y*z],[x-170*X*z,y+320*Y*z],[x-170*X*z,y+370*Y*z],[x-370*X*z,y+370*Y*z],[x-370*X*z,y+170*Y*z],[x-320*X*z,y+170*Y*z]]
                 pygame.draw.polygon(m.screen, self.colors['player0'], pos)
         
         if m.Game.selected_cell != None:
+
             self.selectsize -= 0.03
             if self.selectsize < 0.25:
                 self.selectsize = 0.25
+
         else:
+
             self.selectsize += 0.03
             if self.selectsize > 1:
                 self.selectsize = 1
+        
+        if self.lastselectedcell != m.Game.selected_cell:
+
+            self.lastselectedcell = m.Game.selected_cell
+            now = []
+            for i in range(2):
+                now.append(self.selectoffset[i] + self.selectpos[i])
+
+            if m.Game.selected_cell == None:
+                self.selectpos = [0,0]
+            else:
+                for X in range(3):
+                    for Y in range(3):
+                        if 3*Y+X == m.Game.selected_cell:
+                            self.selectpos = [200*(X-1),-200*(Y-1)]
+            
+            self.selectoffset[0] = now[0] - self.selectpos[0]
+            self.selectoffset[1] = now[1] - self.selectpos[1]
+        
+        self.selectoffset = [i/1.1 for i in self.selectoffset]

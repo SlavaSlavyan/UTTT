@@ -31,7 +31,7 @@ class Main:
         self.Game = Game(self)
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.3 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.4 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):

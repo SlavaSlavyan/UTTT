@@ -59,7 +59,8 @@ class Display:
             f"FPS: {m.fps}",
             f"Max fps: {m.maxfps}",
             f"Mouse pos: {self.mouse_pos[0]-m.width//2,-(self.mouse_pos[1]-m.height//2)}",
-            f"Main offset: {self.offset}"
+            f"Main offset: {self.offset}","",
+            f"=====[{m.status}]=====",""
         ]
 
         for key,value in m.config.items():
@@ -68,12 +69,9 @@ class Display:
             inputText.insert(4,f"{key}: {value}")
         
         if m.status == "game":
-            inputText.append("")
-            inputText.append("=====[GAME]=====")
-            inputText.append("")
             inputText.append("Cells:")
             for i in m.Game.cells:
-                line = ""
+                line = "  "
                 for j in i:
                     if j == None:
                         line = line + "- "
@@ -85,15 +83,34 @@ class Display:
                         line = line + "E "
 
                 inputText.append(line)
+            inputText.append("")
             inputText.append(f"Player: {m.Game.player}")
             inputText.append(f"Selected cell: {m.Game.selected_cell}")
             inputText.append(f"Last pos: {m.Game.x,m.Game.y}")
+        
+        inputText.append("")
+        inputText.append(f"=====[{self.anim}]=====")
+        inputText.append("")
+
+        if self.anim == "game" or self.anim == "game_start":
+            inputText.append(f"Select size: {round(self.Game.selectsize,2)}")
+            inputText.append(f"Select pos: {self.Game.selectpos}")
+            inputText.append(f"Select offset: {[round(self.Game.selectoffset[0],2),round(self.Game.selectoffset[1],2)]}")
+            inputText.append("")
+            inputText.append("Colors:")
+            for key,value in self.Game.colors.items():
+                if isinstance(value,tuple):
+                    inputText.append(f"  {key}: {value}")
+            inputText.append("")
+            inputText.append("Offset:")
+            for i in range(len(self.Game.offset)):
+                inputText.append(f"  {i}.[{round(self.Game.offset[i],2)}]")
+            
 
         font = pygame.font.Font(f"font\\text.ttf", 8)
         for i in range(len(inputText)):
             text = font.render(str(inputText[i]), False, m.Disp.colors[m.config['them']]['global']['text'])
             m.screen.blit(text, (10,10+8*i))
-            
 
     def gradient(self,color1, color2, steps):
 
