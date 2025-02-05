@@ -31,7 +31,7 @@ class Main:
         self.Game = Game(self)
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.2 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.3 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):
@@ -58,6 +58,7 @@ class Main:
                             self.config['zoom'] += 0.1
 
                         if event.button == 2: 
+                            self.Disp.offset = [0,0]
                             self.config['zoom'] = 1
                     
                     if event.button == 3:
@@ -65,17 +66,32 @@ class Main:
                         self.lastmousepos = self.Disp.mouse_pos
                         self.lastoffset = self.Disp.offset
                         self.mouse['rt'] = True
+                    
+                    if event.button == 1:
+
+                        self.mouse['lt'] = True
+                        self.mouseinput()
                 
                 if event.type == pygame.MOUSEBUTTONUP:
 
                     if event.button == 3:
 
                         self.mouse['rt'] = False
+                    
+                    if event.button == 1:
+
+                        self.mouse['lt'] = False
 
                 if event.type == pygame.KEYDOWN:
 
                     if event.key == pygame.K_LCTRL or event.key == pygame.K_RCTRL:
                         self.keys['ctrl'] = True
+                    
+                    if event.key == pygame.K_F2:
+                        if self.maxfps == 60:
+                            self.maxfps = 1200
+                        else:
+                            self.maxfps = 60
 
                     if event.key == pygame.K_F3:
                         Main.F3(self)
@@ -100,7 +116,10 @@ class Main:
         
         if self.mouse['rt'] == True:
             self.Disp.offset = [self.lastoffset[0]-self.lastmousepos[0]+self.Disp.mouse_pos[0],self.lastoffset[1]+self.lastmousepos[1]-self.Disp.mouse_pos[1]]
-            
+    
+    def mouseinput(self):
+
+        self.Game.main(self)
     
     def F11(self):
 

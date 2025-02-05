@@ -10,6 +10,9 @@ class Display:
         self.anim = 'game_start'
         self.colors = {
             "dark":{
+                "global":{
+                    "text":(255,255,255)
+                },
                 "game":{
                     "bg":(40, 44, 52),
                     "darkbg":(33, 37, 43),
@@ -34,12 +37,64 @@ class Display:
 
             self.Game.start(m)
         
+        if m.F3:
+            self.F3(m)
+        
         self.cursor(m)
     
     def cursor(self,m):
 
         self.mouse_pos = pygame.mouse.get_pos()
     
+    def F3(self,m):
+
+        inputText = [
+            "Made by sll :3","",
+            "=====[GLOBAL]=====","",
+            f"Screen: {m.width}x{m.height}",
+            f"Status: {m.status}",
+            f"Anim: {self.anim}",
+            f"Keys: {m.keys}",
+            f"Mouse: {m.mouse}",
+            f"FPS: {m.fps}",
+            f"Max fps: {m.maxfps}",
+            f"Mouse pos: {self.mouse_pos[0]-m.width//2,-(self.mouse_pos[1]-m.height//2)}",
+            f"Main offset: {self.offset}"
+        ]
+
+        for key,value in m.config.items():
+            if key == "zoom":
+                value = str(value)[:3]
+            inputText.insert(4,f"{key}: {value}")
+        
+        if m.status == "game":
+            inputText.append("")
+            inputText.append("=====[GAME]=====")
+            inputText.append("")
+            inputText.append("Cells:")
+            for i in m.Game.cells:
+                line = ""
+                for j in i:
+                    if j == None:
+                        line = line + "- "
+                    elif j == 0:
+                        line = line + "0 "
+                    elif j == 1:
+                        line = line + "X "
+                    else:
+                        line = line + "E "
+
+                inputText.append(line)
+            inputText.append(f"Player: {m.Game.player}")
+            inputText.append(f"Selected cell: {m.Game.selected_cell}")
+            inputText.append(f"Last pos: {m.Game.x,m.Game.y}")
+
+        font = pygame.font.Font(f"font\\text.ttf", 8)
+        for i in range(len(inputText)):
+            text = font.render(str(inputText[i]), False, m.Disp.colors[m.config['them']]['global']['text'])
+            m.screen.blit(text, (10,10+8*i))
+            
+
     def gradient(self,color1, color2, steps):
 
         gradient = []
