@@ -13,6 +13,7 @@ class Game:
             self.cells.append([])
             for j in range(9):
                 self.cells[i].append(None)
+        self.memory = []
 
     def main(self,m):
 
@@ -20,7 +21,11 @@ class Game:
         self.x = round((m.Disp.mouse_pos[0] - m.width//2 - m.Disp.offset[0])/z)
         self.y = round((-m.Disp.mouse_pos[1] + m.height//2 - m.Disp.offset[1])/z)
 
-        self.selected_cell = self.selectbigcell(m)
+        if self.selected_cell == None:
+            self.checkselectedbigcell(m,self.selectbigcell(m))
+        
+        else:
+            self.checkselectedsmallcell(m,self.selectsmallcell(m))
 
     def selectbigcell(self,m):
 
@@ -30,3 +35,62 @@ class Game:
                     return 3*y+x
         
         return None
+
+    def checkselectedbigcell(self,m,cell):
+
+        if cell != None and None in self.cells[cell]:
+            self.selected_cell = cell
+    
+    def selectsmallcell(self,m):
+
+        for X in range(3):
+            for Y in range(3):
+                if 3*Y+X == self.selected_cell:
+                    offset = [X-1,Y-1]
+        X,Y = offset
+
+        for x in range(3):
+            for y in range(3):
+                if self.x < -25+50*x+200*X and self.x > -75+50*x+200*X and self.y < 75-50*y-200*Y and self.y > 25-50*y-200*Y:
+                    return 3*y+x
+        
+        return None
+    
+    def checkselectedsmallcell(self,m,cell):
+
+        if cell != None and self.cells[self.selected_cell][cell] == None:
+            self.cells[self.selected_cell][cell] = self.player
+            self.capture(m)
+            self.nextcell(m,cell)
+
+            if self.player == 0:
+                self.player = 1
+            else:
+                self.player = 0
+    
+    def nextcell(self,m,cell):
+
+        if None in self.cells[cell]:
+            self.selected_cell = cell
+        else:
+            self.selected_cell = None
+    
+    def capture(self,m):
+
+        for p in range(2):
+
+            for i in range(3):
+
+                if self.cells[self.selected_cell][0+3*i] == p and self.cells[self.selected_cell][1+3*i] == p and self.cells[self.selected_cell][2+3*i] == p:
+                    self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
+                    break
+
+                if self.cells[self.selected_cell][0+i] == p and self.cells[self.selected_cell][3+i] == p and self.cells[self.selected_cell][6+i] == p:
+                    self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
+                    break
+
+            if self.cells[self.selected_cell][0] == p and self.cells[self.selected_cell][4] == p and self.cells[self.selected_cell][8] == p:
+                self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
+
+            elif self.cells[self.selected_cell][2] == p and self.cells[self.selected_cell][4] == p and self.cells[self.selected_cell][6] == p:
+                self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]

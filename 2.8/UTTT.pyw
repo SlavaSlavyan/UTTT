@@ -15,7 +15,7 @@ class Main:
 
         self.fps = int
         self.maxfps = 60
-        self.status = "game"
+        self.status = "loading"
         self.F3 = True
         self.keys = {
             "ctrl":False
@@ -31,7 +31,7 @@ class Main:
         self.Game = Game(self)
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.4 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.5 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):
@@ -119,7 +119,11 @@ class Main:
     
     def mouseinput(self):
 
-        self.Game.main(self)
+        if self.Disp.anim == "game_start":
+            self.Disp.anim = 'game'
+            self.status = "game"
+        elif self.status == 'game':
+            self.Game.main(self)
     
     def F11(self):
 
