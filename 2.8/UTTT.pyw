@@ -31,7 +31,7 @@ class Main:
         self.Game = Game(self)
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.5 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.6 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):
@@ -98,6 +98,9 @@ class Main:
                     
                     if event.key == pygame.K_F11:
                         Main.F11(self)
+                    
+                    if event.key == pygame.K_z and self.keys['ctrl']:
+                        self.Game.loadsave(self)
                 
                 if event.type == pygame.KEYUP:
 

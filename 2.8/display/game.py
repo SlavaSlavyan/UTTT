@@ -184,4 +184,3 @@ class Game:
 
                             if self.smallfiguresizes[3*Y+X][3*yY+xX] < 1:
                                 self.smallfiguresizes[3*Y+X][3*yY+xX] += 0.05
-                            

@@ -39,6 +39,7 @@ class Game:
     def checkselectedbigcell(self,m,cell):
 
         if cell != None and None in self.cells[cell]:
+            self.memory.append([f'self.selected_cell = {self.selected_cell}'])
             self.selected_cell = cell
     
     def selectsmallcell(self,m):
@@ -59,6 +60,9 @@ class Game:
     def checkselectedsmallcell(self,m,cell):
 
         if cell != None and self.cells[self.selected_cell][cell] == None:
+            self.memory.append([f'self.cells[{self.selected_cell}] = {self.cells[self.selected_cell]}',
+                                f'self.selected_cell = {self.selected_cell}',
+                                f'self.player = {self.player}'])
             self.cells[self.selected_cell][cell] = self.player
             self.capture(m)
             self.nextcell(m,cell)
@@ -77,20 +81,40 @@ class Game:
     
     def capture(self,m):
 
+        capture = False
+
         for p in range(2):
 
             for i in range(3):
 
                 if self.cells[self.selected_cell][0+3*i] == p and self.cells[self.selected_cell][1+3*i] == p and self.cells[self.selected_cell][2+3*i] == p:
                     self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
+                    capture = True
                     break
 
                 if self.cells[self.selected_cell][0+i] == p and self.cells[self.selected_cell][3+i] == p and self.cells[self.selected_cell][6+i] == p:
                     self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
+                    capture = True
                     break
 
             if self.cells[self.selected_cell][0] == p and self.cells[self.selected_cell][4] == p and self.cells[self.selected_cell][8] == p:
                 self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
+                capture = True
 
             elif self.cells[self.selected_cell][2] == p and self.cells[self.selected_cell][4] == p and self.cells[self.selected_cell][6] == p:
                 self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
+                capture = True
+
+    def loadsave(self,m):
+
+        try:
+            for i in self.memory[-1]:
+                exec(i)
+            self.memory = self.memory[:-1]
+
+            for i in range(9):
+                for j in range(9):
+                    m.Disp.Game.smallfiguresizes[i][j] *= 0
+        except:
+            pass
+
