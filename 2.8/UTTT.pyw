@@ -31,7 +31,7 @@ class Main:
         self.Game = Game(self)
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.6 DEV")
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.7 DEV")
         pygame.mouse.set_visible(True)
 
     def main(self):
@@ -111,6 +111,7 @@ class Main:
             self.offset()
                     
             self.fps = int(self.clock.get_fps())
+            self.timer()
 
             pygame.display.flip()
             self.clock.tick(self.maxfps)
@@ -161,6 +162,24 @@ class Main:
 
             self.screen = pygame.display.set_mode((0, 0),pygame.FULLSCREEN)
             self.width, self.height = self.screen.get_size()
+    
+    def timer(self):
+
+        if self.status == 'game':
+            
+            try:
+                tick = 100/self.fps
+            except:
+                tick = 0
+            self.Game.timer['tick'] += tick
+
+            if self.Game.timer['tick'] >= 100:
+                self.Game.timer['tick'] = 0
+                self.Game.timer['seconds'] += 1
+            
+            if self.Game.timer['seconds'] >= 60:
+                self.Game.timer['seconds'] = 0
+                self.Game.timer['minutes'] += 1
 
 Start = Main()
 

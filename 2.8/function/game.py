@@ -1,5 +1,6 @@
 import pygame
 
+
 class Game:
 
     def __init__(self,m):
@@ -14,6 +15,7 @@ class Game:
             for j in range(9):
                 self.cells[i].append(None)
         self.memory = []
+        self.timer = {'tick':0,'seconds':0,'minutes':0}
 
     def main(self,m):
 
@@ -104,6 +106,9 @@ class Game:
             elif self.cells[self.selected_cell][2] == p and self.cells[self.selected_cell][4] == p and self.cells[self.selected_cell][6] == p:
                 self.cells[self.selected_cell] = [p,p,p,p,p,p,p,p,p]
                 capture = True
+    
+        if capture:
+            print(self.wincheck(m))
 
     def loadsave(self,m):
 
@@ -111,10 +116,29 @@ class Game:
             for i in self.memory[-1]:
                 exec(i)
             self.memory = self.memory[:-1]
-
-            for i in range(9):
-                for j in range(9):
-                    m.Disp.Game.smallfiguresizes[i][j] *= 0
         except:
             pass
 
+    def wincheck(self,m):
+
+        win = None
+
+        for p in range(2):
+
+            for i in range(3):
+
+                if self.cells[0+3*i] == [p,p,p,p,p,p,p,p,p] and self.cells[1+3*i] == [p,p,p,p,p,p,p,p,p] and self.cells[2+3*i] == [p,p,p,p,p,p,p,p,p]:
+                    win = p
+                    break
+
+                if self.cells[0+i] == [p,p,p,p,p,p,p,p,p] and self.cells[3+i] == [p,p,p,p,p,p,p,p,p] and self.cells[6+i] == [p,p,p,p,p,p,p,p,p]:
+                    win = p
+                    break
+
+            if self.cells[0] == [p,p,p,p,p,p,p,p,p] and self.cells[4] == [p,p,p,p,p,p,p,p,p] and self.cells[8] == [p,p,p,p,p,p,p,p,p]:
+                win = p
+
+            elif self.cells[2] == [p,p,p,p,p,p,p,p,p] and self.cells[4] == [p,p,p,p,p,p,p,p,p] and self.cells[6] == [p,p,p,p,p,p,p,p,p]:
+                win = p
+        
+        return win

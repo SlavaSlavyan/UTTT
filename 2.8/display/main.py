@@ -27,6 +27,8 @@ class Display:
         }
         self.offset = [0,0]
         self.ratio = [m.width/100,m.height/100]
+        self.F3update = 0
+        self.F3text = [[],[]]
         self.Game = Game(m,self)
     
     def main(self,m):
@@ -52,89 +54,97 @@ class Display:
 
         z = 8
 
-        inputText = [
-            "WARNING!!! F3 mode can summon lags, please use F3 only in debug.",
-            "Made by sll :3","",
-            "=====[GLOBAL]=====","","",
-            f"Screen: {m.width}x{m.height}",
-            f"Status: {m.status}",
-            f"Anim: {self.anim}",
-            f"Keys: {m.keys}",
-            f"Mouse: {m.mouse}",
-            f"FPS: {m.fps}",
-            f"Max fps: {m.maxfps}",
-            f"Mouse pos: {self.mouse_pos[0]-m.width//2,-(self.mouse_pos[1]-m.height//2)}",
-            f"Main offset: {self.offset}"
-        ]
+        if self.F3update == 0:
 
-        for key,value in m.config.items():
-            if key == "zoom":
-                value = str(value)[:3]
-            inputText.insert(5,f"{key}: {value}")
+            self.F3text[0] = [
+                "WARNING!!! F3 mode can summon lags, please use F3 only in debug.",
+                "Made by sll :3","",
+                "=====[GLOBAL]=====","","",
+                f"Screen: {m.width}x{m.height}",
+                f"Status: {m.status}",
+                f"Anim: {self.anim}",
+                f"Keys: {m.keys}",
+                f"Mouse: {m.mouse}",
+                f"FPS: {m.fps}",
+                f"Max fps: {m.maxfps}",
+                f"Mouse pos: {self.mouse_pos[0]-m.width//2,-(self.mouse_pos[1]-m.height//2)}",
+                f"Main offset: {self.offset}"
+            ]
+
+            for key,value in m.config.items():
+                if key == "zoom":
+                    value = str(value)[:3]
+                self.F3text[0].insert(5,f"{key}: {value}")
 
         font = pygame.font.Font(f"font\\text.ttf", z)
-        for i in range(len(inputText)):
-            text = font.render(str(inputText[i]), False, m.Disp.colors[m.config['them']]['global']['text'])
+        for i in range(len(self.F3text[0])):
+            text = font.render(str(self.F3text[0][i]), False, m.Disp.colors[m.config['them']]['global']['text'])
             m.screen.blit(text, (10,10+z*i))
         
-        inputText = [
-            "Status and Anim variables","",
-            f"=====[STATUS|{m.status}]=====",""
-        ]
+        if self.F3update == 0:
 
-        if m.status == "loading":
-            inputText.append("Idk just wait <3")
-        
-        if m.status == "game":
-            inputText.append(":cells")
-            for i in m.Game.cells:
-                line = ""
-                for j in i:
-                    if j == None:
-                        line = line + "- "
-                    elif j == 0:
-                        line = line + "0 "
-                    elif j == 1:
-                        line = line + "X "
-                    else:
-                        line = line + "E "
+            self.F3text[1] = [
+                "Status and Anim variables","",
+                f"=====[STATUS|{m.status}]=====",""
+            ]
 
-                line = line + " "
-                inputText.append(line)
-
-            inputText.append("")
-            inputText.append(f"{m.Game.player} :player")
-            inputText.append(f"{m.Game.selected_cell} :selected cell")
-            inputText.append(f"{m.Game.x,m.Game.y} :last pos")
-        
-        inputText.append("")
-        inputText.append(f"=====[ANIM|{self.anim}]=====")
-        inputText.append("")
-
-        if self.anim == "game" or self.anim == "game_start":
-            inputText.append(f"{round(self.Game.selectsize,2)} :select size")
-            inputText.append(f"{self.Game.selectpos} :select pos")
-            inputText.append(f"{[round(self.Game.selectoffset[0],2),round(self.Game.selectoffset[1],2)]} :select offset")
-            inputText.append(f"{self.Game.selectcolor} :select color")
-            inputText.append("")
-            inputText.append(":colors")
-            for key,value in self.Game.colors.items():
-                if isinstance(value,tuple):
-                    inputText.append(f"{value} :{key}  ")
-            if self.anim == "game_start":
-                inputText.append("")
-                inputText.append(":offset")
-                for i in range(len(self.Game.offset)):
-                    inputText.append(f"[{round(self.Game.offset[i],2)}].{i}  ")
+            if m.status == "loading":
+                self.F3text[1].append("Idk just wait <3")
             
+            if m.status == "game":
+                self.F3text[1].append(":cells")
+                for i in m.Game.cells:
+                    line = ""
+                    for j in i:
+                        if j == None:
+                            line = line + "- "
+                        elif j == 0:
+                            line = line + "0 "
+                        elif j == 1:
+                            line = line + "X "
+                        else:
+                            line = line + "E "
+
+                    line = line + " "
+                    self.F3text[1].append(line)
+
+                self.F3text[1].append("")
+                self.F3text[1].append(f"{m.Game.player} :player")
+                self.F3text[1].append(f"{m.Game.selected_cell} :selected cell")
+                self.F3text[1].append(f"{m.Game.x,m.Game.y} :last pos")
+            
+            self.F3text[1].append("")
+            self.F3text[1].append(f"=====[ANIM|{self.anim}]=====")
+            self.F3text[1].append("")
+
+            if self.anim == "game" or self.anim == "game_start":
+                self.F3text[1].append(f"{round(self.Game.selectsize,2)} :select size")
+                self.F3text[1].append(f"{self.Game.selectpos} :select pos")
+                self.F3text[1].append(f"{[round(self.Game.selectoffset[0],2),round(self.Game.selectoffset[1],2)]} :select offset")
+                self.F3text[1].append(f"{self.Game.selectcolor} :select color")
+                self.F3text[1].append("")
+                self.F3text[1].append(":colors")
+                for key,value in self.Game.colors.items():
+                    if isinstance(value,tuple):
+                        self.F3text[1].append(f"{value} :{key}  ")
+                if self.anim == "game_start":
+                    self.F3text[1].append("")
+                    self.F3text[1].append(":offset")
+                    for i in range(len(self.Game.offset)):
+                        self.F3text[1].append(f"[{round(self.Game.offset[i],2)}].{i}  ")
         
         font = pygame.font.Font(f"font\\text.ttf", z)
-        for i in range(len(inputText)):
-            text = font.render(str(inputText[i]), False, m.Disp.colors[m.config['them']]['global']['text'])
+        for i in range(len(self.F3text[1])):
+            text = font.render(str(self.F3text[1][i]), False, m.Disp.colors[m.config['them']]['global']['text'])
             text_width = text.get_width()
             screen_width = m.screen.get_width()
             x_position = screen_width - text_width - 10
             m.screen.blit(text, (x_position, 10 + z * i))
+        
+        if self.F3update == 0:
+            self.F3update = 30
+        else:
+            self.F3update -= 1
 
     def gradient(self,color1, color2, steps):
 
