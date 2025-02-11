@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class Game:
 
@@ -22,6 +23,7 @@ class Game:
             self.bigfiguresizes.append(0)
             self.cellscolor.append(0)
         self.lastselectedcell = None
+        self.timersize = 0
 
     def start(self,m):
 
@@ -36,7 +38,7 @@ class Game:
 
         self.offset = [i/1.1 for i in self.offset]
 
-        if round(self.offset[6],2) == 0 or m.status == 'game':
+        if round(self.offset[6],2) <= 0.5 or m.status == 'game':
             m.Disp.anim = 'game'
             m.status = 'game'
 

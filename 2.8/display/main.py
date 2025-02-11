@@ -11,7 +11,8 @@ class Display:
         self.colors = {
             "dark":{
                 "global":{
-                    "text":(255,255,255)
+                    "text":(255,255,255),
+                    "mouse":(229, 192, 123)
                 },
                 "game":{
                     "bg":(40, 44, 52),
@@ -49,6 +50,12 @@ class Display:
     def cursor(self,m):
 
         self.mouse_pos = pygame.mouse.get_pos()
+        x,y = self.mouse_pos
+        
+        pos = [(x,y),(x,y+16),(x+10,y+12)]
+        pygame.draw.polygon(m.screen, self.colors[m.config['them']]['global']['mouse'], pos)
+        for i in range(len(pos)):
+            pygame.draw.aaline(m.screen, self.colors[m.config['them']]['global']['mouse'], pos[i-1], pos[i])
     
     def F3(self,m):
 

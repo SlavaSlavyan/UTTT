@@ -31,8 +31,8 @@ class Main:
         self.Game = Game(self)
         self.Disp = Display(self)
 
-        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.7 DEV")
-        pygame.mouse.set_visible(True)
+        pygame.display.set_caption("Ultimate Tic Tac Toe 2.8.8 DEV")
+        pygame.mouse.set_visible(False)
 
     def main(self):
 
@@ -174,7 +174,7 @@ class Main:
             self.Game.timer['tick'] += tick
 
             if self.Game.timer['tick'] >= 100:
-                self.Game.timer['tick'] = 0
+                self.Game.timer['tick'] -= 100
                 self.Game.timer['seconds'] += 1
             
             if self.Game.timer['seconds'] >= 60:

@@ -1,46 +1,68 @@
-import random
+def is_valid_roman(roman):
+    # Проверка на наличие недопустимых символов
+    valid_characters = "IVXLCDM"
+    for char in roman:
+        if char not in valid_characters:
+            return False
 
-stage = 0
-money = 0
-health = 20
-mana = 20
-inventory = {
-    "magic stick":{
-        "atc":5,
-        "chance":60,
-        "mana":4
-    },
-    "sword":{
-        "atc":2,
-        "crit chance":10,
-        "crit multiplier":2
-    }
-}
-cave = {
-    "empty":10,
-    "bottle":20,
-    "chest":20,
-    "mouse":20
-}
-
-def start():
+    # Проверка на корректность последовательности римских цифр
+    count = 0
+    prev_char = ''
     
-    while True:
-        pass
+    for i in range(len(roman)):
+        char = roman[i]
+        
+        # Проверка на количество повторений
+        if char == prev_char:
+            count += 1
+            if (char in 'VLD' and count > 1) or (char in 'IUX' and count > 3):
+                return False
+        else:
+            count = 1
+            prev_char = char
+        
+        # Проверка на допустимые комбинации
+        if i > 0:
+            if (roman[i-1] == 'I' and char in 'VX') or \
+               (roman[i-1] == 'X' and char in 'LC') or \
+               (roman[i-1] == 'C' and char in 'DM'):
+                continue
+            elif (roman[i-1] in 'VLD' and char == roman[i-1]):
+                return False
 
-def impediment():
+    return True
 
-    sum = 0
-    for s,i in cave.items():
-        sum += i
-    r = random.randint(0,sum)
+def roman_to_arabic(roman):
+    roman_numerals = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+    
+    arabic = 0
+    prev_value = 0
+    
+    for char in reversed(roman):
+        value = roman_numerals[char]
+        
+        if value < prev_value:
+            arabic -= value
+        else:
+            arabic += value
+        
+        prev_value = value
+    
+    return arabic
 
-    sum = 0
+# Пример использования
+roman_number = input("Введите римское число: ")
 
-    for key,value in cave.items():
-
-        if r >= 0+sum and r < value+sum:
-            return key, r
-        sum += value
-
-start()
+if is_valid_roman(roman_number):
+    arabic_number = roman_to_arabic(roman_number)
+    print(f"Арабское число: {arabic_number}")
+else:
+    print("Ошибка: введено некорректное римское число.")
