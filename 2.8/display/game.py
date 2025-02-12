@@ -32,20 +32,28 @@ class Game:
         self.cube(m)
         self.bigcells(m)
         self.smallcells(m)
-        if m.Disp.anim != 'game_start':
+        if m.Disp.anim != 'game_start' and m.Disp.anim != 'game_end':
             self.figures(m)
         self.select(m)
 
-        self.offset = [i/1.1 for i in self.offset]
+        if m.Disp.anim != 'game_end':
+            self.offset = [i/1.1 for i in self.offset]
 
-        if round(self.offset[6],2) <= 0.5 or m.status == 'game':
-            m.Disp.anim = 'game'
-            m.status = 'game'
+        if m.Disp.anim != 'game_end':
+            if round(self.offset[6],2) <= 0.5 or m.status == 'game':
+                m.Disp.anim = 'game'
+                m.status = 'game'
 
     def main(self,m):
 
         self.start(m)
-        self.offset = [i/1.3 for i in self.offset]
+        if m.Disp.anim != 'game_end':
+            self.offset = [i/1.3 for i in self.offset]
+    
+    def end(self,m):
+
+        self.main(m)
+        self.offset = [i*1.05 for i in self.offset]
 
     def cube(self,m):
 

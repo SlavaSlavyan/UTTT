@@ -16,6 +16,7 @@ class Game:
                 self.cells[i].append(None)
         self.memory = []
         self.timer = {'tick':0,'seconds':0,'minutes':0}
+        self.win = None
 
     def main(self,m):
 
@@ -108,7 +109,14 @@ class Game:
                 capture = True
     
         if capture:
-            print(self.wincheck(m))
+            if self.wincheck(m) != None:
+                self.win = self.wincheck(m)
+                m.Disp.anim = 'game_end'
+                m.status = 'loading'
+                for i in range(len(m.Disp.Game.offset)):
+                    m.Disp.Game.offset[i] = 0.4
+
+
 
     def loadsave(self,m):
 

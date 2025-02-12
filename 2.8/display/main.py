@@ -42,6 +42,9 @@ class Display:
         elif self.anim == 'game':
             self.Game.main(m)
         
+        elif self.anim == 'game_end':
+            self.Game.end(m)
+        
         if m.F3:
             self.F3(m)
         
