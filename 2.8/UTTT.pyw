@@ -8,6 +8,21 @@ from function.game import Game
 class Main:
     
     def __init__(self):
+
+        self.text = {
+            'ru':{
+                'game':[
+
+                ]
+            },
+            'en':{
+                'game':[
+                    "Player 0 win!",
+                    "Player X win!"
+                ]
+            }
+        }
+        
         
         pygame.init()
 
@@ -44,8 +59,8 @@ class Main:
 
                 if event.type == pygame.QUIT:
 
-                    File.save('function\\config',self.config)
                     pygame.quit()
+                    File.save('function\\config',self.config)
                     sys.exit()
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:

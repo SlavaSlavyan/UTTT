@@ -21,6 +21,7 @@ class Display:
                     "passivecell":(92, 99, 112),
                     "player0":(97, 175, 239),
                     "playerX":(198, 107, 60),
+                    "timertext":(255,255,255),
                     "active-passive":self.gradient((92, 99, 112),(171,178,191),30),
                     "0toX":self.gradient((97, 175, 239),(198, 107, 60),30)
                 }
@@ -55,7 +56,7 @@ class Display:
         self.mouse_pos = pygame.mouse.get_pos()
         x,y = self.mouse_pos
         
-        pos = [(x,y),(x,y+16),(x+10,y+12)]
+        pos = [(x,y),(x+10,y),(x,y+10)]
         pygame.draw.polygon(m.screen, self.colors[m.config['them']]['global']['mouse'], pos)
         for i in range(len(pos)):
             pygame.draw.aaline(m.screen, self.colors[m.config['them']]['global']['mouse'], pos[i-1], pos[i])

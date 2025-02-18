@@ -113,8 +113,6 @@ class Game:
                 self.win = self.wincheck(m)
                 m.Disp.anim = 'game_end'
                 m.status = 'loading'
-                for i in range(len(m.Disp.Game.offset)):
-                    m.Disp.Game.offset[i] = 0.4
 
 
 

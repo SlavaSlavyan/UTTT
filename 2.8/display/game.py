@@ -4,7 +4,8 @@ import math
 class Game:
 
     def __init__(self,m,d):
-        
+
+        self.text = m.text[m.config['lang']]['game']
         self.colors = d.colors[m.config['them']]['game']
         self.offset = []
         for i in range(13):
@@ -32,12 +33,11 @@ class Game:
         self.cube(m)
         self.bigcells(m)
         self.smallcells(m)
-        if m.Disp.anim != 'game_start' and m.Disp.anim != 'game_end':
+        if m.Disp.anim != 'game_start':
             self.figures(m)
         self.select(m)
 
-        if m.Disp.anim != 'game_end':
-            self.offset = [i/1.1 for i in self.offset]
+        self.offset = [i/1.1 for i in self.offset]
 
         if m.Disp.anim != 'game_end':
             if round(self.offset[6],2) <= 0.5 or m.status == 'game':
@@ -47,13 +47,12 @@ class Game:
     def main(self,m):
 
         self.start(m)
-        if m.Disp.anim != 'game_end':
-            self.offset = [i/1.3 for i in self.offset]
+        self.offset = [i/1.3 for i in self.offset]
     
     def end(self,m):
 
-        self.main(m)
-        self.offset = [i*1.05 for i in self.offset]
+        self.start(m)
+        self.win_label(m)
 
     def cube(self,m):
 
@@ -258,7 +257,31 @@ class Game:
         y = m.height//2-m.Disp.offset[1] - 350*z - self.offset[12]*z*m.Disp.ratio[1]
 
         font = pygame.font.Font(f"font\\title.ttf", round(70*z))  # Используем стандартный шрифт, размер 74
-        text_surface = font.render(f"[{m.Game.timer['minutes']}:{second}]", True, (255, 255, 255))  # Белый цвет текста
+        text_surface = font.render(f"[{m.Game.timer['minutes']}:{second}]", True, (self.colors['timertext']))  # Белый цвет текста
 
         text_rect = text_surface.get_rect(center=(x, y))
         m.screen.blit(text_surface, text_rect)
+    
+    def win_label(self,m):
+
+        z = m.config['zoom']
+        x = m.width//2+m.Disp.offset[0]
+        y = m.height//2-m.Disp.offset[1]
+
+        pos = [(x-400*z,y+150*z),(x+400*z,y+150*z),(x+400*z,y-150*z),(x-400*z,y-150*z)]
+
+        if m.Game.win == 0:
+            color = 'player0'
+        if m.Game.win == 1:
+            color = 'playerX'
+
+        pygame.draw.polygon(m.screen, self.colors[color], pos)
+
+        pos = [(x-350*z,y+100*z),(x+350*z,y+100*z),(x+350*z,y-100*z),(x-350*z,y-100*z)]
+        pygame.draw.polygon(m.screen, self.colors['darkbg'], pos)
+
+        font = pygame.font.Font(f"font\\title.ttf", round(100*z))
+        text_surface = font.render(self.text[m.Game.win], True, (self.colors[color])) 
+
+        text_rect = text_surface.get_rect(center=(x, y))
+        m.screen.blit(text_surface, text_rect)      
