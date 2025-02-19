@@ -143,7 +143,12 @@ class Display:
                     self.F3text[1].append(":offset")
                     for i in range(len(self.Game.offset)):
                         self.F3text[1].append(f"[{round(self.Game.offset[i],2)}].{i}  ")
-        
+            
+            if self.anim == "game_end":
+                self.F3text[1].append(":offset")
+                for i in range(len(self.Game.endoffset)):
+                    self.F3text[1].append(f"[{round(self.Game.endoffset[i],2)}].{i}  ")
+    
         font = pygame.font.Font(f"font\\text.ttf", z)
         for i in range(len(self.F3text[1])):
             text = font.render(str(self.F3text[1][i]), False, m.Disp.colors[m.config['them']]['global']['text'])
@@ -153,7 +158,7 @@ class Display:
             m.screen.blit(text, (x_position, 10 + z * i))
         
         if self.F3update == 0:
-            self.F3update = 30
+            self.F3update = 2
         else:
             self.F3update -= 1
 

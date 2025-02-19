@@ -114,8 +114,6 @@ class Game:
                 m.Disp.anim = 'game_end'
                 m.status = 'loading'
 
-
-
     def loadsave(self,m):
 
         try:

@@ -8,6 +8,7 @@ class Game:
         self.text = m.text[m.config['lang']]['game']
         self.colors = d.colors[m.config['them']]['game']
         self.offset = []
+        self.endoffset = [100]
         for i in range(13):
             self.offset.append(200*(i+1))
         self.selectsize = 1
@@ -25,6 +26,7 @@ class Game:
             self.cellscolor.append(0)
         self.lastselectedcell = None
         self.timersize = 0
+        self.sleep = 300
 
     def start(self,m):
 
@@ -53,6 +55,7 @@ class Game:
 
         self.start(m)
         self.win_label(m)
+        self.endoffset = [i/1.05 for i in self.endoffset]
 
     def cube(self,m):
 
@@ -264,7 +267,7 @@ class Game:
     
     def win_label(self,m):
 
-        z = m.config['zoom']
+        z = m.config['zoom']*((self.endoffset[0]-100)/100)
         x = m.width//2+m.Disp.offset[0]
         y = m.height//2-m.Disp.offset[1]
 
@@ -280,8 +283,28 @@ class Game:
         pos = [(x-350*z,y+100*z),(x+350*z,y+100*z),(x+350*z,y-100*z),(x-350*z,y-100*z)]
         pygame.draw.polygon(m.screen, self.colors['darkbg'], pos)
 
-        font = pygame.font.Font(f"font\\title.ttf", round(100*z))
+        font = pygame.font.Font(f"font\\title.ttf", round(100*-z))
         text_surface = font.render(self.text[m.Game.win], True, (self.colors[color])) 
 
         text_rect = text_surface.get_rect(center=(x, y))
-        m.screen.blit(text_surface, text_rect)      
+        m.screen.blit(text_surface, text_rect)
+
+        if self.sleep > 0:
+            self.sleep -= 100/m.fps
+
+        elif self.sleep == -69:
+            self.shade(m)
+        else:
+            self.sleep = -69
+            self.endoffset.append(50)
+    
+    def shade(self,m):
+        
+        pos = [[0,0],[0,m.height],[m.width//2-self.endoffset[1]*m.Disp.ratio[0]-50,m.height],[m.width//2-self.endoffset[1]*m.Disp.ratio[0]+50,0]]
+        pygame.draw.polygon(m.screen, self.colors['darkbg'], pos)
+
+        pos = [[m.width,0],[m.width,m.height],[m.width//2+self.endoffset[1]*m.Disp.ratio[0]-50,m.height],[m.width//2+self.endoffset[1]*m.Disp.ratio[0]+50,0]]
+        pygame.draw.polygon(m.screen, self.colors['darkbg'], pos)
+
+        if round(self.endoffset[1],1) == 0:
+            m.Disp.anim = 'after_game'
