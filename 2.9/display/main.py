@@ -1,6 +1,7 @@
 import pygame
 
 from display.game import Game
+from func.filereader import File
 
 class Display: # Этот клас отвечает за условия выведения экранов игры (anim) по типу "startscreen" или "game"
 
@@ -11,7 +12,9 @@ class Display: # Этот клас отвечает за условия выве
         self.Game = Game(m)
         
 
-    def main(self,m):
+    def main(self,m): # Основная функция, которая определяет условия вывода информации на экран
 
         if self.anim[:4] == 'game':
             self.Game.main(m)
+
+        self.test(m)

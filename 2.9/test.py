@@ -1,3 +1,4 @@
 t = "game_test"
 
-print(t[:4])
+for i in t:
+    print(i)
