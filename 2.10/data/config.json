@@ -1,0 +1,9 @@
+{
+    "fullscreen": false,
+    "log": "auto",
+    "screensize": [
+        1109,
+        650
+    ],
+    "maxfps": 60
+}
