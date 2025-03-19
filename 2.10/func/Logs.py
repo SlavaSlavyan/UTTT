@@ -7,27 +7,35 @@ class Log: # этот класс необходим для создания ло
         
         self.config = config
         
-        self.log = [f'\n=====[{datetime.now().strftime("%H:%M:%S")}][START]=====\n'] # массив со всеми строками лога
-        print(self.log[0])
+        self.log = [""] # массив со всеми строками лога
         
         if self.config['log'] != False:
-            self.s("last",False)
+            
+            if Path("last.log").exists():
+                Path("last.log").unlink()
+        
+            self.log[0] = f'\n=====[{datetime.now().strftime("%H:%M:%S")}][START]=====\n'
+            
+            if self.config['log'] == "auto":
+                self.s("last",False)
+                
+        print(self.log[0])
     
     def w(self,text: str): # функция для записи новой строки в логи
         
         # принимает text как строчку лога
         
+        end = False
+            
+        if text == '/$end$':
+            string = f'\n=====[{datetime.now().strftime("%H:%M:%S")}][END]=====\n'
+            end = True
+        else:
+            string = f"[{datetime.now().strftime("%H:%M:%S")}] {text}" # форматизация новой строки
+
+        
         if self.config['log'] != False: # если логирование разрешено
             
-            end = False
-            
-            if text == '/$end$':
-                string = f'\n=====[{datetime.now().strftime("%H:%M:%S")}][END]=====\n'
-                end = True
-            else:
-                string = f"[{datetime.now().strftime("%H:%M:%S")}] {text}" # форматизация новой строки
-
-            print(string)
             self.log.append(f"\n{string}")
             
             if self.config['log'] == "auto":
@@ -37,6 +45,8 @@ class Log: # этот класс необходим для создания ло
             elif end:
                 self.s("last",True)
                 self.endsave()
+        
+        print(string)
 
     def s(self,path: str,full: bool): # функция для сохранения лога в отдельный файл
         

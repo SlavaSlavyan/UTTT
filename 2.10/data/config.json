@@ -1,9 +1,12 @@
 {
     "fullscreen": false,
-    "log": "auto",
+    "log": false,
     "screensize": [
-        1109,
-        650
+        1146,
+        747
     ],
-    "maxfps": 60
+    "maxfps": 60,
+    "zoom": 1,
+    "them": "basedark",
+    "lang": "EN"
 }
