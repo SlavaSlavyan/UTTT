@@ -20,8 +20,8 @@ class Log:
             self.logging = True # Разрешение на логирование
             
             # удаление последнего лога для создания нового
-            if self.Path("Log\\last.log").exists(): 
-                Path("Log\\last.log").unlink()
+            if self.Path("Logs\\last.log").exists(): 
+                self.Path("Logs\\last.log").unlink()
             
         except Exception as err:
             print(f"[WARNING] Не удалось включить логи! Ошибка: {err}.")
@@ -82,36 +82,98 @@ class Log:
             
             except Exception as err:
                 print(f"[WARNING] Не удалось сохранить логи! Ошибка: {err}.")
+    
+    def err(text: str): # Экстренный вывод логов при фатальной ошибке
+        
+        # принимает text как строку и форматирует её для строчки лога 
+            
+        print(text) # вывод чистой строки в терминал (не зависимо от логов, терминал выводит информацию всегда)
 
-# Импортированиe библиотек
-import pygame
-import sys
+        # авто сохранение логов в последний файл (последняя строчка)
+        with open("err.log", "a", encoding="utf-8") as file:
+            file.write(f"\n{text}")
+ 
+try: # Исключение на случай ошибки импортирования
+    
+    # Импортированиe библиотек
+    import pygame
+    import sys
+    
+    # импортирование модулей
+    from func.JsonManager import JsonManager
+    
+    run = True
+
+except Exception as err:
+    
+    Log.err(f'[FATAL] Не удалось импортировать библиотеки! Ошибка:{err}')
+    run = False
 
 # Основной класс программы
 class Main:
     
     def __init__(self):
         
-        # Создание экземпляра логов
-        self.log = Log()
-        self.log.write('[DEBUG] Инициализация основного класса и подготовка к запуску...')
+        # если в инициализации основного файла произойдёт ошибка, программа не запуститься и выдаст лог с причиной
         
-        # Инициализация графического модуля PyGame
-        pygame.init()
+        try:
+            
+            self.run = True # разрешение на запуск
         
-        # Эта переменная отвечает за инструкции по вводу от пользователя.
-        # Проще говоря эта переменная обозначает где сейчас происходят события в игре.
-        # Например meny, game, settings и подобное.
-        self.status = 'logo'
+            # Создание экземпляра логов
+            self.log = Log()
+            self.log.write('=====[START]=====\n')
+            self.log.write('[DEBUG] Инициализация основного класса и подготовка к запуску...')
+            
+            # Инициализация модуля взаимодействия с файлами json и импортирование базовых настроек
+            self.Manager = JsonManager(self)
+            self.config = self.Manager.load(self,"data\\config")
+            
+            # проверка правильного импортирования конфига
+            if self.config[1]: 
+                self.config = self.config[0]
+            else: 
+                self.run = False
+            
+            # Эта переменная отвечает за инструкции по вводу от пользователя.
+            # Проще говоря эта переменная обозначает где сейчас происходят события в игре.
+            # Например meny, game, settings и подобное.
+            self.status = 'logo'
+            
+            # Инициализация графического модуля PyGame
+            pygame.init()
+            
+            self.log.write('[DEBUG] Инициализация основного класса прошла успешно.\n')
         
+        except Exception as err:
+            
+            Log.err(f'[FATAL] Не удалось иициализировать основной класс программы! Ошибка: {err}')
+            self.run = False
         
+    def start(self): # функция для старта программы
+        
+        self.log.write('[DEBUG] Запуск игры.')
+        
+        if self.run:
+            
+            while True:
+                
+                break
+        
+        self.end()
     
-    def start(self):
+    def end(self):
         
-        self.log.write('[DEBUG] [WARNING] [ERROR] [FATAL] [TRACE] [INFO]')
+        self.log.write('[DEBUG] Отключение игры.\n')
+        self.log.write('=====[END]=====')
         self.log.save()
+        
+        pygame.quit()
+        sys.exit()
     
+# если запуск разрешен
+if run:
     
-UTTT = Main()
-
-UTTT.start()
+    # Создание экзмпляра основного класса и запуск
+    UTTT = Main()
+    UTTT.start()
