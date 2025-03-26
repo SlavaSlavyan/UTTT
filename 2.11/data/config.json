@@ -5,7 +5,7 @@
         1200,
         800
     ],
-    "max-fps": 2,
+    "max-fps": 60,
     "them": "basedark",
     "zoom": 1
 }
