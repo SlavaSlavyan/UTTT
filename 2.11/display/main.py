@@ -9,7 +9,6 @@ class Display:
         
         m.log.write('[DEBUG] Инициализация класса Display')
         
-        
         self.colors = m.Manager.load(m,f'data\\them\\{m.config['them']}')
         
         if self.colors[1]:
@@ -33,6 +32,7 @@ class Display:
     def main(self,m):
         
         self.width, self.height = self.screen.get_size()
+        self.ratio = round(self.width / self.height,2)
         
         if self.anim[:4] == 'logo':
             self.Logo.main(m)
