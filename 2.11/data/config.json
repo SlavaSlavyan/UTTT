@@ -1,3 +1,11 @@
 {
-    
+    "vers": "2.11.2 DEV",
+    "fullscreen": false,
+    "start-screen-size": [
+        1200,
+        800
+    ],
+    "max-fps": 2,
+    "them": "basedark",
+    "zoom": 1
 }
