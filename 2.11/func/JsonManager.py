@@ -5,7 +5,7 @@ from pathlib import Path
 class JsonManager:
     
     def __init__(self,m):
-        m.log.write('[DEBUG] Инициализация класса JsonManager')
+        m.log.write('[DEBUG] Инициализация класса Func.JsonManager')
     
     # функция для загрузки файла
     def load(self, m, path: str) -> list:

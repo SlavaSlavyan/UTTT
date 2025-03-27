@@ -1,5 +1,6 @@
 import pygame
 
+from display.Text import Text
 from display.logo import Logo
 
 # Класс отвечающий за визуальный вывод
@@ -7,7 +8,7 @@ class Display:
     
     def __init__(self,m):
         
-        m.log.write('[DEBUG] Инициализация класса Display')
+        m.log.write('[DEBUG] Инициализация класса Display.Main')
         
         self.colors = m.Manager.load(m,f'data\\them\\{m.config['them']}')
         
@@ -23,6 +24,7 @@ class Display:
         self.width, self.height = m.config['start-screen-size']
         self.setscreen(m)
         
+        self.Text = Text(m)
         self.Logo = Logo(m,self)
             
         self.clock = pygame.time.Clock() # класс для последовательного отображения кадров без задержек или спешки (контроль FPS)
@@ -32,10 +34,11 @@ class Display:
     def main(self,m):
         
         self.width, self.height = self.screen.get_size()
-        self.ratio = round(self.width / self.height,2)
         
         if self.anim[:4] == 'logo':
             self.Logo.main(m)
+            
+        self.Text.F3(m)
     
     def setscreen(self,m): # Обновление информации экрана
         
