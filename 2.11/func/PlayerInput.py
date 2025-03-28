@@ -1,5 +1,10 @@
 import pygame
 
+# Импорт отдельных модулей для мышки и клавиатуры
+from func.MouseInput import MouseInput
+
+# Импорт инструкций для использованния ввода
+
 # Класс обработки ввода от игрока
 class PlayerInput:
     
@@ -7,7 +12,11 @@ class PlayerInput:
         
         m.log.write('[DEBUG] Инициализация класса Func.PlayerInput')
         
+        self.MI = MouseInput(m)
+        
     def main(self,m):
+        
+        self.MI.mouse_pos = pygame.mouse.get_pos() 
         
         for event in pygame.event.get(): # проверка всех эвентов в pygame
             
@@ -16,3 +25,19 @@ class PlayerInput:
                 m.log.write('[DEBUG] Запуск инструкций для отключения программы')
                 
                 m.end() # запуск функции для выхода из игры
+            
+            self.MI.main(m,event) # проверка мыши
+            
+            self.logic(m) # Запуск логики
+            
+            self.MI.clicked = {"rt":False,"lt":False} # Обновление клика
+    
+    def logic(self,m):
+        
+        if m.status == 'logo':
+            if any(self.MI.clicked.values()):
+                m.log.write('[INFO] Пропуск анимации лого')
+                
+                m.Disp.anim = 'startscreen_start'
+                m.status = 'startscreen_start'
+                    

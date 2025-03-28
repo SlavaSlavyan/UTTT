@@ -1,7 +1,7 @@
 import pygame
 
 from display.Text import Text
-from display.logo import Logo
+from display.Logo import Logo
 
 # Класс отвечающий за визуальный вывод
 class Display:
@@ -37,6 +37,10 @@ class Display:
         
         if self.anim[:4] == 'logo':
             self.Logo.main(m)
+        
+        else:
+            self.screen.fill(self.colors['main']['bg'])
+            self.Text.title(m,self.Text.text['main'][0],70,(0,0),self.colors['main']['title-text'])
             
         self.Text.F3(m)
     

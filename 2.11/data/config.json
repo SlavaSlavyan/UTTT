@@ -1,12 +1,13 @@
 {
-    "vers": "2.11.3 DEV",
+    "vers": "2.11.4 DEV",
     "fullscreen": false,
     "start-screen-size": [
         1200,
         800
     ],
-    "max-fps": 240,
+    "max-fps": 60,
     "them": "basedark",
     "zoom": 1,
-    "language": "EN"
+    "language": "EN",
+    "animation-smoothing": true
 }
