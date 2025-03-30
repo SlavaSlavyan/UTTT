@@ -56,6 +56,6 @@ class Display:
         else:
             
             m.log.write('[INFO] Режим окна был изменён на оконный.')
-            self.screen = pygame.display.set_mode((self.width,self.height),pygame.RESIZABLE | pygame.DOUBLEBUF)
+            self.screen = pygame.display.set_mode((self.width,self.height),pygame.DOUBLEBUF | pygame.RESIZABLE)
 
         m.saveconfig(False)

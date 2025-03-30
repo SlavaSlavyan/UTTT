@@ -41,6 +41,7 @@ class Text:
             f"Zoom: {m.config['zoom']}",
             f"Animation smoothing: {m.config['animation-smoothing']}",
             f"Mouse pos: {m.PI.MI.mouse_pos}",
+            f"Main timer: {m.Time.timers['main']['min']}:{m.Time.timers['main']['sec']:02}",
             ""
         ]
         

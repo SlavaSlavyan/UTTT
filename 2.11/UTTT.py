@@ -103,6 +103,7 @@ try: # Исключение на случай ошибки импортиров�
     from func.JsonManager import JsonManager
     from display.main import Display
     from func.PlayerInput import PlayerInput
+    from func.Timer import Timer
     
     run = True
 
@@ -143,6 +144,7 @@ class Main:
             
             self.Disp = Display(self)
             self.PI = PlayerInput(self)
+            self.Time = Timer(self)
             
             # базовые настройки
             pygame.display.set_caption(f"Ultimate Tic Tac Toe {self.config['vers']}")
@@ -171,6 +173,8 @@ class Main:
             pygame.display.flip() # обновление кадра (вывод)
             self.Disp.fps = self.Disp.clock.get_fps() # получение фпс
             self.Disp.clock.tick(self.config['max-fps']) # ограничение кадров в секунду соответствующее максимальному значению в cofig
+
+            self.Time.main(self) # Вычисления таймеров
             
         self.end()
     
@@ -228,6 +232,8 @@ class Main:
             self.log.write('[INFO] Конфигурация успешно сохранена.')
         except:
             self.log.write('[ERROR] Не удалось сохранить конфиг при выключении.')
+        
+        self.log.write(f'[INFO] Итоговое время игры по внутреннему таймеру ({round(self.Time.timers['main']['tick'])}:{self.Time.timers['main']['sec']}:{self.Time.timers['main']['min']})')
         
         self.log.write('=====[END]=====')
         self.log.save()

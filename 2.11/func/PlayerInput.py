@@ -40,4 +40,5 @@ class PlayerInput:
                 
                 m.Disp.anim = 'startscreen_start'
                 m.status = 'startscreen_start'
+                m.Time.removetimer(m,'logo')
                     
