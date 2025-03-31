@@ -2,6 +2,7 @@ import pygame
 
 from display.Text import Text
 from display.Logo import Logo
+from display.StartScreen import StartScreen
 
 # Класс отвечающий за визуальный вывод
 class Display:
@@ -26,6 +27,7 @@ class Display:
         
         self.Text = Text(m)
         self.Logo = Logo(m,self)
+        self.StartScreen = StartScreen(m,self)
             
         self.clock = pygame.time.Clock() # класс для последовательного отображения кадров без задержек или спешки (контроль FPS)
         self.fps = self.clock.get_fps()
@@ -37,6 +39,9 @@ class Display:
         
         if self.anim[:4] == 'logo':
             self.Logo.main(m)
+        
+        elif self.anim[:11] == "startscreen":
+            self.StartScreen.main(m)
         
         else:
             self.screen.fill(self.colors['main']['bg'])
@@ -59,3 +64,17 @@ class Display:
             self.screen = pygame.display.set_mode((self.width,self.height),pygame.DOUBLEBUF | pygame.RESIZABLE)
 
         m.saveconfig(False)
+
+    def gradient(self,m,color1: tuple, color2: tuple, steps: int):
+        
+        m.log.write(f'[INFO] Был создан градиент из цветов {color1} и {color2}.')
+
+        gradient = []
+        
+        for step in range(steps + 1):
+            r = int(color1[0] + (color2[0] - color1[0]) * step / steps)
+            g = int(color1[1] + (color2[1] - color1[1]) * step / steps)
+            b = int(color1[2] + (color2[2] - color1[2]) * step / steps)
+            gradient.append((r, g, b))
+        
+        return gradient

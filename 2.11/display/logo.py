@@ -51,15 +51,12 @@ class Logo:
                     self.offset = [i * -1 for i in self.offset]
                     self.offset.reverse()
                     m.Time.addtimer(m,"logo",-1,(0,1,0))
-
-                    m.log.write(f'[INFO] Смена анимации на {m.Disp.anim}')
             
             elif m.Disp.anim == 'logo_wait':
 
                 if m.Time.timers['logo']['min'] <= -1:
                     m.Time.removetimer(m,'logo')
                     m.Disp.anim = 'logo_end'
-                    m.log.write(f'[INFO] Смена анимации на {m.Disp.anim}')
                 
             if m.Disp.anim == 'logo_end':
 
@@ -69,7 +66,6 @@ class Logo:
 
                     m.Disp.anim = 'startscreen_start'
                     m.status = 'startscreen_start'
-                    m.log.write(f'[INFO] Смена анимации на {m.Disp.anim} и смена статуса на {m.status}')
 
     
         

@@ -4,6 +4,8 @@ import pygame
 from func.MouseInput import MouseInput
 
 # Импорт инструкций для использованния ввода
+from func.StartScreen import StartScreen
+
 
 # Класс обработки ввода от игрока
 class PlayerInput:
@@ -13,6 +15,8 @@ class PlayerInput:
         m.log.write('[DEBUG] Инициализация класса Func.PlayerInput')
         
         self.MI = MouseInput(m)
+        
+        self.StartScreen = StartScreen(m)
         
     def main(self,m):
         
@@ -39,6 +43,8 @@ class PlayerInput:
                 m.log.write('[INFO] Пропуск анимации лого')
                 
                 m.Disp.anim = 'startscreen_start'
-                m.status = 'startscreen_start'
+                m.status = 'loading'
                 m.Time.removetimer(m,'logo')
-                    
+                
+        if m.status == 'startscreen':
+            self.StartScreen.main(m)

@@ -18,7 +18,7 @@ class Text:
     
     def title(self,m,text: str,size: int,pos: tuple,color: tuple):
         
-        font = pygame.font.Font("data\\font\\title.ttf", size)
+        font = pygame.font.Font("data\\font\\title.ttf", round(size))
         t = font.render(text, True, color)  # Создаем текст
         text_rect = t.get_rect(center=(m.Disp.width // 2 + pos[0], m.Disp.height // 2 - pos[1]))  # Получаем прямоугольник текста и центрируем его
         m.Disp.screen.blit(t, text_rect)
@@ -40,7 +40,7 @@ class Text:
             f"Language: {m.config['language']}",
             f"Zoom: {m.config['zoom']}",
             f"Animation smoothing: {m.config['animation-smoothing']}",
-            f"Mouse pos: {m.PI.MI.mouse_pos}",
+            f"Mouse pos: {m.PI.MI.mouse_pos}, [{m.PI.MI.mouse_pos[0] - m.Disp.width//2},{-m.PI.MI.mouse_pos[1] + m.Disp.height//2}]",
             f"Main timer: {m.Time.timers['main']['min']}:{m.Time.timers['main']['sec']:02}",
             ""
         ]
