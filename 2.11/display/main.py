@@ -31,11 +31,21 @@ class Display:
             
         self.clock = pygame.time.Clock() # класс для последовательного отображения кадров без задержек или спешки (контроль FPS)
         self.fps = self.clock.get_fps()
+        
+        self.maxsize = [1,1]
+        self.sm_zoom = 0
     
     # Основная функция класса, которая даёт условия для вывода инофрмации
     def main(self,m):
         
         self.width, self.height = self.screen.get_size()
+        
+        self.maxsize = [round(self.width/1200,1),round(self.height/800,1)]
+        
+        if m.config['size-smoothing']:
+            self.sm_zoom = min(self.maxsize) - 1
+        else:
+            self.sm_zoom = 0
         
         if self.anim[:4] == 'logo':
             self.Logo.main(m)

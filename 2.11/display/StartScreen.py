@@ -59,14 +59,14 @@ class StartScreen:
             
     def title(self,m):
         
-        z = m.config['zoom']
+        z = m.config['zoom'] + m.Disp.sm_zoom
         
         m.Disp.Text.title(m,m.Disp.Text.text['startscreen'][0],170*z,(0,220*z + m.Disp.height*(self.offset[1]/100)),self.colors['title'])
         m.Disp.Text.title(m,m.Disp.Text.text['startscreen'][1],100*z,(0,120*z + m.Disp.height*(self.offset[0]/100)),self.colors['title'])
     
     def buttons(self,m,i: int):
         
-        z = m.config['zoom']
+        z = m.config['zoom'] + m.Disp.sm_zoom
         x = m.Disp.width//2 - 200*z
         y = m.Disp.height//2 + m.Disp.height*(self.offset[i+2]/100) + 55*z*(i+2) - 100*z
         

@@ -35,6 +35,8 @@ class PlayerInput:
             self.logic(m) # Запуск логики
             
             self.MI.clicked = {"rt":False,"lt":False} # Обновление клика
+        
+        self.MI.zooming(m)
     
     def logic(self,m):
         

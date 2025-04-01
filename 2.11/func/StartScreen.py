@@ -11,7 +11,7 @@ class StartScreen:
 
     def gradbtn(self,m):
 
-        z = m.config['zoom']
+        z = m.config['zoom'] + m.Disp.sm_zoom
         x = m.PI.MI.mouse_pos[0] - m.Disp.width//2
         y = -m.PI.MI.mouse_pos[1] + m.Disp.height//2
 
