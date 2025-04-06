@@ -1,0 +1,11 @@
+{
+    "fullscreen": false,
+    "start-screensize": [
+        1200,
+        800
+    ],
+    "max-fps": 60,
+    "them": "basedark",
+    "language": "EN",
+    "zoom": 1
+}
