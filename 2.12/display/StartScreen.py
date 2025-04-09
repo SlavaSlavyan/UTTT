@@ -14,6 +14,9 @@ class StartScreen:
     def main(self,m):
         
         if m.Disp.anim == 'startscreen_start':
+
+            if True in m.PI.MI.mouse.values():
+                m.Disp.animSpeed *= 2
             
             try:
                 m.Disp.screen.fill(self.colors['grad-bg'][round(self.bg)])
@@ -28,6 +31,9 @@ class StartScreen:
                 m.Disp.anim = 'startscreen_start2'
                 
         else:
+
+            if True in m.PI.MI.mouse.values():
+                m.Disp.animSpeed *= 2
             
             m.Disp.screen.fill(self.colors['bg'])
             
@@ -47,14 +53,14 @@ class StartScreen:
             
     def title(self,m):
         
-        z = m.config['zoom']
+        z = m.config['zoom'] + m.Disp.max_zoom
         
         m.Disp.Text.title(m,m.Disp.Text.text['startscreen'][0],170*z,(0,220*z + m.Disp.height*(self.offset[1]/100)),self.colors['title'])
         m.Disp.Text.title(m,m.Disp.Text.text['startscreen'][1],100*z,(0,120*z + m.Disp.height*(self.offset[0]/100)),self.colors['title'])
     
     def buttons(self,m,i: int):
         
-        z = m.config['zoom']
+        z = m.config['zoom'] + m.Disp.max_zoom
         x = m.Disp.width//2 - 200*z
         y = m.Disp.height//2 + m.Disp.height*(self.offset[i+2]/100) + 55*z*(i+2) - 100*z
         

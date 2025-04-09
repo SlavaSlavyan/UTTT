@@ -1,6 +1,7 @@
 import pygame
 
 from func.MouseInput import MouseInput
+from func.KeyInput import KeyInput
 
 from func.StartScreen import StartScreen
 
@@ -8,7 +9,8 @@ class PlayerInput:
     
     def __init__(self,m):
         
-        self.MI = MouseInput(self)
+        self.MI = MouseInput(m)
+        self.KI = KeyInput(m)
         
         self.StartScreen = StartScreen(m)
         
@@ -22,29 +24,25 @@ class PlayerInput:
                 m.end()
             
             self.MI.main(m,event)
+            self.KI.main(m,event)
             
-            self.logic(m)
+            self.logicOn(m)
             
             self.MI.clicked = {"rt":False,"lt":False}
             self.MI.released = {"rt":False,"lt":False}
         
         self.MI.zooming(m)
     
-    def logic(self,m):
-        
-        if True in self.MI.clicked.values():
-            m.Sound.click(m)
+    def logicOn(self,m):
         
         if m.status == 'logo':
             
             if True in self.MI.clicked.values():
+
+                m.Sound.play(m,'skip')
                 
                 print("[INFO] Skip logo")
                 
                 m.status = 'startscreen_start'
                 m.Disp.anim = 'startscreen_start'
                 m.Time.removetimer(m,'logo')
-        
-        elif m.status == 'startscreen_start':
-            if True in self.MI.mouse.values():
-                m.Disp.animSpeed *= 2

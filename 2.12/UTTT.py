@@ -1,4 +1,4 @@
-UTTT_version = "2.12.1 DEV"
+UTTT_version = "2.12.2 DEV"
 print(f"VERS={UTTT_version}")
 
 import pygame
@@ -39,9 +39,9 @@ class Main:
 
         while True:
 
-            self.Disp.main(self)
-            
             self.PI.main(self)
+
+            self.Disp.main(self)
 
             pygame.display.flip()
             self.Disp.clock.tick(self.config['max-fps'])

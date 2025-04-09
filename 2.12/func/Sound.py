@@ -1,24 +1,19 @@
 import pygame
-import random
+from pathlib import Path
 
 class Sound:
     
     def __init__(self,m):
         
         pygame.mixer.init()
-        self.sounds = {
-            "click1":pygame.mixer.Sound("data\\assets\\sounds\\click1.mp3"),
-            "click2":pygame.mixer.Sound("data\\assets\\sounds\\click2.mp3"),
-            "click3":pygame.mixer.Sound("data\\assets\\sounds\\click3.mp3"),
-            "startscreen_select":pygame.mixer.Sound("data\\assets\\sounds\\startscreen_select.mp3")
-        }
-    
-    def click(self,m):
-        
-        sound = self.sounds[f"click{random.randint(1,3)}"]
-        sound.set_volume(round(m.config['sound-volume']/100,3))
-        sound.play()
-    
+
+        self.sounds = {}
+        files = [f.name for f in Path('data\\assets\\sounds').iterdir() if f.is_file()]
+
+        for f in files:
+            if f.split('.')[-1] == 'mp3':
+                self.sounds[f.rsplit('.', 1)[0]] = pygame.mixer.Sound(f"data\\assets\\sounds\\{f}")
+
     def play(self,m,soundname:str):
         
         try:

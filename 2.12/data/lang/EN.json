@@ -2,6 +2,6 @@
     "main":[
         "Cannot found anim :("
     ],
-    "logo":[],
+    "logo":["Version "],
     "startscreen":["ULTIMATE","TIC TAC TOE","Play","Settings","Info","Exit"]
 }

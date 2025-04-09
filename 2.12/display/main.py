@@ -26,6 +26,7 @@ class Display:
         self.fps = self.clock.get_fps()
 
         self.animSpeed = 1
+        self.max_zoom = 0
 
     def main(self,m):
 
@@ -37,6 +38,7 @@ class Display:
             self.animSpeed = 0
 
         self.width, self.height = self.screen.get_size()
+        self.max_zoom = round(min([self.width/1200 - 1,self.height/800 - 1]),1)
 
         if self.anim[:4] == 'logo':
             self.Logo.main(m)
@@ -45,7 +47,13 @@ class Display:
             self.StartScreen.main(m)
         
         else:
-            self.screen.fill(self.colors['main']['bg'])
+            
+            z = m.config['zoom'] + m.Disp.max_zoom
+
+            self.screen.fill(self.colors['main']['error'])
+
+            m.Disp.Text.title(m,m.Disp.Text.text['main'][0],100*z,(0,50*z),self.colors['main']['f3-text'])
+            m.Disp.Text.title(m,self.anim,50*z,(0,-20*z),self.colors['main']['f3-text'])
         
         self.Text.F3(m)
 

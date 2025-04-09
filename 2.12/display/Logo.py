@@ -44,10 +44,11 @@ class Logo:
 
                 m.Disp.anim = 'startscreen_start'
                 m.status = 'startscreen_start'
+        
 
     def letter(self,m,letter: str, pos: float, offset: float):
         
-        z = m.config['zoom']
+        z = m.config['zoom'] + m.Disp.max_zoom
         x = m.Disp.width//2 + pos*z + m.Disp.width*(offset/100) -75*z 
         y = m.Disp.height//2 + 125*z
         

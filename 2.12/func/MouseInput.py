@@ -34,7 +34,7 @@ class MouseInput:
             
             if event.button == 1:
 
-                self.released['lt'] = False
+                self.mouse['lt'] = False
                 self.released['lt'] = True
         
         if event.type == pygame.MOUSEWHEEL:
