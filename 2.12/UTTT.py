@@ -30,7 +30,7 @@ class Main:
         self.Time = Timer(self)
 
         pygame.display.set_caption(f"Ultimate Tic Tac Toe {UTTT_version}")
-        pygame.display.set_icon(pygame.image.load('data\\assets\\UTTT.png'))
+        pygame.display.set_icon(pygame.image.load('data\\assets\\small_ico.png'))
         pygame.mouse.set_visible(True)
 
     def start(self):
