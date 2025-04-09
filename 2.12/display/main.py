@@ -2,6 +2,7 @@ import pygame
 
 from display.Text import Text
 from display.Logo import Logo
+from display.StartScreen import StartScreen
 
 class Display:
 
@@ -10,6 +11,8 @@ class Display:
         self.colors = m.JsonManager.load(f'data\\them\\{m.config['them']}')
 
         self.anim = "logo_start"
+        print(f'Start-anim={self.anim}')
+        self.old_anim = self.anim
 
         self.width, self.height = m.config['start-screensize']
         
@@ -17,6 +20,7 @@ class Display:
 
         self.Text = Text(m)
         self.Logo = Logo(m,self)
+        self.StartScreen = StartScreen(m,self)
 
         self.clock = pygame.time.Clock()
         self.fps = self.clock.get_fps()
@@ -36,6 +40,9 @@ class Display:
 
         if self.anim[:4] == 'logo':
             self.Logo.main(m)
+        
+        elif self.anim[:11] == 'startscreen':
+            self.StartScreen.main(m)
         
         else:
             self.screen.fill(self.colors['main']['bg'])

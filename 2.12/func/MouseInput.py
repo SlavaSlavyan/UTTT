@@ -7,6 +7,8 @@ class MouseInput:
         self.mouse_pos = pygame.mouse.get_pos()
         self.mouse = {"rt":False,"lt":False}
         self.clicked = {"rt":False,"lt":False}
+        self.released = {"rt":False,"lt":False}
+        
         self.zoom = 0
     
     def main(self,m,event):
@@ -28,10 +30,12 @@ class MouseInput:
             if event.button == 3:
 
                 self.mouse['rt'] = False
+                self.released['rt'] = True
             
             if event.button == 1:
 
-                self.mouse['lt'] = False
+                self.released['lt'] = False
+                self.released['lt'] = True
         
         if event.type == pygame.MOUSEWHEEL:
             

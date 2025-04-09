@@ -7,5 +7,6 @@
     "max-fps": 60,
     "them": "basedark",
     "language": "EN",
-    "zoom": 1
+    "zoom": 1.0,
+    "sound-volume": 100
 }
