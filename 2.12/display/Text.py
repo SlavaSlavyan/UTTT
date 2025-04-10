@@ -37,6 +37,7 @@ class Text:
                 f"Mouse: {m.PI.MI.mouse}",
                 f"Anim speed: {round(m.Disp.animSpeed,2)}",
                 f"Main timer: {m.Time.timers['main']['min']}:{m.Time.timers['main']['sec']:02}",
+                f"Keys: {m.PI.KI.keys}",
                 ""
             ]
             

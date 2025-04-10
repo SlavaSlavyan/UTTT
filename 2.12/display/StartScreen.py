@@ -13,10 +13,10 @@ class StartScreen:
     
     def main(self,m):
         
+        if True in m.PI.MI.mouse.values() or True in m.PI.KI.keys.values():
+            m.Disp.animSpeed *= 2
+        
         if m.Disp.anim == 'startscreen_start':
-
-            if True in m.PI.MI.mouse.values():
-                m.Disp.animSpeed *= 2
             
             try:
                 m.Disp.screen.fill(self.colors['grad-bg'][round(self.bg)])
@@ -31,9 +31,6 @@ class StartScreen:
                 m.Disp.anim = 'startscreen_start2'
                 
         else:
-
-            if True in m.PI.MI.mouse.values():
-                m.Disp.animSpeed *= 2
             
             m.Disp.screen.fill(self.colors['bg'])
             
@@ -50,6 +47,13 @@ class StartScreen:
             
             if m.Disp.anim == 'startscreen_main':
                 m.PI.StartScreen.main(m)
+            
+            if m.Disp.anim == 'startscreen_end':
+                self.offset = [i * (1 + 0.06*m.Disp.animSpeed) for i in self.offset]
+                
+                if self.offset[0] >= 200:
+                    m.Disp.anim = 'idk'
+                    m.status = 'iddk'
             
     def title(self,m):
         

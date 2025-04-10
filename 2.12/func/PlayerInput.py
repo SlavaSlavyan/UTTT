@@ -37,7 +37,7 @@ class PlayerInput:
         
         if m.status == 'logo':
             
-            if True in self.MI.clicked.values():
+            if True in self.MI.clicked.values() or True in self.KI.keys.values():
 
                 m.Sound.play(m,'skip')
                 
@@ -46,3 +46,8 @@ class PlayerInput:
                 m.status = 'startscreen_start'
                 m.Disp.anim = 'startscreen_start'
                 m.Time.removetimer(m,'logo')
+        
+        if m.status == 'startscreen':
+            
+            if self.MI.released['lt']:
+                self.StartScreen.onclick(m)

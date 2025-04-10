@@ -1,5 +1,5 @@
 {
-    "fullscreen": false,
+    "fullscreen": true,
     "start-screensize": [
         1200,
         800

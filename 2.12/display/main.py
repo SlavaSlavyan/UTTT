@@ -1,4 +1,5 @@
 import pygame
+import math
 
 from display.Text import Text
 from display.Logo import Logo
@@ -9,7 +10,8 @@ class Display:
     def __init__(self,m):
 
         self.colors = m.JsonManager.load(f'data\\them\\{m.config['them']}')
-
+        self.colors['main']['grad-error'] = self.gradient(self.colors['main']['grad-error'][0],self.colors['main']['grad-error'][1],100)
+        
         self.anim = "logo_start"
         print(f'Start-anim={self.anim}')
         self.old_anim = self.anim
@@ -27,6 +29,8 @@ class Display:
 
         self.animSpeed = 1
         self.max_zoom = 0
+        
+        self.err_bg = 0
 
     def main(self,m):
 
@@ -47,13 +51,7 @@ class Display:
             self.StartScreen.main(m)
         
         else:
-            
-            z = m.config['zoom'] + m.Disp.max_zoom
-
-            self.screen.fill(self.colors['main']['error'])
-
-            m.Disp.Text.title(m,m.Disp.Text.text['main'][0],100*z,(0,50*z),self.colors['main']['f3-text'])
-            m.Disp.Text.title(m,self.anim,50*z,(0,-20*z),self.colors['main']['f3-text'])
+            self.error(m)
         
         self.Text.F3(m)
 
@@ -63,6 +61,17 @@ class Display:
             self.screen = pygame.display.set_mode((0, 0),pygame.FULLSCREEN | pygame.DOUBLEBUF)
         else:
             self.screen = pygame.display.set_mode((m.config['start-screensize'][0],m.config['start-screensize'][1]),pygame.DOUBLEBUF | pygame.RESIZABLE)
+    
+    def error(self,m):
+        
+        z = m.config['zoom'] + m.Disp.max_zoom
+
+        self.screen.fill(self.colors['main']['grad-error'][round(math.sin(self.err_bg)*50+50)])
+
+        m.Disp.Text.title(m,m.Disp.Text.text['main'][0],100*z,(0,50*z),self.colors['main']['f3-text'])
+        m.Disp.Text.title(m,self.anim,50*z,(0,-20*z),self.colors['main']['f3-text'])
+        
+        self.err_bg += 0.01
 
     def gradient(self,color1: tuple, color2: tuple, steps: int):
         
