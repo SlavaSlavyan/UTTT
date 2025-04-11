@@ -107,3 +107,24 @@ class StartScreen:
         if self.selected_button != None:
             m.Disp.anim = 'startscreen_end'
             m.status = 'startscreen_end'
+    
+    def nextanim(self,m):
+        
+        if self.selected_button == 0:
+            m.Disp.anim = 'game_start'
+            m.status = 'game_start'
+        elif self.selected_button == 3:
+            m.end()
+        else:
+            m.Disp.anim = 'startscreen_start'
+            m.status = 'startscreen_start'
+            self.resetmodule(m)
+            m.PI.StartScreen.resetmodule(m)
+    
+    def resetmodule(self,m):
+        
+        self.grad_buttons = [0,0,0,0]
+        self.btn_sound = [False,False,False,False]
+        self.selected_button = None
+        self.selecting_button = None
+        self.keypress = [False,False]

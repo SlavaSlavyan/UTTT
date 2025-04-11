@@ -4,6 +4,7 @@ import math
 from display.Text import Text
 from display.Logo import Logo
 from display.StartScreen import StartScreen
+from display.Game import Game
 
 class Display:
 
@@ -12,7 +13,7 @@ class Display:
         self.colors = m.JsonManager.load(f'data\\them\\{m.config['them']}')
         self.colors['main']['grad-error'] = self.gradient(self.colors['main']['grad-error'][0],self.colors['main']['grad-error'][1],100)
         
-        self.anim = "logo_start"
+        self.anim = "game_start"
         print(f'Start-anim={self.anim}')
         self.old_anim = self.anim
 
@@ -23,6 +24,7 @@ class Display:
         self.Text = Text(m)
         self.Logo = Logo(m,self)
         self.StartScreen = StartScreen(m,self)
+        self.Game = Game(m,self)
 
         self.clock = pygame.time.Clock()
         self.fps = self.clock.get_fps()
@@ -49,6 +51,9 @@ class Display:
         
         elif self.anim[:11] == 'startscreen':
             self.StartScreen.main(m)
+        
+        elif self.anim[:4] == 'game':
+            self.Game.main(m)
         
         else:
             self.error(m)

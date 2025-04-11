@@ -1,4 +1,4 @@
-UTTT_version = "2.12.3 DEV"
+UTTT_version = "2.12.4 DEV"
 print(f"VERS={UTTT_version}")
 
 import pygame
@@ -20,7 +20,7 @@ class Main:
         
         pygame.init()
 
-        self.status = 'logo'
+        self.status = 'game_start'
         print(f'Start-status={self.status}')
         self.old_status = self.status
 
@@ -38,6 +38,8 @@ class Main:
         print('Start main while...')
 
         while True:
+            
+            self.checknewscene()
 
             self.PI.main(self)
 
@@ -47,14 +49,6 @@ class Main:
             self.Disp.clock.tick(self.config['max-fps'])
 
             self.Time.main(self)
-            
-            if self.old_status != self.status:
-                print(f"[STATUS] {self.old_status} => {self.status}")
-                self.old_status = self.status
-            
-            if self.Disp.old_anim != self.Disp.anim:
-                print(f"[ANIM] {self.Disp.old_anim} => {self.Disp.anim}")
-                self.Disp.old_anim = self.Disp.anim
     
     def loadconfig(self):
 
@@ -63,7 +57,17 @@ class Main:
     def saveconfig(self):
 
         self.JsonManager.save('data\\config',self.config)
-
+        
+    def checknewscene(self):
+        
+        if self.old_status != self.status:
+            self.old_status = self.status
+            print(self.status)
+        
+        if self.Disp.old_anim != self.Disp.anim:
+            self.Disp.old_anim = self.Disp.anim
+            print(self.Disp.anim)
+            
     def end(self):
 
         self.saveconfig()

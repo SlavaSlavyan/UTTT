@@ -1,5 +1,5 @@
 {
-    "fullscreen": true,
+    "fullscreen": false,
     "start-screensize": [
         1200,
         800
@@ -7,6 +7,6 @@
     "max-fps": 60,
     "them": "basedark",
     "language": "EN",
-    "zoom": 1.0,
+    "zoom": 0.9,
     "sound-volume": 100
 }

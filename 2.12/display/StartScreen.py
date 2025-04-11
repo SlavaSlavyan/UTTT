@@ -52,8 +52,7 @@ class StartScreen:
                 self.offset = [i * (1 + 0.06*m.Disp.animSpeed) for i in self.offset]
                 
                 if self.offset[0] >= 200:
-                    m.Disp.anim = 'idk'
-                    m.status = 'iddk'
+                    m.PI.StartScreen.nextanim(m)
             
     def title(self,m):
         
@@ -73,3 +72,12 @@ class StartScreen:
         pygame.draw.polygon(m.Disp.screen, self.colors['button'], pos)
         
         m.Disp.Text.title(m,m.Disp.Text.text['startscreen'][i+2],30*z,(0,-m.Disp.height*(self.offset[i+2]/100)-55*z*i-33*z),self.colors['grad-button-text'][round(m.PI.StartScreen.grad_buttons[i])])
+    
+    def resetmodule(self,m):
+        
+        self.colors = m.Disp.colors['startscreen']
+        self.colors['grad-bg'] = m.Disp.gradient(self.colors['grad-bg'][0],self.colors['grad-bg'][1],120)
+        self.colors['grad-button-text'] = m.Disp.gradient(self.colors['grad-button-text'][0],self.colors['grad-button-text'][1],30)
+        
+        self.bg = 0
+        self.offset = [100,200,400,800,1600,3200]

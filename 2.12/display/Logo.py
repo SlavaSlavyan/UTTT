@@ -69,3 +69,10 @@ class Logo:
         
         for i in range(len(pos)):    
             pygame.draw.line(m.Disp.screen, self.colors['text'], pos[i-1], pos[i], 1)
+    
+    def resetmodule(self,m):
+        
+        self.colors = m.Disp.colors['logo']
+        
+        self.offset = [100,200,400]
+        self.rotate = 0
