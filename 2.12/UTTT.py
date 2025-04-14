@@ -1,4 +1,4 @@
-UTTT_version = "2.12.4 DEV"
+UTTT_version = "2.12.5 DEV"
 print(f"VERS={UTTT_version}")
 
 import pygame

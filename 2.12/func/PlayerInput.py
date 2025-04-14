@@ -4,6 +4,7 @@ from func.MouseInput import MouseInput
 from func.KeyInput import KeyInput
 
 from func.StartScreen import StartScreen
+from func.Game import Game
 
 class PlayerInput:
     
@@ -13,6 +14,7 @@ class PlayerInput:
         self.KI = KeyInput(m)
         
         self.StartScreen = StartScreen(m)
+        self.Game = Game(m)
         
     def main(self,m):
 
@@ -51,3 +53,8 @@ class PlayerInput:
             
             if self.MI.released['lt']:
                 self.StartScreen.onclick(m)
+        
+        if m.status == 'game':
+            
+            if self.MI.released['lt']:
+                self.Game.onclick(m)
