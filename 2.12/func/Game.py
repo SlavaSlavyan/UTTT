@@ -70,7 +70,10 @@ class Game:
     def check_selected_small_cell(self,m,cell:int):
         
         if cell != None and self.cells[self.selected_cell][cell] == None:
+
             self.cells[self.selected_cell][cell] = self.player
+
+            self.captupeCheck(m,self.selected_cell)
             
             self.check_selected_big_cell(m,cell)
             
@@ -79,6 +82,22 @@ class Game:
             else:
                 self.player = 0
     
-    def captupeCheck(self,m):
+    def captupeCheck(self,m,cell:int):
         
-        pass
+        for p in range(2):
+
+            print(self.cells[cell])
+
+            for i in range(3):
+
+                if self.cells[cell][3*i] == p and self.cells[cell][1+3*i] == p and self.cells[2+3*i] == p:
+                    self.cells[cell] = [p,p,p,p,p,p,p,p,p]
+                
+                elif self.cells[cell][i] == p and self.cells[cell][3+i] == p and self.cells[6+i] == p:
+                    self.cells[cell] = [p,p,p,p,p,p,p,p,p]
+
+            if self.cells[cell][0] == p and self.cells[cell][4] == p and self.cells[8] == p:
+                self.cells[cell] = [p,p,p,p,p,p,p,p,p]
+                
+            elif self.cells[cell][2] == p and self.cells[cell][4] == p and self.cells[6] == p:
+                self.cells[cell] = [p,p,p,p,p,p,p,p,p]

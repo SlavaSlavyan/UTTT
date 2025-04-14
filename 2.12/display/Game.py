@@ -1,4 +1,5 @@
 import pygame
+import copy
 
 class Game:
     
@@ -20,6 +21,12 @@ class Game:
             "grad":0
         }
         self.grad_cells = [0,0,0,0,0,0,0,0,0]
+
+        self.figure_size = []
+        for i in range(9):
+            self.figure_size.append([])
+            for j in range(9):
+                self.figure_size[i].append(0)
         
     def main(self,m):
         
@@ -45,6 +52,7 @@ class Game:
         
         elif m.Disp.anim == 'game_main':
             self.static(m)
+            self.figures(m)
             self.select_main(m)
         
     def bg(self,m):
@@ -194,3 +202,49 @@ class Game:
         
         else:
             self.select['grad'] = 15
+    
+    def figures(self,m):
+
+        z = m.config['zoom'] + m.Disp.max_zoom
+        Xx = m.Disp.width//2
+        Yy = m.Disp.height//2
+
+        for Y in range(3):
+            for X in range(3):
+                for y in range(3):
+                    for x in range(3):
+
+                        if m.PI.Game.cells[3*Y+X][3*y+x] != None:
+                            self.figure_size[3*Y+X][3*y+x] += 0.05*m.Disp.animSpeed
+                            if self.figure_size[3*Y+X][3*y+x] > 1:
+                                self.figure_size[3*Y+X][3*y+x] = 1
+
+                        else:
+                            self.figure_size[3*Y+X][3*y+x] -= 0.05*m.Disp.animSpeed
+                            if self.figure_size[3*Y+X][3*y+x] < 0:
+                                self.figure_size[3*Y+X][3*y+x] = 0
+                            
+
+                        if self.figure_size[3*Y+X][3*y+x] != 0:
+                            
+                            if m.PI.Game.cells[3*Y+X][3*y+x] == 0:
+                                
+                                pos = (Xx-200*z+200*z*X-50*z+50*z*x,Yy-200*z+200*z*Y-50*z+50*z*y)
+    
+                                pygame.draw.circle(m.Disp.screen, self.colors['grad-player'][0], pos, 20*z*self.figure_size[3*Y+X][3*y+x])
+                                pygame.draw.circle(m.Disp.screen, self.colors['bg2'], pos, 15*z*self.figure_size[3*Y+X][3*y+x])
+                            
+                            else:
+
+                                center = (Xx-200*z+200*z*X-50*z+50*z*x,Yy-200*z+200*z*Y-50*z+50*z*y)
+
+                                pos = [[0,-37.5],[37.5,-75],[75,-37.5],
+                                [37.5,0],[75,37.5],[37.5,75],
+                                [0,37.5],[-37.5,75],[-75,37.5],
+                                [-37.5,0],[-75,-37.5],[-37.5,-75]]
+
+                                for dot in pos:
+                                    dot[0] = center[0] + dot[0]*z*self.figure_size[3*Y+X][3*y+x]/4
+                                    dot[1] = center[1] + dot[1]*z*self.figure_size[3*Y+X][3*y+x]/4
+
+                                pygame.draw.polygon(m.Disp.screen, self.colors['grad-player'][-1], pos)
