@@ -7,7 +7,6 @@ class Display:
         m.Log.write("Инициализация класса отображения.","DEBUG")
 
         self.reload_screen(m)
-        self.width, self.height = m.config['start-screensize']
 
         self.anim = "Logo"
         m.Log.write(f"Начальная сцена = {self.anim}.","DEBUG")
@@ -18,11 +17,15 @@ class Display:
         self.zoom = m.config['zoom']
     
     def main(self,m):
+
+        self.width, self.height = self.screen.get_size()
         
         self.fps = self.clock.get_fps()
 
-        self.zoom = m.config['zoom']
+        if self.fps == 0: self.anim_speed = 0
+        else: self.anim_speed = 60/self.fps
 
+        self.zoom = round(m.config['zoom'] + min(self.width/m.config['start-screensize'][0],self.height/m.config['start-screensize'][1]) -1,1)
 
     def reload_screen(self,m):
 

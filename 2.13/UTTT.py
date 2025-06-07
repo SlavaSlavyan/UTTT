@@ -1,5 +1,4 @@
 import turtle
-import tkinter as tk
 import threading
 
 def start_main():
@@ -14,9 +13,8 @@ def start_main():
     while True:
         
         Start.main()
-        
 
-VERS = "2.13.2 DEV"
+VERS = "2.13.3 DEV"
 
 turtle.Screen().setup(600,400)
 turtle.Screen().title("Loading UTTT")
