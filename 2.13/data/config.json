@@ -1,5 +1,12 @@
 {
-    "fullscreen":true,
-    "start-screensize":[1200,800],
-    "zoom":1
+    "fullscreen": false,
+    "start-screensize": [
+        1200,
+        800
+    ],
+    "max-fps": 60,
+    "them": "base_dark",
+    "language": "EN",
+    "zoom": 1,
+    "sound-volume": 1
 }
