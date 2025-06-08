@@ -5,7 +5,7 @@
         800
     ],
     "max-fps": 60,
-    "them": "base_dark",
+    "theme": "base_dark",
     "language": "EN",
     "zoom": 1,
     "sound-volume": 1

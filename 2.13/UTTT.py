@@ -14,7 +14,7 @@ def start_main():
         
         Start.main()
 
-VERS = "2.13.3 DEV"
+VERS = "2.13.5 DEV"
 
 turtle.Screen().setup(600,400)
 turtle.Screen().title("Loading UTTT")

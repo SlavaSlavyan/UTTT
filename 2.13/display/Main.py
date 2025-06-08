@@ -1,20 +1,26 @@
 import pygame
 
+from display.scenes.Logo import Logo
+
 class Display:
     
     def __init__(self,m):
 
         m.Log.write("Инициализация класса отображения.","DEBUG")
 
+        self.colors = m.JsonManager.load(m,f"data\\theme\\{m.config['theme']}",True)
+
         self.reload_screen(m)
 
-        self.anim = "Logo"
+        self.anim = "Logo_start"
         m.Log.write(f"Начальная сцена = {self.anim}.","DEBUG")
 
         self.clock = pygame.time.Clock()
         self.fps = self.clock.get_fps()
 
         self.zoom = m.config['zoom']
+
+        self.Logo = Logo(m)
     
     def main(self,m):
 
@@ -26,6 +32,9 @@ class Display:
         else: self.anim_speed = 60/self.fps
 
         self.zoom = round(m.config['zoom'] + min(self.width/m.config['start-screensize'][0],self.height/m.config['start-screensize'][1]) -1,1)
+
+        if self.anim[:4] == "Logo":
+            self.Logo.main(m)
 
     def reload_screen(self,m):
 
