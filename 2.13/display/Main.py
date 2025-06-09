@@ -12,13 +12,10 @@ class Display:
 
         self.reload_screen(m)
 
-        self.anim = "Logo_start"
+        self.anim = "Logo_0"
         m.Log.write(f"Начальная сцена = {self.anim}.","DEBUG")
 
         self.clock = pygame.time.Clock()
-        self.fps = self.clock.get_fps()
-
-        self.zoom = m.config['zoom']
 
         self.Logo = Logo(m)
     

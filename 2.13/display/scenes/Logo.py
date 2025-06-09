@@ -9,6 +9,7 @@ class Logo:
 
         self.rotate = 0
         self.offset = [100,150,200]
+        self.speed = 1
 
     def main(self,m):
 
@@ -18,9 +19,30 @@ class Logo:
         self.letter(m,"l",(0,0),(self.offset[1],0))
         self.letter(m,"l",(200,0),(self.offset[2],0))
 
-        self.rotate += 0.03*m.Disp.anim_speed
-        if m.Disp.anim_speed != 0:
-            self.offset = [i/1.06*m.Disp.anim_speed for i in self.offset]
+        if m.Disp.anim == "Logo_0":
+            
+            if m.Disp.anim_speed != 0:
+                self.offset = [i/1.03*m.Disp.anim_speed*self.speed for i in self.offset]
+            
+            if self.offset[-1] <= 0.1:
+                
+                m.Disp.anim = "Logo_1"
+                self.offset = [i*-1 for i in self.offset]
+                m.TimeManager.stop(m,"logo_1")
+                m.TimeManager.start(m,"logo_1",(0,2,0),-1)
+        
+        elif m.Disp.anim == "Logo_1":
+            
+            if 'logo_1' in m.TimeManager.timers:
+                
+                m.TimeManager.timers['logo_1']['mod'] = -self.speed
+                
+                if m.TimeManager.timers['logo_1']['sec'] <= 0:
+                    
+                    m.Disp.anim = "Logo_2"
+                    m.TimeManager.stop(m,"logo_1")
+        
+        self.rotate += 0.03*m.Disp.anim_speed*self.speed
 
     def letter(self, m, symbol:str, pos:tuple, offset:tuple):
 

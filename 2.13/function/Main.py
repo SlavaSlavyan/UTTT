@@ -3,6 +3,7 @@ import sys
 
 from function.managers.LogManager import LogManager
 from function.managers.JsonManager import JsonManager
+from function.managers.TimeManager import TimeManager
 from function.inputs.PlayerInput import PlayerInput
 from display.Main import Display
 
@@ -14,6 +15,7 @@ class Main:
         self.Log.write([f"[==========[VERS:{game_version}]==========]\n","@SLL Привет всем, кто читает этот лог! ツ","Инициализация всех библиотек..."],"DEBUG")
 
         self.JsonManager = JsonManager(self)
+        self.TimeManager = TimeManager(self)
         
         pygame.init()
 
@@ -37,6 +39,8 @@ class Main:
 
         pygame.display.flip()
         self.Disp.clock.tick(self.config['max-fps'])
+        
+        self.TimeManager.main(self)
 
     def stop(self):
 

@@ -11,7 +11,7 @@ class JsonManager:
 
     def load(self, m, path:str, hard_mode:bool=False) -> any:
 
-        m.Log.write(f"Загрузка инофрмации из файла {path}.json.")
+        m.Log.write(f"Загрузка инофрмации из файла {path}.json...")
 
         try:
 
@@ -35,7 +35,7 @@ class JsonManager:
     
     def save(self, m, path:str, data:any, hard_mode:bool=False):
 
-        m.Log.write(f"Сохранение информации в файл {path}.json. Информация:\n{data}.")
+        m.Log.write(f"Сохранение информации в файл {path}.json... Информация:\n{data}.")
 
         try:
             
