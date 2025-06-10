@@ -22,7 +22,7 @@ class Logo:
         if m.Disp.anim == "Logo_0":
             
             if m.Disp.anim_speed != 0:
-                self.offset = [i/1.03*m.Disp.anim_speed*self.speed for i in self.offset]
+                self.offset = [i / (1 + (0.03*self.speed*m.Disp.anim_speed)) for i in self.offset]
             
             if self.offset[-1] <= 0.1:
                 
@@ -41,6 +41,10 @@ class Logo:
                     
                     m.Disp.anim = "Logo_2"
                     m.TimeManager.stop(m,"logo_1")
+        
+        elif m.Disp.anim == 'Logo_2':
+            
+            pass
         
         self.rotate += 0.03*m.Disp.anim_speed*self.speed
 

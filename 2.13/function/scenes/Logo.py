@@ -9,11 +9,15 @@ class Logo:
     
     def onclick(self,m):
         
-        #if m.Disp.anim == 'Logo_0' or m.Disp.anim == 'Logo_1':
-            
-            m.Disp.Logo.speed = 1
+        m.Disp.Logo.speed = 1
+        
+        if m.Disp.anim == 'Logo_0' or m.Disp.anim == 'Logo_1':
             
             for button in m.PI.MI.mouse.values():
                 
                 if button['hold']:
                     m.Disp.Logo.speed = 2
+        
+        if m.Disp.anim == 'Logo_2':
+            
+            pass
