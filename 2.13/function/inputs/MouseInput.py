@@ -20,16 +20,19 @@ class MouseInput:
             
             if event.button == 1:
                 
+                m.Log.write("Зажата ЛКМ.")
                 self.mouse['LT']['hold'] = True
                 self.mouse['LT']['press'] = True
             
             if event.button == 2:
                 
+                m.Log.write("Зажата СКМ.")
                 self.mouse['MID']['hold'] = True
                 self.mouse['MID']['press'] = True
             
             if event.button == 3:
                 
+                m.Log.write("Зажата ПКМ.")
                 self.mouse['RT']['hold'] = True
                 self.mouse['RT']['press'] = True
         
@@ -37,16 +40,19 @@ class MouseInput:
                 
             if event.button == 1:
                 
+                m.Log.write("Разжата ЛКМ.")
                 self.mouse['LT']['hold'] = False
                 self.mouse['LT']['release'] = True
             
             if event.button == 2:
                 
+                m.Log.write("Разжата СКМ.")
                 self.mouse['MID']['hold'] = False
                 self.mouse['MID']['release'] = True
             
             if event.button == 3:
                 
+                m.Log.write("Разжата ПКМ.")
                 self.mouse['RT']['hold'] = False
                 self.mouse['RT']['release'] = True
         
@@ -71,4 +77,4 @@ class MouseInput:
         for button in self.mouse.values():
             
             button['press'] = False
-            button['hold'] = False
+            button['release'] = False

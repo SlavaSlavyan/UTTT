@@ -14,10 +14,10 @@ def start_main():
         
         Start.main()
 
-VERS = "2.13.5 DEV"
+VERS = "2.13.7 DEV"
 
 turtle.Screen().setup(600,400)
-turtle.Screen().title("Loading UTTT")
+turtle.Screen().title("Loading")
 turtle.bgcolor((0,0,0))
 turtle.pencolor((1,1,1))
 turtle.hideturtle()

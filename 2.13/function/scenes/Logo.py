@@ -4,11 +4,12 @@ class Logo:
         m.Log.write("Инициализация логики сцены Logo.","DEBUG")
     
     def main(self,m):
-        pass
+        
+        self.onclick(m)
     
     def onclick(self,m):
         
-        if m.Disp.anim == 'Logo_0' or m.Disp.anim == 'Logo_1':
+        #if m.Disp.anim == 'Logo_0' or m.Disp.anim == 'Logo_1':
             
             m.Disp.Logo.speed = 1
             

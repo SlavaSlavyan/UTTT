@@ -27,6 +27,10 @@ class PlayerInput:
             self.MI.main(m,event)
         
         self.logic(m)
+        
+        self.MI.reload_mouse(m)
     
     def logic(self,m):
-        pass
+        
+        if m.Disp.anim[:4] == "Logo":
+            self.Logo.main(m)
