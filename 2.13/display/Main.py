@@ -41,9 +41,8 @@ class Display:
     def F3(self,m):
         
         text = [
-            "Debug mod can reduse much lags :/","",{"Configuration":m.config},"s"
+            "Debug mod can reduse much lags :/","",'str',["str",["str",["str","str"],'test']],"str","",m.config
         ]
-        print(m.config)
 
         self.Text.F3(m,text)
 
