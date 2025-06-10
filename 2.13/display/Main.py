@@ -41,7 +41,23 @@ class Display:
     def F3(self,m):
         
         text = [
-            "Debug mod can reduse much lags :/","",'str',["str",["str",["str","str"],'test']],"str","",m.config
+            "Debug mod can reduse much lags!","",
+            "[CONFIGURATION]","",m.config,"",
+            "[MAIN]","",[
+            f"Status: {m.status}",
+            f"Anim: {self.anim}",
+            f"Screen: [{self.width}x{self.height}]",
+            f"FPS: {round(self.fps)}",
+            f"Animation speed: {round(self.anim_speed,2)}",
+            f"Zoom: {self.zoom}",""],
+            "[MOUSE]","",[
+            f"Pos: {m.PI.MI.mouse_pos}, [{self.width//2 - m.PI.MI.mouse_pos[0]}, {self.height//2 - m.PI.MI.mouse_pos[1]}]",
+            "Mouse btn:",
+            f"RT: {m.PI.MI.mouse['RT']['hold']}",
+            f"MID: {m.PI.MI.mouse['MID']['hold']}",
+            f"LT: {m.PI.MI.mouse['LT']['hold']}"],"",
+            "[COLORS-MAIN]","",
+            m.Disp.colors['Main']
         ]
 
         self.Text.F3(m,text)

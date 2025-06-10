@@ -25,8 +25,15 @@ class Text:
             line_num -= 1
         
         else:
+
             m.Disp.screen.blit(self.f3_font.render(str(text), False, m.Disp.colors['Main']['f3-text']), (2+12*tab_num, 9+9*line_num))
                           
         line_num += 1
         
         return line_num
+
+    def paragraf(self,m, text:str|list, pos:tuple, size:int, align:str="normal"):
+
+        font = pygame.font.Font("data\\font\\text.ttf", round(size*m.Disp.zoom))
+
+        
