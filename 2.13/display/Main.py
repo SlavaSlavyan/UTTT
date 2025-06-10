@@ -1,5 +1,6 @@
 import pygame
 
+from display.Text import Text
 from display.scenes.Logo import Logo
 
 class Display:
@@ -16,6 +17,8 @@ class Display:
         m.Log.write(f"Начальная сцена = {self.anim}.","DEBUG")
 
         self.clock = pygame.time.Clock()
+        
+        self.Text = Text(m)
 
         self.Logo = Logo(m)
     
@@ -32,6 +35,17 @@ class Display:
 
         if self.anim[:4] == "Logo":
             self.Logo.main(m)
+        
+        self.F3(m)
+    
+    def F3(self,m):
+        
+        text = [
+            "Debug mod can reduse much lags :/","",{"Configuration":m.config},"s"
+        ]
+        print(m.config)
+
+        self.Text.F3(m,text)
 
     def reload_screen(self,m):
 
