@@ -28,6 +28,7 @@ class Logo:
                 
                 m.Disp.anim = "Logo_1"
                 self.offset = [i*-1 for i in self.offset]
+                self.offset.reverse()
                 m.TimeManager.stop(m,"logo_1")
                 m.TimeManager.start(m,"logo_1",(0,2,0),-1)
         
@@ -48,7 +49,11 @@ class Logo:
             self.press_blink += 0.06*m.Disp.anim_speed*self.speed
             
             if math.cos(self.press_blink) > 0:
-                m.Disp.Text.paragraf(m,m.Disp.Text.text['Logo'][0],(0,-m.Disp.height//4),27,m.Disp.colors['Logo']['press'])
+                m.Disp.Text.paragraf(m,m.Disp.Text.text['Logo'][0],(0,-200),27,m.Disp.colors['Logo']['press'])
+        
+        elif m.Disp.anim == 'Logo_3':
+            
+            self.offset = [i * (1 + (0.03*self.speed*m.Disp.anim_speed)) for i in self.offset]
         
         self.rotate += 0.03*m.Disp.anim_speed*self.speed
 
