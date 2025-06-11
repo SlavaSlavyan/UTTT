@@ -1,13 +1,5 @@
 import turtle
 import math
-import threading
-import subprocess
-
-def start_main():
-
-    result = subprocess.run(['python', 'data\\.py'], capture_output=True, text=True)
-
-VERS = "2.13.14 DEV"
 
 turtle.Screen().setup(600,400)
 turtle.Screen().title("Loading")
@@ -16,10 +8,8 @@ turtle.pencolor((1,1,1))
 turtle.hideturtle()
 turtle.tracer(0)
 
-a = threading.Thread(target=start_main)
-a.start()
-
-rotate = 0
+rotateX = 0
+rotateY = 0
 
 while True:
     
@@ -30,8 +20,8 @@ while True:
     
     points = []
     
-    for i in range(1,9):
-        points.append((math.cos(rotate*(1.1*i))*50,-100 + math.sin(rotate*(1.1*i))*50))
+    for i in range(1,5):
+        points.append((math.cos(rotateX*(1.1*i))*50,-100 + math.sin(rotateY*(1.1*i))*50))
     
     for i in range(len(points)-1):
         
@@ -44,4 +34,5 @@ while True:
     
     turtle.update()
 
-    rotate += 0.002
+    rotateX += 0.002
+    rotateY += 0.003
