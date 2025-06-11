@@ -20,4 +20,7 @@ class Logo:
         
         if m.Disp.anim == 'Logo_2':
             
-            pass
+            for button in m.PI.MI.mouse.values():
+                
+                if button['press']:
+                    m.Disp.anim = "Logo_3"

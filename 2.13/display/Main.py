@@ -41,7 +41,8 @@ class Display:
     def F3(self,m):
         
         text = [
-            "Debug mod can reduse much lags!","",
+            f"Ultimate Tic Tac Toe {m.game_version}",
+            "Created by SLL","",
             "[CONFIGURATION]","",m.config,"",
             "[MAIN]","",[
             f"Status: {m.status}",

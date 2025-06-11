@@ -10,9 +10,11 @@ from display.Main import Display
 class Main:
     
     def __init__(self, game_version:str):
+        
+        self.game_version = game_version
 
         self.Log = LogManager()
-        self.Log.write([f"[==========[VERS:{game_version}]==========]\n","@SLL Привет всем, кто читает этот лог! ツ","Инициализация всех библиотек..."],"DEBUG")
+        self.Log.write([f"[==========[VERS:{self.game_version}]==========]\n","@SLL Привет всем, кто читает этот лог! ツ","Инициализация всех библиотек..."],"DEBUG")
 
         self.JsonManager = JsonManager(self)
         self.TimeManager = TimeManager(self)
@@ -25,7 +27,7 @@ class Main:
         self.status = "Logo"
         self.Log.write(f"Начальный статус = {self.status}.","DEBUG")
 
-        pygame.display.set_caption(f"Ultimate Tic Tac Toe {game_version}")
+        pygame.display.set_caption(f"Ultimate Tic Tac Toe {self.game_version}")
         #pygame.display.set_icon(pygame.image.load('data\\assets\\small_ico.png'))
         pygame.mouse.set_visible(True)
 

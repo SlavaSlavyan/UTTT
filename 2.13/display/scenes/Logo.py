@@ -41,10 +41,14 @@ class Logo:
                     
                     m.Disp.anim = "Logo_2"
                     m.TimeManager.stop(m,"logo_1")
+                    self.press_blink = 0
         
         elif m.Disp.anim == 'Logo_2':
             
-            pass
+            self.press_blink += 0.06*m.Disp.anim_speed*self.speed
+            
+            if math.cos(self.press_blink) > 0:
+                m.Disp.Text.paragraf(m,m.Disp.Text.text['Logo'][0],(0,-m.Disp.height//4),27,m.Disp.colors['Logo']['press'])
         
         self.rotate += 0.03*m.Disp.anim_speed*self.speed
 

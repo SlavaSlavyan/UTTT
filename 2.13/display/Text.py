@@ -8,6 +8,8 @@ class Text:
         
         self.f3_font = pygame.font.Font("data\\font\\text.ttf", 9)
         
+        self.text = m.JsonManager.load(m,f"data\\language\\{m.config['language']}",True)
+        
     def F3(self,m, text:str|list|dict, line_num:int=0, tab_num:int=0) -> int:
         
         if isinstance(text,list):
@@ -32,8 +34,16 @@ class Text:
         
         return line_num
 
-    def paragraf(self,m, text:str|list, pos:tuple, size:int, align:str="normal"):
+    def paragraf(self,m, text:str|list, pos:tuple, size:int, color:tuple, align:str="center"):
 
         font = pygame.font.Font("data\\font\\text.ttf", round(size*m.Disp.zoom))
-
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
         
+        pos = (m.Disp.width // 2 + pos[0]*m.Disp.zoom, m.Disp.height // 2 - pos[1]*m.Disp.zoom)
+        
+        if align == "left": text_rect.topleft = pos
+        elif align == "center": text_rect.center = pos
+        elif align == "right": text_rect.topright = pos
+        
+        m.Disp.screen.blit(text_surface, text_rect)
