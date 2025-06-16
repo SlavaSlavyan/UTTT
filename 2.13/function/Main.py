@@ -31,6 +31,8 @@ class Main:
         #pygame.display.set_icon(pygame.image.load('data\\assets\\small_ico.png'))
         pygame.mouse.set_visible(True)
 
+        self.old = {"anim":self.Disp.anim,"status":self.status}
+
         self.Log.write("Инициализация всех библиотек окончена!","DEBUG")
         
     def main(self):
@@ -43,6 +45,20 @@ class Main:
         self.Disp.clock.tick(self.config['max-fps'])
         
         self.TimeManager.main(self)
+
+        self.SA_chage_log()
+    
+    def SA_chage_log(self):
+
+        if self.Disp.anim != self.old['anim']:
+
+            self.Log.write(f"Новая сцена! {self.old['anim']} -> {self.Disp.anim}.","DEBUG")
+            self.old['anim'] = self.Disp.anim
+        
+        if self.status != self.old['status']:
+
+            self.Log.write(f"Новая сцена! {self.old['status']} -> {self.status}.","DEBUG")
+            self.old['status'] = self.status
 
     def stop(self):
 

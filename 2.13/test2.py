@@ -1,47 +1,27 @@
-import turtle
-import math
-import threading
-import subprocess
+import pygame
 
-def start_main():
+pygame.init()
 
-    result = subprocess.run(['python', 'data\\.py'], capture_output=True, text=True)
+# Создаем окно
+screen = pygame.display.set_mode((800, 600))
 
-VERS = "2.13.14 DEV"
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_MINUS:
+                print("-")
 
-turtle.Screen().setup(600,400)
-turtle.Screen().title("Loading")
-turtle.bgcolor((0,0,0))
-turtle.pencolor((1,1,1))
-turtle.hideturtle()
-turtle.tracer(0)
+            if event.key == pygame.K_LSHIFT:
+                print("shift")
 
-a = threading.Thread(target=start_main)
-a.start()
+            if event.key == pygame.K_PLUS:
+                print("+")
+            #if event.key == pygame.K_MINUS:
+            #    print("Дефис (-) был нажат")
+            #if event.key == pygame.K_EQUALS:
+            #    print("Равно (=) было нажат")
 
-rotate = 0
-
-while True:
-    
-    turtle.clear()
-    
-    turtle.teleport(0,0)
-    turtle.write("Loading UTTT...",False,'center',("Courier",30,"normal"))
-    
-    points = []
-    
-    for i in range(1,9):
-        points.append((math.cos(rotate*(1.1*i))*50,-100 + math.sin(rotate*(1.1*i))*50))
-    
-    for i in range(len(points)-1):
-        
-        for i in range(len(points)):
-            
-            turtle.teleport(points[i][0],points[i][1])
-            turtle.goto(points[-1][0],points[-1][1])
-        
-        points.pop(-1)
-    
-    turtle.update()
-
-    rotate += 0.002
+pygame.quit()

@@ -10,14 +10,19 @@ class Logo:
         self.rotate = 0
         self.offset = [100,150,200]
         self.speed = 1
+        self.bg = 0
+        self.end = False
 
     def main(self,m):
+        
+        if self.end:
+            m.Disp.screen.fill(m.Disp.colors['Logo']['grad-bg'][round(self.bg*100)])
+        else:
+            m.Disp.screen.fill(m.Disp.colors['Logo']['bg'])
 
-        m.Disp.screen.fill(m.Disp.colors['Logo']['bg'])
-
-        self.letter(m,"s",(-200,0),(self.offset[0],0))
-        self.letter(m,"l",(0,0),(self.offset[1],0))
-        self.letter(m,"l",(200,0),(self.offset[2],0))
+            self.letter(m,"s",(-200,0),(self.offset[0],0))
+            self.letter(m,"l",(0,0),(self.offset[1],0))
+            self.letter(m,"l",(200,0),(self.offset[2],0))
 
         if m.Disp.anim == "Logo_0":
             
@@ -54,6 +59,20 @@ class Logo:
         elif m.Disp.anim == 'Logo_3':
             
             self.offset = [i * (1 + (0.03*self.speed*m.Disp.anim_speed)) for i in self.offset]
+            
+            if self.offset[-1] < -m.Disp.width//2:
+                m.Disp.anim = 'Logo_4'
+                self.end = True
+        
+        elif m.Disp.anim == 'Logo_4':
+
+            self.bg += 1/60*m.Disp.anim_speed*self.speed
+
+            if self.bg > 1:
+
+                m.Disp.anim = 'StartScreen_0'
+                m.status = 'StartScreen'
+                self.bg = 1
         
         self.rotate += 0.03*m.Disp.anim_speed*self.speed
 

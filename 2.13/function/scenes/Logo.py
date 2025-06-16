@@ -11,14 +11,14 @@ class Logo:
         
         m.Disp.Logo.speed = 1
         
-        if m.Disp.anim == 'Logo_0' or m.Disp.anim == 'Logo_1':
+        if m.Disp.anim != "Logo_2":
             
             for button in m.PI.MI.mouse.values():
                 
                 if button['hold']:
-                    m.Disp.Logo.speed = 2
+                    m.Disp.Logo.speed = 3
         
-        if m.Disp.anim == 'Logo_2':
+        else:
             
             for button in m.PI.MI.mouse.values():
                 

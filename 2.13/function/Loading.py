@@ -15,13 +15,15 @@ while True:
     
     turtle.clear()
     
-    turtle.teleport(0,0)
-    turtle.write("Loading UTTT...",False,'center',("Courier",30,"normal"))
+    turtle.teleport((math.cos(rotateX*10)*20),0)
+    turtle.write("Loading UTTT",False,'center',("Courier",30,"normal"))
     
     points = []
+    points2 = []
     
-    for i in range(1,5):
-        points.append((math.cos(rotateX*(1.1*i))*50,-100 + math.sin(rotateY*(1.1*i))*50))
+    for i in range(1,10):
+        points.append((math.cos(rotateX*(math.pi*i))*200,-100 + math.sin(rotateY*(math.pi*i))*50))
+        points2.append((math.cos(-rotateX*(math.pi*i))*200,-100 + math.sin(-rotateY*(math.pi*i))*50))
     
     for i in range(len(points)-1):
         
@@ -32,7 +34,16 @@ while True:
         
         points.pop(-1)
     
+    for i in range(len(points2)-1):
+        
+        for i in range(len(points2)):
+            
+            turtle.teleport(-points2[i][0],points2[i][1])
+            turtle.goto(-points2[-1][0],points2[-1][1])
+        
+        points2.pop(-1)
+    
     turtle.update()
 
     rotateX += 0.002
-    rotateY += 0.003
+    rotateY += 0.002
