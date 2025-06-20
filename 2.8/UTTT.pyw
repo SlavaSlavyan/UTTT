@@ -107,7 +107,7 @@ class Main:
                             self.maxfps = 1200
                         else:
                             self.maxfps = 60
-
+                            
                     if event.key == pygame.K_F3:
                         Main.F3(self)
                     

@@ -1,6 +1,7 @@
 import pygame
 
 from function.inputs.MouseInput import MouseInput
+from function.inputs.KeyInput import KeyInput
 
 from function.scenes.Logo import Logo
 
@@ -11,6 +12,7 @@ class PlayerInput:
         m.Log.write("Инициализация класса ввода от пользователя.","DEBUG")
         
         self.MI = MouseInput(m)
+        self.KI = KeyInput(m)
         
         self.Logo = Logo(m)
 
@@ -25,12 +27,16 @@ class PlayerInput:
                 m.stop()
             
             self.MI.main(m,event)
+            self.KI.main(m,event)
         
         self.logic(m)
         
         self.MI.reload_mouse(m)
+        self.KI.reload_keyboard(m)
     
     def logic(self,m):
+        
+        self.KI.logic_main(m)
         
         if m.Disp.anim[:4] == "Logo":
             self.Logo.main(m)

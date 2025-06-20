@@ -6,7 +6,7 @@ class Text:
         
         m.Log.write("Инициализация мастера отображения текста.","DEBUG")
         
-        self.f3_font = pygame.font.Font("data\\font\\text.ttf", 9)
+        self.f3_font = pygame.font.Font("data\\font\\Silkscreen.ttf", 9)
         
         self.text = m.JsonManager.load(m,f"data\\language\\{m.config['language']}",True)
         
@@ -47,7 +47,7 @@ class Text:
 
     def paragraf(self,m, text:str|list, pos:tuple, size:int, color:tuple, align:str="center"):
 
-        font = pygame.font.Font("data\\font\\text.ttf", round(size*m.Disp.zoom))
+        font = pygame.font.Font("data\\font\\GNF.ttf", round(size*m.Disp.zoom))
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
         
@@ -61,7 +61,7 @@ class Text:
     
     def title(self,m, text:str, pos:tuple, size:int, color:tuple):
 
-        font = pygame.font.Font("data\\font\\title.ttf", round(size*m.Disp.zoom))
+        font = pygame.font.Font("data\\font\\PIXY.ttf", round(size*m.Disp.zoom))
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
         

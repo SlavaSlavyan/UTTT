@@ -54,7 +54,7 @@ class Logo:
             self.press_blink += 0.06*m.Disp.anim_speed*self.speed
             
             if math.cos(self.press_blink) > 0:
-                m.Disp.Text.paragraf(m,m.Disp.Text.text['Logo'][0],(0,-200),27,m.Disp.colors['Logo']['press'])
+                m.Disp.Text.title(m,m.Disp.Text.text['Logo'][0],(0,-200),27,m.Disp.colors['Logo']['press'])
         
         elif m.Disp.anim == 'Logo_3':
             

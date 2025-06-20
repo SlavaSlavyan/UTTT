@@ -41,7 +41,7 @@ class Display:
         if self.anim[:4] == "Logo":
             self.Logo.main(m)
         
-        if self.anim[:11] == "StartScreen":
+        elif self.anim[:11] == "StartScreen":
             self.StartScreen.main(m)
         
         else:

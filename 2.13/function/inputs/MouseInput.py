@@ -22,19 +22,19 @@ class MouseInput:
                 
                 self.mouse['LT']['hold'] = True
                 self.mouse['LT']['press'] = True
-                m.Log.write(f"Зажата ЛКМ.\nLT = {self.mouse['LT']}")
+                m.Log.write(f"Зажата ЛКМ.")
             
             if event.button == 2:
                 
                 self.mouse['MID']['hold'] = True
                 self.mouse['MID']['press'] = True
-                m.Log.write(f"Зажата CКМ.\nMID = {self.mouse['MID']}")
+                m.Log.write(f"Зажата CКМ.")
             
             if event.button == 3:
                 
                 self.mouse['RT']['hold'] = True
                 self.mouse['RT']['press'] = True
-                m.Log.write(f"Зажата ПКМ.\nRT = {self.mouse['RT']}")
+                m.Log.write(f"Зажата ПКМ.")
         
         if event.type == pygame.MOUSEBUTTONUP:
                 
@@ -42,19 +42,19 @@ class MouseInput:
                 
                 self.mouse['LT']['hold'] = False
                 self.mouse['LT']['release'] = True
-                m.Log.write(f"Разжата ЛКМ.\nLT = {self.mouse['LT']}")
+                m.Log.write(f"Разжата ЛКМ.")
             
             if event.button == 2:
                 
                 self.mouse['MID']['hold'] = False
                 self.mouse['MID']['release'] = True
-                m.Log.write(f"Разжата СКМ.\nMID = {self.mouse['MID']}")
+                m.Log.write(f"Разжата СКМ.")
             
             if event.button == 3:
                 
                 self.mouse['RT']['hold'] = False
                 self.mouse['RT']['release'] = True
-                m.Log.write(f"Разжата ПКМ.\nRT = {self.mouse['RT']}")
+                m.Log.write(f"Разжата ПКМ.")
         
         if event.type == pygame.MOUSEWHEEL:
             
