@@ -20,7 +20,7 @@ class Main:
         
         pygame.init()
 
-        self.status = 'game_start'
+        self.status = 'logo'
         print(f'Start-status={self.status}')
         self.old_status = self.status
 

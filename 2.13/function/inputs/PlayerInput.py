@@ -4,6 +4,7 @@ from function.inputs.MouseInput import MouseInput
 from function.inputs.KeyInput import KeyInput
 
 from function.scenes.Logo import Logo
+from function.scenes.StartScreen import StartScreen
 
 class PlayerInput:
 
@@ -15,6 +16,7 @@ class PlayerInput:
         self.KI = KeyInput(m)
         
         self.Logo = Logo(m)
+        self.StartScreen = StartScreen(m)
 
     def main(self,m):
         
@@ -40,3 +42,6 @@ class PlayerInput:
         
         if m.Disp.anim[:4] == "Logo":
             self.Logo.main(m)
+        
+        elif m.Disp.anim[:11] == "StartScreen":
+            self.StartScreen.main(m)

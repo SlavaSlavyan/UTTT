@@ -1,3 +1,11 @@
 {
-    "Logo":["PRESS ANY KEY TO START"]
+    "Logo":["PRESS ANY KEY TO START"],
+    "StartScreen":[
+        "Tic Tac Toe",
+        "Ultimate",
+        "play",
+        "settings",
+        "info",
+        "exit"
+    ]
 }

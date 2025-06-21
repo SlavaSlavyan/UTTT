@@ -15,7 +15,7 @@ class Display:
 
         self.reload_screen(m)
 
-        self.anim = "Logo_0"
+        self.anim = "StartScreen_0"
         m.Log.write(f"Начальная сцена = {self.anim}.","DEBUG")
 
         self.clock = pygame.time.Clock()

@@ -13,7 +13,7 @@ class Display:
         self.colors = m.JsonManager.load(f'data\\them\\{m.config['them']}')
         self.colors['main']['grad-error'] = self.gradient(self.colors['main']['grad-error'][0],self.colors['main']['grad-error'][1],100)
         
-        self.anim = "game_start"
+        self.anim = "logo_start"
         print(f'Start-anim={self.anim}')
         self.old_anim = self.anim
 

@@ -24,7 +24,7 @@ class Main:
         self.PI = PlayerInput(self)
         self.Disp = Display(self)
 
-        self.status = "Logo"
+        self.status = "StartScreen"
         self.Log.write(f"Начальный статус = {self.status}.","DEBUG")
 
         pygame.display.set_caption(f"Ultimate Tic Tac Toe {self.game_version}")
