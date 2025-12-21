@@ -1,7 +1,0 @@
-Ultimate
-Tic Tac Toe
-Play
-Config
-Exit
-
-#end
