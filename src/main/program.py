@@ -22,6 +22,8 @@ class Program:
 
     def start(self):
 
+        print('start')
+
         while True:
             
             self.Event.main(self)
