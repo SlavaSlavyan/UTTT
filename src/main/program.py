@@ -3,7 +3,7 @@ import sys
 
 from src.main.event import Event
 from src.main.display import Display
-from src.manager.sceneLoad import Scenes
+from src.manager.scene_manager import Scenes
 
 class Program:
 
@@ -19,6 +19,10 @@ class Program:
         self.Event = Event(self)
         self.Display = Display(self)
         self.Scenes = Scenes(self)
+
+        self.Scenes.load_scene(self,'game')
+
+        self.status = 'game'
 
     def start(self):
 

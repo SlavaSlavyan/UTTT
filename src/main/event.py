@@ -12,3 +12,9 @@ class Event:
             if event.type == pygame.QUIT:
 
                 mainself.stop()
+        
+        self.logic(mainself)
+    
+    def logic(self,mainself):
+
+        exec(f"mainself.Scenes.{mainself.status}.Logic.main(mainself)")
