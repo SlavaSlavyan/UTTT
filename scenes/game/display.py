@@ -33,9 +33,11 @@ class Display:
             for y in range(-1,2):
                 for x in range(-1,2):
 
+                    size = mainself.Scenes.game.Figures.big_figures_sizes[3*(y+1)+(x+1)]/100
+
                     color = self.cells_gradient_logic(mainself,3*(y+1)+(x+1))
                     
-                    mainself.Scenes.game.Animation.cells_grid(mainself,self.cells_gradient[color],(200*x,-200*y))
+                    mainself.Scenes.game.Animation.cells_grid(mainself,self.cells_gradient[color],(200*x,-200*y),size=0.25*-(abs(size)-1))
             
             mainself.Scenes.game.Figures.main(mainself)
             mainself.Scenes.game.Select.main(mainself)

@@ -11,7 +11,7 @@ class Program:
 
         self.config = {
             "zoom":1,
-            "max-fps":60
+            "max-fps":-1
         }
         
         pygame.init()
