@@ -3,6 +3,8 @@ from scenes.game.logic import Logic
 from scenes.game.animation import Animation
 from scenes.game.select import Select
 from scenes.game.figures import Figures
+from scenes.game.small_cells import SmallCells
+from scenes.game.buttons import Buttons
 
 class Main:
 
@@ -13,3 +15,5 @@ class Main:
         self.Animation = Animation(mainself)
         self.Select = Select(mainself)
         self.Figures = Figures(mainself)
+        self.SmallCells = SmallCells(mainself)
+        self.Buttons = Buttons(mainself)

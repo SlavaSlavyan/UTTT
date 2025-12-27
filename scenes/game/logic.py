@@ -13,6 +13,8 @@ class Logic:
 
         self.player = 0
         self.selected_cell = None
+
+        self.history = []
     
     def main(self,mainself):
 
@@ -56,7 +58,7 @@ class Logic:
         for X in range(3):
             for Y in range(3):
 
-                if x > -75 + 50*X and x < -15 + 50*X and y > 15 - 50*Y and y < 75 - 50*Y:
+                if x > -75 + 50*X and x < -25 + 50*X and y > 25 - 50*Y and y < 75 - 50*Y:
                     return 3 * Y + X
     
     def check_selected_small_cell(self,mainself, selected_cell: int):
