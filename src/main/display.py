@@ -1,5 +1,4 @@
 import pygame
-import traceback
 
 class Display:
 
@@ -10,7 +9,11 @@ class Display:
             (218, 192, 123), # 1 yellow
             (40, 44, 52), # 2 gray
             (33, 37, 43), # 3 dark gray
-            (171, 178, 191) # 4 light gray
+            (171, 178, 191), # 4 white
+            (127, 134, 144), # 5 light_gray
+            (229, 192, 123), # 6 yellow
+            (89, 175, 239), # 7 blue
+            (209, 154, 102), # 8 orange
         ]
 
         self.screen = pygame.display.set_mode([800,800], pygame.RESIZABLE)
@@ -40,8 +43,11 @@ class Display:
         
         pygame.display.flip()
 
-    def gradient(self, color1: tuple, color2: tuple, steps: int) -> list:
-        
+    def gradient(self, color1: int, color2: int, steps: int) -> list:
+
+        color1 = self.colors[color1]
+        color2 = self.colors[color2]
+
         gradient = []
         
         for step in range(steps + 1):

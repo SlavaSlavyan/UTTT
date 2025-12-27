@@ -4,98 +4,58 @@ class Display:
 
     def __init__(self,mainself):
 
-        self.counter = 1
+        self.cells_gradient = mainself.Display.gradient(5,4,100)
+        self.cells_colors = []
+        
+        for i in range(9):
+            self.cells_colors.append(0)
+
         self.anim = 0
 
     def main(self,mainself):
 
-        z = mainself.Display.zoom
-
         mainself.Display.screen.fill(mainself.Display.colors[2])
 
         if self.anim == 0:
+            mainself.Scenes.game.Animation.main(mainself)
 
-            pygame.draw.rect(mainself.Display.screen,mainself.Display.colors[3],
-                             (mainself.Display.width//2 -300*z*-(self.counter-1),
-                              mainself.Display.height//2 -300*z*-(self.counter-1),
-                              600*z*-(self.counter-1),600*z*-(self.counter-1)))
-            
-            self.counter /= (1 + 0.1*mainself.Display.speed)
+            if mainself.Scenes.game.Animation.counter < 0.001:
 
-            if round(self.counter,2) == 0:
                 self.anim = 1
-                self.counter = 1
+                mainself.Scenes.game.Animation.counter = 0.001
+                mainself.Scenes.game.Animation.speed = -0.1
+
+        elif self.anim == 1: 
+
+            mainself.Scenes.game.Animation.back_rect(mainself)
+            mainself.Scenes.game.Animation.big_cells_grid(mainself)
+
+            for y in range(-1,2):
+                for x in range(-1,2):
+
+                    color = self.cells_gradient_logic(mainself,3*(y+1)+(x+1))
+                    
+                    mainself.Scenes.game.Animation.cells_grid(mainself,self.cells_gradient[color],(200*x,-200*y))
+            
+            mainself.Scenes.game.Figures.main(mainself)
+            mainself.Scenes.game.Select.main(mainself)
+    
+    def cells_gradient_logic(self,mainself, id: int) -> int:
+
+        if mainself.Scenes.game.Logic.selected_cell == id:
+
+            if self.cells_colors[id] < 99:
+                self.cells_colors[id] += 2*mainself.Display.speed
+
+            if round(self.cells_colors[id]) > 99:
+                self.cells_colors[id] = 99
+
+        else:
+
+            if self.cells_colors[id] > 0:
+                self.cells_colors[id] -= 2*mainself.Display.speed
+
+            if round(self.cells_colors[id]) < 0:
+                self.cells_colors[id] = 0
         
-        elif self.anim == 1:
-
-            pygame.draw.rect(mainself.Display.screen,mainself.Display.colors[3],
-                             (mainself.Display.width//2 -300*z,mainself.Display.height//2 -300*z,600*z,600*z))
-
-
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[4],
-                            (mainself.Display.width//2 + 300*z - mainself.Display.width*self.counter,
-                            mainself.Display.height//2 - 100*z),
-                            (mainself.Display.width//2 - 300*z - mainself.Display.width*self.counter,
-                            mainself.Display.height//2 - 100*z),
-                            round(5*z))
-
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[4],
-                            (mainself.Display.width//2 + 300*z + mainself.Display.width*self.counter,
-                            mainself.Display.height//2 + 100*z),
-                            (mainself.Display.width//2 - 300*z + mainself.Display.width*self.counter,
-                            mainself.Display.height//2 + 100*z),
-                            round(5*z))
-            
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[4],
-                            (mainself.Display.width//2 - 100*z,
-                            mainself.Display.height//2 + 300*z + mainself.Display.height*self.counter),
-                            (mainself.Display.width//2 - 100*z ,
-                            mainself.Display.height//2 - 300*z + mainself.Display.height*self.counter),
-                            round(5*z))
-            
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[4],
-                            (mainself.Display.width//2 + 100*z,
-                            mainself.Display.height//2 + 300*z - mainself.Display.height*self.counter),
-                            (mainself.Display.width//2 + 100*z,
-                            mainself.Display.height//2 - 300*z - mainself.Display.height*self.counter),
-                            round(5*z))
-            
-            self.counter /= (1 + 0.1*mainself.Display.speed)
-
-            if round(self.counter,2) == 0:
-                self.anim = 1
-                self.counter = 1
-        
-        elif self.anim == 2:
-
-            pygame.draw.rect(mainself.Display.screen,mainself.Display.colors[3],
-                             (mainself.Display.width//2 -300*z,mainself.Display.height//2 -300*z,600*z,600*z))
-
-
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[2],
-                            (mainself.Display.width//2 + 300*z,
-                            mainself.Display.height//2 - 100*z),
-                            (mainself.Display.width//2 - 300*z,
-                            mainself.Display.height//2 - 100*z),
-                            round(5*z))
-
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[2],
-                            (mainself.Display.width//2 + 300*z,
-                            mainself.Display.height//2 + 100*z),
-                            (mainself.Display.width//2 - 300*z,
-                            mainself.Display.height//2 + 100*z),
-                            round(5*z))
-            
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[2],
-                            (mainself.Display.width//2 - 100*z,
-                            mainself.Display.height//2 + 300*z),
-                            (mainself.Display.width//2 - 100*z,
-                            mainself.Display.height//2 - 300*z),
-                            round(5*z))
-            
-            pygame.draw.line(mainself.Display.screen,mainself.Display.colors[2],
-                            (mainself.Display.width//2 + 100*z,
-                            mainself.Display.height//2 + 300*z),
-                            (mainself.Display.width//2 + 100*z,
-                            mainself.Display.height//2 - 300*z),
-                            round(5*z))
+        return round(self.cells_colors[id])
