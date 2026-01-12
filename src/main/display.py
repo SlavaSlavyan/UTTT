@@ -16,6 +16,10 @@ class Display:
             (209, 154, 102), # 8 orange
         ]
 
+        self.text = [
+            ["ИГРОК 0","ИГРОК X","ПОБЕДИЛ"]
+        ]
+
         self.screen = pygame.display.set_mode([800,800], pygame.RESIZABLE)
 
         self.Clock = pygame.time.Clock()
@@ -32,7 +36,7 @@ class Display:
         self.width = self.screen.get_width()
         self.height = self.screen.get_height()
 
-        self.zoom = min(self.width,self.height)/800 * mainself.config['zoom']
+        self.zoom = min(self.width,self.height)/800
 
         self.fps = self.Clock.get_fps()
 

@@ -10,8 +10,8 @@ class Program:
     def __init__(self):
 
         self.config = {
-            "zoom":1,
-            "max-fps":-1
+            "max-fps":-1,
+            "language":"RU"
         }
         
         pygame.init()

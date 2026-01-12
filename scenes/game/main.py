@@ -5,6 +5,7 @@ from scenes.game.select import Select
 from scenes.game.figures import Figures
 from scenes.game.small_cells import SmallCells
 from scenes.game.buttons import Buttons
+from scenes.game.win import Win
 
 class Main:
 
@@ -17,3 +18,4 @@ class Main:
         self.Figures = Figures(mainself)
         self.SmallCells = SmallCells(mainself)
         self.Buttons = Buttons(mainself)
+        self.Win = Win(mainself)
