@@ -3,7 +3,7 @@ import sys
 
 from src.main.event import Event
 from src.main.display import Display
-from src.manager.scene_manager import Scenes
+from src.utils.scene_manager import Scenes
 
 class Program:
 
@@ -15,6 +15,7 @@ class Program:
         }
         
         pygame.init()
+        pygame.mouse.set_visible(False)
 
         self.Event = Event(self)
         self.Display = Display(self)

@@ -11,7 +11,7 @@ class Buttons:
 
     def main(self,mainself):
 
-        self.selected_button = mainself.Scenes.game.Logic.select_button(mainself)
+        self.selected_button = mainself.Scenes.game.Logic.Buttons.select_button(mainself)
         
         self.back(mainself)
 
@@ -30,7 +30,7 @@ class Buttons:
     
     def back_logic(self,mainself):
         
-        if mainself.Scenes.game.Logic.select_button(mainself) == 1:
+        if mainself.Scenes.game.Logic.Buttons.select_button(mainself) == 1:
             
             if self.back_transparency < 255:
 

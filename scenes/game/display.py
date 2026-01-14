@@ -29,7 +29,7 @@ class Display:
             mainself.Scenes.game.Select.main(mainself)
             mainself.Scenes.game.Buttons.main(mainself)
 
-            if mainself.Scenes.game.Logic.win != None:
+            if mainself.Scenes.game.Logic.Game.win != None:
                 mainself.Scenes.game.Win.main(mainself)
 
                 if mainself.Scenes.game.Win.counter < 0.001:
@@ -44,7 +44,7 @@ class Display:
                         mainself.Scenes.game.Win.counter = 0.001
                         mainself.Scenes.game.Win.speed = -0.1
 
-                        for small_cell in mainself.Scenes.game.Logic.cells:
+                        for small_cell in mainself.Scenes.game.Logic.Game.cells:
                             small_cell.clear()
                             
                             for i in range(9):

@@ -45,7 +45,7 @@ class Select:
     
     def zoom(self,mainself):
 
-        if mainself.Scenes.game.Logic.selected_cell == None:
+        if mainself.Scenes.game.Logic.Game.selected_cell == None:
 
             if self.size < 1:
                 self.size += 0.025 * mainself.Display.speed
@@ -61,14 +61,14 @@ class Select:
     
     def new_end_pos(self,mainself):
 
-        if self.last_selected_cell != mainself.Scenes.game.Logic.selected_cell:
+        if self.last_selected_cell != mainself.Scenes.game.Logic.Game.selected_cell:
 
             pos = [0,0]
             
             for i in range(2):
                 pos[i] = self.offset[i] + self.end_pos[i]
 
-            if mainself.Scenes.game.Logic.selected_cell == None:
+            if mainself.Scenes.game.Logic.Game.selected_cell == None:
                 self.end_pos = [0,0]
 
             else:
@@ -76,10 +76,10 @@ class Select:
                 for x in range(3):
                     for y in range(3):
 
-                        if y*3+x == mainself.Scenes.game.Logic.selected_cell:
+                        if y*3+x == mainself.Scenes.game.Logic.Game.selected_cell:
                             self.end_pos = [x-1,y-1]
 
             for i in range(2):
                 self.offset[i] = pos[i] - self.end_pos[i]
 
-            self.last_selected_cell = mainself.Scenes.game.Logic.selected_cell
+            self.last_selected_cell = mainself.Scenes.game.Logic.Game.selected_cell

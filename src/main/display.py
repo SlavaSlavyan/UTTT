@@ -1,5 +1,7 @@
 import pygame
 
+from src.utils.cursor_display import Cursor
+
 class Display:
 
     def __init__(self,mainself):
@@ -22,6 +24,7 @@ class Display:
 
         self.screen = pygame.display.set_mode([800,800], pygame.RESIZABLE)
 
+        self.Cursor = Cursor(mainself)
         self.Clock = pygame.time.Clock()
 
         self.width = self.screen.get_width()
@@ -44,6 +47,8 @@ class Display:
         except: self.speed = 0
 
         exec(f"mainself.Scenes.{mainself.status}.Display.main(mainself)")
+
+        self.Cursor.main(mainself)
         
         pygame.display.flip()
 

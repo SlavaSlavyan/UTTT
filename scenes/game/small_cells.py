@@ -21,7 +21,7 @@ class SmallCells:
     
     def cells_gradient_logic(self,mainself, id: int) -> int:
 
-        if mainself.Scenes.game.Logic.selected_cell == id:
+        if mainself.Scenes.game.Logic.Game.selected_cell == id:
 
             if self.cells_colors[id] < 99:
                 self.cells_colors[id] += 2*mainself.Display.speed

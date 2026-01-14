@@ -1,5 +1,6 @@
 import turtle
 import math
+import sys
 
 class Loading:
 
@@ -11,12 +12,15 @@ class Loading:
         turtle.hideturtle()
         turtle.tracer(0)
 
+        root = turtle.Screen().getcanvas().winfo_toplevel()
+        root.protocol("WM_DELETE_WINDOW", lambda: None)
+
         self.counter = 0
 
         self.bg_pos = 50
     
     def main(self):
-
+            
         while True:
 
             turtle.clear()
@@ -107,4 +111,5 @@ class Loading:
             turtle.teleport(x-17,y-17*i)
             turtle.goto(x+17,y+17*i)
 
-Loading().main()
+if sys.argv[-1] == "LOADING":
+    Loading().main()
