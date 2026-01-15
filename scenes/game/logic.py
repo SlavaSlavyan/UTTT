@@ -18,3 +18,5 @@ class Logic:
 
                 self.Buttons.main(mainself)
                 self.Game.main(mainself)
+            
+            self.Select.select_keyboard_update(mainself)

@@ -2,19 +2,25 @@ class Select:
 
     def __init__(self,mainself):
 
-        self.control = "MOUSE"
-        self.selecting_cell = None
+        self.control = "KEYBOARD"
+        self.selecting_cell = 0
 
     def select_big_cell(self,mainself) -> int | None:
         
-        x = (mainself.Event.Mouse.pos[0] - mainself.Display.width//2)/mainself.Display.zoom
-        y = (mainself.Event.Mouse.pos[1] - mainself.Display.height//2)/-mainself.Display.zoom
+        if self.control == "MOUSE":
+        
+            x = (mainself.Event.Mouse.pos[0] - mainself.Display.width//2)/mainself.Display.zoom
+            y = (mainself.Event.Mouse.pos[1] - mainself.Display.height//2)/-mainself.Display.zoom
 
-        for X in range(3):
-            for Y in range(3):
+            for X in range(3):
+                for Y in range(3):
 
-                if x > -300 + 200*X and x < -100 + 200*X and y > 100 - 200*Y and y < 300 - 200*Y:
-                    return 3 * Y + X
+                    if x > -300 + 200*X and x < -100 + 200*X and y > 100 - 200*Y and y < 300 - 200*Y:
+                        self.selecting_cell = 3 * Y + X
+                        return 3 * Y + X
+        
+        else:
+            return self.selecting_cell
                 
     def select_small_cell(self,mainself) -> int | None:
 
@@ -32,4 +38,23 @@ class Select:
             for Y in range(3):
 
                 if x > -75 + 50*X and x < -25 + 50*X and y > 25 - 50*Y and y < 75 - 50*Y:
+                    self.selecting_cell = 3 * Y + X
                     return 3 * Y + X
+    
+    def select_keyboard_update(self,mainself):
+        
+        if mainself.Event.KeyBoard.keys['up']['press']:
+            if self.selecting_cell > 2: 
+                self.selecting_cell -= 3
+        
+        elif mainself.Event.KeyBoard.keys['down']['press']:
+            if self.selecting_cell < 6: 
+                self.selecting_cell += 3
+        
+        elif mainself.Event.KeyBoard.keys['left']['press']:
+            if int(self.selecting_cell/3) > 0:
+                self.selecting_cell -= 1
+        
+        elif mainself.Event.KeyBoard.keys['right']['press']:
+            if int(self.selecting_cell%3) < 2:
+                self.selecting_cell += 1
