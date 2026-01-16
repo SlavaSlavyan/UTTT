@@ -14,9 +14,18 @@ class Logic:
 
         if mainself.Scenes.game.Display.anim == 1:
 
-            if mainself.Event.Mouse.buttons[0]['press'] or mainself.Event.KeyBoard.keys['select']['press']:
+            if mainself.Event.Mouse.buttons[0]['press'] and self.Select.control == "MOUSE":
 
                 self.Buttons.main(mainself)
                 self.Game.main(mainself)
             
-            self.Select.select_keyboard_update(mainself)
+            elif self.Select.control == "KEYBOARD":
+                
+                if mainself.Event.KeyBoard.keys['select']['press']:
+                    
+                    self.Buttons.main(mainself)
+                    self.Game.main(mainself)
+            
+                self.Select.select_keyboard_update(mainself)
+            
+            self.Select.control_switch(mainself)

@@ -16,6 +16,7 @@ class Display:
             (229, 192, 123), # 6 yellow
             (89, 175, 239), # 7 blue
             (209, 154, 102), # 8 orange
+            (224, 108, 117) # 9 red
         ]
 
         self.text = [

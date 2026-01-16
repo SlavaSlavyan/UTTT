@@ -179,34 +179,44 @@ class Figures:
 
             selected_cell = mainself.Scenes.game.Logic.Select.select_big_cell(mainself)
 
-            if selected_cell != None and None in mainself.Scenes.game.Logic.Game.cells[selected_cell]:
+            if selected_cell != None:
+                
+                if None in mainself.Scenes.game.Logic.Game.cells[selected_cell]:
 
-                color = round((math.sin(self.counter)/4+0.75)*100)
-                self.select(mainself,mainself.Scenes.game.Select.select_points,selected_cell,color)
+                    color = round((math.sin(self.counter)/4+0.75)*100)
+                    self.select(mainself,mainself.Scenes.game.Select.select_points,selected_cell,color)
+
+                elif mainself.Scenes.game.Logic.Select.control == "KEYBOARD":
+                    self.cannot_select(mainself,mainself.Scenes.game.Select.select_points,selected_cell)
 
         else:
             small_selected_cell = mainself.Scenes.game.Logic.Select.select_small_cell(mainself)
+            
+            if small_selected_cell != None:
 
-            if small_selected_cell != None and mainself.Scenes.game.Logic.Game.cells[mainself.Scenes.game.Logic.Game.selected_cell][small_selected_cell] == None:
+                if mainself.Scenes.game.Logic.Game.cells[mainself.Scenes.game.Logic.Game.selected_cell][small_selected_cell] == None:
 
-                for X in range(3):
-                    for Y in range(3):
-                        
-                        if mainself.Scenes.game.Logic.Game.selected_cell == Y*3+X:
-                            big_selected_cell_cords = [X-1,Y-1]
-                        
-                        if small_selected_cell == Y*3+X:
-                            small_selected_cell_cords = [X-1,Y-1]
+                    for X in range(3):
+                        for Y in range(3):
+                            
+                            if mainself.Scenes.game.Logic.Game.selected_cell == Y*3+X:
+                                big_selected_cell_cords = [X-1,Y-1]
+                            
+                            if small_selected_cell == Y*3+X:
+                                small_selected_cell_cords = [X-1,Y-1]
+                    
+                    x = big_selected_cell_cords[0]*200 + small_selected_cell_cords[0]*50
+                    y = big_selected_cell_cords[1]*200 + small_selected_cell_cords[1]*50
+
+                    color = round((math.sin(self.counter)/4+0.75)*100)
+
+                    if mainself.Scenes.game.Logic.Game.player == 0:
+                        self.circle(mainself,(x,-y),color)
+                    else:
+                        self.cross(mainself,(x,-y),color)
                 
-                x = big_selected_cell_cords[0]*200 + small_selected_cell_cords[0]*50
-                y = big_selected_cell_cords[1]*200 + small_selected_cell_cords[1]*50
-
-                color = round((math.sin(self.counter)/4+0.75)*100)
-
-                if mainself.Scenes.game.Logic.Game.player == 0:
-                    self.circle(mainself,(x,-y),color)
-                else:
-                    self.cross(mainself,(x,-y),color)
+                elif mainself.Scenes.game.Logic.Select.control == "KEYBOARD":
+                    self.cannot_select(mainself,mainself.Scenes.game.Select.select_points,small_selected_cell)
 
     def select(self,mainself,points: list,selected_cell:int,color:int):
 
@@ -239,3 +249,48 @@ class Figures:
 
         for part in parts:
             pygame.draw.polygon(mainself.Display.screen,color,part)
+    
+    def cannot_select(self,mainself,points: list,selected_cell:int):
+        
+        if mainself.Scenes.game.Logic.Game.selected_cell == None:
+            
+            for X in range(3):
+                for Y in range(3):
+                    
+                    if selected_cell == Y*3+X:
+                        big_cords = [X-1,Y-1]
+            
+            small_cords = [0,0]
+            size = 0.25
+        
+        else:
+            
+            for X in range(3):
+                for Y in range(3):
+                    
+                    if mainself.Scenes.game.Logic.Game.selected_cell == Y*3+X:
+                        big_cords = [X-1,Y-1]
+                    
+                    if selected_cell == Y*3+X:
+                        small_cords = [X-1,Y-1]
+                        
+            size = 0.25/4
+        
+        z = mainself.Display.zoom
+
+        parts = []
+        
+        for Y in range(-1,2,2):
+            for X in range(-1,2,2):
+
+                parts.append([])
+
+                for point in points:
+
+                    x = mainself.Display.width//2 - 320*z*X*size + point[0]*X * 50*z*size + 200*z*big_cords[0] + 50*z*small_cords[0]
+                    y = mainself.Display.height//2 - 320*z*Y*size + point[1]*Y * 50*z*size + 200*z*big_cords[1] + 50*z*small_cords[1]
+
+                    parts[-1].append((x,y))
+        
+        for part in parts:
+            pygame.draw.polygon(mainself.Display.screen,mainself.Display.colors[9],part)

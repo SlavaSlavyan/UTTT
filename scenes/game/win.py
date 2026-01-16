@@ -45,7 +45,7 @@ class Win:
 
         if round(74*z*-(counter-1)) >= 0:
 
-            font = pygame.font.Font("data\\font.ttf", round(74*z*-(counter-1)))
+            font = pygame.font.Font("data\\fonts\\base.ttf", round(74*z*-(counter-1)))
             text_surface = font.render(mainself.Display.text[0][text_id], True, mainself.Display.colors[color_id])
             text_rect = text_surface.get_rect()
             text_rect.center = (mainself.Display.width // 2, mainself.Display.height // 2 + offset*z)
